@@ -40,7 +40,13 @@ th{
     width: 70px;
     height: 35px;
 }
+/*
 #link-01{
     font-size: 20px;
+    font-weight: lighter;
+}
+*/
+span.link-exp{
+    font-size: 25px;
     font-weight: lighter;
 }
