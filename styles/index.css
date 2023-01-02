@@ -1,9 +1,33 @@
-h1{
-    color:azure;
+#h1{
+    color:rgb(23, 79, 126);
+    font-weight: lighter;
+    text-align: center;
+    font-size: 50px;
 }
 
+#body{
+    opacity: 1.5;
+    font-weight: lighter;
+}
 #cpzj001{
     color:darkcyan;
     font-size:35px;
     font-style: italic;
+    font-weight: lighter;
+}
+#table-html{
+    font-weight: lighter;
+}
+a{
+    font-weight: lighter;
+}
+th{
+    font-weight: lighter;
+}
+#table-html-title{
+    font-weight: lighter;
+    font-size: 25px;
+}
+#link-bilicom{
+    font-weight: lighter;
 }
