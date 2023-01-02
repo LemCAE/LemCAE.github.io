@@ -29,9 +29,6 @@ th{
     font-weight: lighter;
     font-size: 25px;
 }
-#link-bilicom{
-    font-weight: lighter;
-}
 #my-github{
     width: 35px;
     height: 35px;
@@ -49,4 +46,8 @@ th{
 span.link-exp{
     font-size: 25px;
     font-weight: lighter;
+}
+b.link-text{
+    font-weight: lighter;
+    font-size: 25px;
 }
