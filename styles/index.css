@@ -30,3 +30,15 @@ th{
 #link-bilicom{
     font-weight: lighter;
 }
+#my-github{
+    width: 35px;
+    height: 35px;
+}
+#bilibili{
+    width: 70px;
+    height: 35px;
+}
+#link-01{
+    font-size: 20px;
+    font-weight: lighter;
+}
