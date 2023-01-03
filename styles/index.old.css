@@ -1,0 +1,53 @@
+#h1{
+    color:rgb(23, 79, 126);
+    font-weight: lighter;
+    text-align: center;
+    font-size: 50px;
+}
+#body{
+    opacity: 1.5;
+    font-weight: lighter;
+}
+#cpzj001{
+    color:darkcyan;
+    font-size:35px;
+    font-style: italic;
+    font-weight: lighter;
+}
+#table-html{
+    font-weight: lighter;
+}
+/*
+a{
+    font-weight: lighter;
+}
+th{
+    font-weight: lighter;
+}
+*/
+#table-html-title{
+    font-weight: lighter;
+    font-size: 25px;
+}
+#my-github{
+    width: 35px;
+    height: 35px;
+}
+#bilibili{
+    width: 70px;
+    height: 35px;
+}
+/*
+#link-01{
+    font-size: 20px;
+    font-weight: lighter;
+}
+*/
+span.link-exp{
+    font-size: 25px;
+    font-weight: lighter;
+}
+b.link-text{
+    font-weight: lighter;
+    font-size: 25px;
+}
