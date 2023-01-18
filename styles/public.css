@@ -7,3 +7,7 @@ a:visited {
 a:hover {
     text-decoration: none;
 }
+.bottom {
+    position: fixed;
+    bottom: 16px;
+}
