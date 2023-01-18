@@ -1,0 +1,26 @@
+a:link {
+    color: #17507D;
+}
+a:visited {
+    color: #005959
+}
+a:hover {
+    text-decoration: none;
+}
+.bottom {
+    position: fixed;
+    bottom: 16px;
+}
+.center-need {
+	text-align: center; 
+	border-radius: 20px;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.bgc1 {
+	background-color: #fffbee;
+}

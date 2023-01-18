@@ -1,0 +1,8 @@
+.background{
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+}
+.center-index {
+	width: 500px;
+	height: 400px;
+}

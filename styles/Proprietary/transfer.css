@@ -1,0 +1,19 @@
+.common-center {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+.block{
+    width: 625px;
+    height: auto;
+}
+.block-left {
+    width: 300px;
+    height: 66px;
+    float: left;
+}
+.block-left {
+    width: 300px;
+    height: 66px;
+    float: right;
+}
