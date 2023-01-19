@@ -4,5 +4,35 @@
 }
 .center-index {
 	width: 500px;
-	height: 400px;
+	height: 600px;
+}
+/*
+.page{
+    height: 100%;
+    width: 100%;
+    font-size: 126px;
+    display: -webkit-box; 
+    display: -moz-box; 
+    display: -ms-flexbox; 
+    display: -webkit-flex; 
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+*/
+.fip{
+    position: fixed;
+    top: 200px;
+}
+.page{
+    width: 500px;
+    height: 720px;
 }
