@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+    
+    <style type="text/css">
+
+
+    #dv{border:4px #FFFFFF double;margin:auto;width:600px;height:300px;
+    background-color:#FFFFFF;
+/*设置透明度*/
+filter:alpha(opacity=50); -moz-opacity:0.6; -khtml-opacity: 0.6; opacity: 0.6;
+  }
+.top{border:0px #FFFFFF solid;width:400px;height:40px;margin:auto;margin-top:12px;}
+.top li{border:0px #FFFFFF solid;width:180px;height:40px;float:left;list-style:none;
+text-height:40px;line-height:40px;
+      }
+.top .top_one{width:70px;height:40px;margin-left:80px;}
+.top #setTime{color:#FFFFFF;width:30px;height:40px;font-size:36px;text-align:center;}
+
+.bottom{border:0px #FFFFFF solid;width:400px;height:40px;margin:auto;margin-top:160px;}
+            .bottom li{border:0px #FFFFFF solid;width:120px;height:40px;float:left;list-style:none;
+line-height:40px;
+       }
+   .bottom .bottom_one{width:100px;height:40px;margin-left:220px;}
+.bottom .bottom_two{width:70px;height:40px;}
+.bottom .bottom_two a:hover{color:#FFFFFF;}
+.bottom .bottom_two a{text-decoration:none;color:#FFFFFF;}
+
+    </style>
+    
+</head>
+<body bgColor="#FFFFFF">
+
+
+<div id = "dv" >
+    <ul class="top">
+            <li class="top_one"><!--网页将在--></li>
+                <li id="setTime"></li>
+                <li><!--秒后自动跳转......--></li>
+            
+            </ul>
+            <ul class="bottom">
+            <li class="bottom_one"><!--如果未跳转请--></li>
+                <li class="bottom_two"><a href="http://www.baidu.com"><!--点击此处--></a></li>
+            </ul>
+ 
+    </div>
+   <!--定时器-->
+    <script type="text/javascript">
+    var i = 1;
+var tId;
+document.getElementById("setTime").innerHTML = i;
+function showTime(){
+if(i == 0){
+window.clearInterval(tId);
+return;
+}
+i--;
+document.getElementById("setTime").innerHTML = i;
+if(i == 0){
+//如果时间秒数为0，跳转到指定页面
+location.replace("https://www.bilibili.com/video/BV1GJ411x7h7");
+
+}
+
+}
+window.setInterval(showTime,1000);
+
+    </script>
+    
+     <!--保持网页不变形-->
+   <script type="text/javascript">
+      var a=screen.availWidth;
+      var b=screen.availHeight;
+      window.moveTo(0,0)
+      window.resizeTo(a,b)
+ 
+  </script>
+</body>
+</html>
