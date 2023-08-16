@@ -15,6 +15,16 @@ ul.navigation li {
     display:inline;
     float: left;
 }
+ul.navigation li.active {
+    background-color: #000000a6;
+}
+ul.navigation li.active a{
+    display: block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 ul.navigation li a{
     display: block;
     color: rgb(0, 0, 0);
@@ -23,7 +33,7 @@ ul.navigation li a{
     text-decoration: none;
 }
 ul.navigation li a:hover{
-    background-color: #000000a6;
+    background-color: #2c2c2ca6;
     color:rgb(255, 255, 255)
 }
 

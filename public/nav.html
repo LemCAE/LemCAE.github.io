@@ -1,0 +1,19 @@
+<div class="navigation">
+<nav>
+    <ul class="navigation">
+        <li><img src="images/test-icon.jpg" class="icon" alt="icon"></li>
+        <li class="navigation active"><a href="index.html">主页</a></li>
+        <li class="navigation"><a href="https://github.com/LemCAE/LemCAE.github.io" target="_blank" rel="noopener noreferrer">项目地址</a></li>
+        <li class="navigation"><a href="subpage1.html">子页1</a></li>
+    </ul>
+</nav>
+</div>
+<script type="text/javascript">
+    $('#drop, nav ~ ul li').click(function() {
+      $('nav, #drop span').toggleClass('open');
+      $(window).scrollTop(0);
+    });
+    $('#drop>div').click(function(){
+        $('.logos').toggleClass('blo')
+    })
+</script>
