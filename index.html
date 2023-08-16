@@ -9,16 +9,13 @@
         <link rel="icon" href="images/test-icon.jpg" type="image/x-icon">
         <link rel="stylesheet" href="styles/public.css">
         <script src="scripts/public.js" defer></script>
+        <script src="scripts/jquery3.7.0.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <nav>
-            <ul class="navigation">
-                <li><img src="images/test-icon.jpg" class="icon" alt="icon"></li>
-                <li class="navigation active"><a href="index.html">主页</a></li>
-                <li class="navigation"><a href="subpage1.html">子页1</a></li>
-                <li class="navigation"><a href="https://github.com/LemCAE/LemCAE.github.io" target="_blank" rel="noopener noreferrer">项目地址</a></li>
-            </ul>
-        </nav>
+        <div id="head"></div>
+        <script type="text/javascript">
+            $('#head').load('nav.html');
+        </script>
         <main>
             <h1 align="center">Welcome to this page!</h1>
             <p>Working......</p>
