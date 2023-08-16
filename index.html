@@ -9,17 +9,18 @@
         <link rel="icon" href="images/test-icon.jpg" type="image/x-icon">
         <link rel="stylesheet" href="styles/public.css">
         <script src="scripts/public.js" defer></script>
-        <script src="scripts/jquery3.7.0.js" type="text/javascript" charset="utf-8"></script>
+        <script src="scripts/jquery3.7.0.js"></script>
     </head>
     <body>
-        <div id="head"></div>
-        <script type="text/javascript">
-            $('#head').load('nav.html');
-        </script>
+        <nav>
+            <div id="nav"></div>
+            <script>
+                $('#nav').load('public/nav.html')
+            </script>
+        </nav>
         <main>
             <h1 align="center">Welcome to this page!</h1>
             <p>Still Working......</p>
-            
         </main>
     </body>
 </html>
