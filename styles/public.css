@@ -5,6 +5,7 @@ ul.navigation {
     overflow: hidden;
     background-color: #dddddd;
     position: fixed;
+    float:right;
     top: 0;
     width: 100%;
     height: 50px;;
