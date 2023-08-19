@@ -9,16 +9,7 @@
         <link rel="icon" href="images/test-icon.jpg" type="image/x-icon">
         <link rel="stylesheet" href="styles/public.css">
         <script src="scripts/public.js" defer></script>
-        <script src="scripts/jquery3.7.0.js"></script>    
-        <script>
-            var path = window.location.pathname;  // pathname 为域名后的值   调取地址栏链接请用href
-            $('.nav a').each(function(i,n){   //获取导航下的链接
-            if($(n).attr('href') == path)
-            {
-            $(this).parent().addClass('active');   //给当前链接的父元素 li添加class
-            }
-            });
-            </script>
+        <script src="scripts/jquery3.7.0.js"></script>
     </head>
     <body>
         <nav>
