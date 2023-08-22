@@ -1,0 +1,28 @@
+main.homework-board{
+    margin-top: 5px;
+}
+div.chinese{
+    width: 46%;
+    height: 100px;
+
+    top: 1%;
+    border: #ffffff 1px solid;
+    border-radius: 5%;
+    display: flex;
+}
+/*
+div.chinese div{
+}
+*/
+div.chinese div.title{
+    background-color: rgba(255, 115, 0, 0.534);
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 100px;
+}
+p.subject-name{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 40px;
+    align-content: center;
+}
