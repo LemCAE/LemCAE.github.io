@@ -1,28 +1,63 @@
 main.homework-board{
     margin-top: 5px;
-}
-div.chinese{
-    width: 46%;
-    height: 100px;
-
-    top: 1%;
-    border: #ffffff 1px solid;
-    border-radius: 5%;
     display: flex;
+    flex-wrap: wrap;
+    column-gap: 1%;
+}
+div.subject{
+    width: 49%;
+    height: 230px;
+    top: 0.5%;
+    border: #000000 1px solid;
+    border-radius: 5px;
+    display: flex;
+}
+div.subject{
+ margin: 0.5% 0;
 }
 /*
 div.chinese div{
 }
 */
-div.chinese div.title{
-    background-color: rgba(255, 115, 0, 0.534);
+div.title{
     width: -moz-fit-content;
     width: fit-content;
-    height: 100px;
+    height: 230px;
+    border-right: #000000 1px dashed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 p.subject-name{
     writing-mode: vertical-rl;
     text-orientation: upright;
     font-size: 40px;
     align-content: center;
+}
+ul.content{
+    font-size: 25px;
+}
+div.chinese div.title{
+    background-color: #ff8800;
+}
+div.math div.title{
+    background-color: #007eaf;
+}
+div.english div.title{
+    background-color: #b3ff00;
+}
+div.physics div.title{
+    background-color: #8400ff;
+}
+div.chemistry div.title{
+    background-color: #0044ff;
+}
+div.biology div.title{
+    background-color: #009c3c;
+}
+div.politics div.title{
+    background-color: #ec0000;
+}
+div.others div.title{
+    background-color: #a5a5a5;
 }
