@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 main.homework-board{
     margin-top: 5px;
     display: flex;
@@ -35,7 +40,10 @@ p.subject-name{
     align-content: center;
 }
 ul.content{
-    font-size: 25px;
+    font-size: 35px;
+}
+ul.content li{
+    top: 0px;
 }
 div.chinese div.title{
     background-color: #ff8800;
@@ -60,4 +68,28 @@ div.politics div.title{
 }
 div.others div.title{
     background-color: #a5a5a5;
+}
+
+/*
+body{
+    background: url(../images/bgp.jpg);
+    background-repeat:no-repeat ;
+    background-size:cover ;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-attachment:fixed;
+    top: 0;
+    }
+main::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px) ;
+    z-index: -1;
+}
+*/
+body{
+    background-attachment: fixed;
 }
