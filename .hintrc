@@ -9,5 +9,13 @@
     "not firefox <= 116",
     "not ios_saf <= 16.5",
     "not safari <= 16.5"
-  ]
+  ],
+  "hints": {
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
+    ]
+  }
 }

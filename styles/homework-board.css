@@ -141,7 +141,7 @@ button.open:active{
 input.input{
     width: 630px;
     height: 40px;;
-    font-size: 25px;
+    font-size: 15px;
     margin: 8px 0 0 0 ;
 }
 a.cws{
@@ -152,5 +152,6 @@ a.cws{
 }
 div.input{
     position: absolute;
-    top:30px
+    top:30px;
+    left: 0.6%;
 }
