@@ -8,7 +8,7 @@ main.homework-board{
     display: flex;
     flex-wrap: wrap;
     column-gap: 0.5%;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
 }
 div.subject{
     width: 49%;
@@ -17,14 +17,8 @@ div.subject{
     border: #000000 1px solid;
     border-radius: 5px;
     display: flex;
-}
-div.subject{
  margin: 0.5% 0;
 }
-/*
-div.chinese div{
-}
-*/
 div.title{
     width: -moz-fit-content;
     width: fit-content;
@@ -47,25 +41,25 @@ ul.content li{
     top: 0px;
 }
 div.chinese div.title{
-    background-color: #ff8800;
+    background-color: #eba34c;
 }
 div.math div.title{
-    background-color: #007eaf;
+    background-color: #1781B5;
 }
 div.english div.title{
-    background-color: #b3ff00;
+    background-color: #57C3C2;
 }
 div.physics div.title{
-    background-color: #8400ff;
+    background-color: #b82490;
 }
 div.chemistry div.title{
-    background-color: #0044ff;
+    background-color: #15559A;
 }
 div.biology div.title{
-    background-color: #009c3c;
+    background-color: #248067;
 }
 div.politics div.title{
-    background-color: #ec0000;
+    background-color: #C02C38;
 }
 div.others div.title{
     background-color: #a5a5a5;
