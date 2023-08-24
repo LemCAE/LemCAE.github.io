@@ -7,7 +7,8 @@ main.homework-board{
     margin-top: 5px;
     display: flex;
     flex-wrap: wrap;
-    column-gap: 1%;
+    column-gap: 0.5%;
+    backdrop-filter: blur(10px);
 }
 div.subject{
     width: 49%;
