@@ -13,7 +13,7 @@ main.homework-board{
 }
 div.subject{
     width: 49%;
-    height: 230px;
+    height: 242px;
     top: 0.5%;
     border: #00000086 1px solid;
     border-radius: 5px;
@@ -24,7 +24,7 @@ div.subject{
 div.title{
     width: -moz-fit-content;
     width: fit-content;
-    height: 230px;
+    height: 242px;
     border-right: #00000062 1px dashed;
     display: flex;
     justify-content: center;
@@ -36,6 +36,9 @@ p.subject-name{
     font-size: 40px;
     align-content: center;
     color: #000000;
+}
+div.subject{
+    position: relative;
 }
 ul.content{
     font-size: 35px;
@@ -67,27 +70,6 @@ div.politics div.title{
 div.others div.title{
     background-color: #a5a5a5;
 }
-
-/*
-body{
-    background: url(../images/bgp.jpg);
-    background-repeat:no-repeat ;
-    background-size:cover ;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-attachment:fixed;
-    top: 0;
-    }
-main::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(15px) ;
-    z-index: -1;
-}
-*/
 div.edit-window{
     background-color: rgb(255, 255, 255);
     z-index: 11;
@@ -101,4 +83,9 @@ div.edit-window{
     margin:auto;
     display: none;
     border: #000000 1px solid;
+}
+div.button-edit{
+    position: absolute;
+    bottom: 3%;
+    right: 1%;
 }
