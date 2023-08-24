@@ -41,3 +41,13 @@ function ShowContentCh(){
     ShowContent('ch5','chip5')
 }
 
+function ReadFromJson(idn,idw){
+    var givenjson, v;
+    givenjson = data;
+    v = givenjson.idn;
+    document.getElementById(idw).innerText = v
+}
+
+function WriteToJson(){
+
+}
