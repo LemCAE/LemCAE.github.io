@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-attachment: fixed;
 }
 main.homework-board{
     margin-top: 5px;
@@ -14,7 +15,7 @@ div.subject{
     width: 49%;
     height: 230px;
     top: 0.5%;
-    border: #000000 1px solid;
+    border: #00000086 1px solid;
     border-radius: 5px;
     display: flex;
  margin: 0.5% 0;
@@ -23,7 +24,7 @@ div.title{
     width: -moz-fit-content;
     width: fit-content;
     height: 230px;
-    border-right: #000000 1px dashed;
+    border-right: #00000062 1px dashed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +34,7 @@ p.subject-name{
     text-orientation: upright;
     font-size: 40px;
     align-content: center;
+    color: #000000;
 }
 ul.content{
     font-size: 35px;
@@ -85,6 +87,3 @@ main::before {
     z-index: -1;
 }
 */
-body{
-    background-attachment: fixed;
-}

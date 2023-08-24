@@ -13,11 +13,6 @@
         <script src="../scripts/jquery3.7.0.js"></script>
     </head>
     <body background="../images/bgp.jpg">
-        <div class="bgp">
-            <!--
-            <img src="../images/bgp.jpg" alt="" class="bgp">
-            -->
-        </div>
         <nav>
             <!--
 
@@ -39,14 +34,19 @@
                     <div class="board">
                         <div class="detail">
                             <ul class="content">
-                                <li>抄写《华强买瓜》</li>
+                                <li id="ch-1">抄写《华强买瓜》</li>
                                 <li>抄写《华强买瓜》-</li>
                                 <li>2023高考一卷</li>
                             </ul>
                         </div>
                         <!--详细内容-->
                         <div class="botton">
-
+                            <p class="botton"><button onclick="editli()">编辑</button></p>
+                            <script>
+                                function editli(){
+                                    document.getElementById('ch-1').innerHTML=value-ch-1;
+                                }
+                            </script>
                         </div>
                         <!--交互按钮-->
                     </div>
