@@ -43,6 +43,8 @@ div.subject{
 }
 ul.content{
     font-size: 35px;
+    top: 0;
+    margin-top: 0.5%;
 }
 ul.content li{
     top: 0px;
@@ -75,10 +77,10 @@ div.others div.title{
     background-color: #a5a5a5;
 }
 div.edit-window{
-    background-color: #ffffff;
-    z-index: 11;
-    width: 600px;
-    height: 600px;
+    background-color: #ffffffd3;
+    backdrop-filter: blur(15px);
+    width: 700px;
+    height: 400px;
     position:fixed;
     top:0;
     right:0;
@@ -86,33 +88,69 @@ div.edit-window{
     bottom:0;
     margin:auto;
     display: none;
-    border: #000000 1px solid;
+    border: #636363 1px solid;
+    z-index: 10;
+    border-radius:5px;
 }
 div.button-edit{
     position: absolute;
-    bottom: 3%;
-    right: 1%;
+    bottom: 0%;
+    right: 0%;
 }
 div.close-button{
     position:absolute ;
     bottom: 5%;
-    right: 10%;
+    left: 32%;
 }
-button.btn1{
-    background-color:#f66f6a;
+button.close{
+    background-color:#19acac;
     color:white;
-    width: 400px;
+    width: 250px;
     height: 45px;
     border:0;
     font-size: 16px;
     box-sizing: content-box;				
     border-radius: 5px;
 }
-button.btn1:hover{
-    background-color: #a54b4a;
+button.close:hover{
+    background-color: #1e8686;
 }
-button.btn1:active{
+button.close:active{
     position:relative;
     top:1px;
-  
+}
+button.open{
+	background-color:#ffffff49;
+	border-radius:37px;
+	display:inline-block;
+	cursor:pointer;
+	color:#00000080;
+	font-family:Arial;
+	font-size:17px;
+	padding:13px 8px;
+	text-decoration:none;
+    border: 0px;
+}
+button.open:hover{
+	background-color:#ffffff02;
+}
+button.open:active{
+	position:relative;
+	top:1px;
+}
+input.input{
+    width: 630px;
+    height: 40px;;
+    font-size: 25px;
+    margin: 8px 0 0 0 ;
+}
+a.cws{
+    position: absolute;
+    top: 0;
+    right:0;
+    text-decoration: none;
+}
+div.input{
+    position: absolute;
+    top:30px
 }

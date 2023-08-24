@@ -34,22 +34,38 @@
                 <div class="board">
                     <div class="detail">
                         <ul class="content" id="content-chinese">
-                            <li id="ch-1">抄写《华强买瓜》</li>
-                            <li id="ch-3">2023高考一卷</li>
+                            <li id="ch1">抄写《华强买瓜》</li>
+                            <li id="ch2">2023高考一卷</li>
+                            <li id="ch3">2023高考二卷</li>
+                            <li id="ch4"></li>
+                            <li id="ch5">11</li>
                         </ul>
                     </div>
                     <!--交互按钮-->
-                        <div class="button-edit">
-                            <button onclick="openedit();">编辑</button>
-                        </div>
-                        <div id="edit-window" class="edit-window">
-                            <div class="close">
-                                <p>此处为弹出窗口</p>
-                                <div class="close-button">
-                                    <button class="btn1" onclick="closePoP()">关闭</button>
+                    <div class="button-edit">
+                        <button onclick="openedit();" class="open">编辑</button>
+                    </div>
+                    <div id="edit-window" class="edit-window">
+                        <div class="close">
+                            <p><a class="cws" href="javascript:void(0);" onclick='closePoP()'">[x]</a></p>
+                            <div class="input">
+                                <script>
+                                    ShowContent('ch1','ch1ip')
+                                </script>
+                                <div>
+                                    <label for="ch1ip" class="cws">内容1:</label>
+                                    <input type="text" id="ch1ip" class="input" value="">
                                 </div>
+                                <label for="ch2ip" class="cws">内容2:</label>
+                                <input type="text" id="ch2ip" class="input" value="">
+                                <label for="ch3ip" class="cws">内容3:</label>
+                                <input type="text" id="ch3ip" class="input" value="1">
+                            </div>
+                            <div class="close-button">
+                                <button class="close" onclick="closePoP()">保存并关闭</button>
                             </div>
                         </div>
+                    </div>
                 </div>
                 <!--右侧内容-->
             </div>
