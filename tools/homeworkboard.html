@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="../styles/homework-board.css">
         <script src="../scripts/public.js" defer></script>
         <script src="../scripts/jquery3.7.0.js"></script>
+        <script src="../scripts/homework-board.js"></script>
     </head>
     <body background="../images/bgp.jpg">
         <nav>
@@ -30,26 +31,25 @@
                     <p class="subject-name">语 文</p>
                 </div>
                 <!--左侧标题-->
-                <div class="content">
-                    <div class="board">
-                        <div class="detail">
-                            <ul class="content">
-                                <li id="ch-1">抄写《华强买瓜》</li>
-                                <li>抄写《华强买瓜》-</li>
-                                <li>2023高考一卷</li>
-                            </ul>
-                        </div>
-                        <!--详细内容-->
-                        <div class="botton">
-                            <p class="botton"><button onclick="editli()">编辑</button></p>
-                            <script>
-                                function editli(){
-                                    document.getElementById('ch-1').innerHTML=value-ch-1;
-                                }
-                            </script>
-                        </div>
-                        <!--交互按钮-->
+                <div class="board">
+                    <div class="detail">
+                        <ul class="content" id="content-chinese">
+                            <li id="ch-1">抄写《华强买瓜》</li>
+                            <li id="ch-2">抄写《华强买瓜》</li>
+                            <li id="ch-3">2023高考一卷</li>
+                        </ul>
                     </div>
+                    <!--交互按钮-->
+
+                        <div class="button-edit">
+                            <button onclick="openedit();">编辑</button>
+                        </div>
+                        <div id="edit-window" class="edit-window">
+                            <div class="close">
+                                <p>此处为弹出窗口</p>
+                                <button onclick="closePop()">关闭</button>
+                            </div>
+                        </div>
                 </div>
                 <!--右侧内容-->
             </div>
