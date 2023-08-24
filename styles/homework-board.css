@@ -5,15 +5,16 @@ body {
     background-attachment: fixed;
 }
 main.homework-board{
-    margin-top: 5px;
+    margin-top: 0px;
     display: flex;
     flex-wrap: wrap;
     column-gap: 0.5%;
     backdrop-filter: blur(15px);
+    top:0
 }
 div.subject{
     width: 49%;
-    height: 242px;
+    height: 235px;
     top: 0.5%;
     border: #00000086 1px solid;
     border-radius: 5px;
@@ -24,7 +25,7 @@ div.subject{
 div.title{
     width: -moz-fit-content;
     width: fit-content;
-    height: 242px;
+    height: 235px;
     border-right: #00000062 1px dashed;
     display: flex;
     justify-content: center;
@@ -45,6 +46,9 @@ ul.content{
 }
 ul.content li{
     top: 0px;
+}
+div.title{
+    border-radius: 4px 0 0 4px ;
 }
 div.chinese div.title{
     background-color: #eba34c;
@@ -71,7 +75,7 @@ div.others div.title{
     background-color: #a5a5a5;
 }
 div.edit-window{
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     z-index: 11;
     width: 600px;
     height: 600px;
@@ -88,4 +92,27 @@ div.button-edit{
     position: absolute;
     bottom: 3%;
     right: 1%;
+}
+div.close-button{
+    position:absolute ;
+    bottom: 5%;
+    right: 10%;
+}
+button.btn1{
+    background-color:#f66f6a;
+    color:white;
+    width: 400px;
+    height: 45px;
+    border:0;
+    font-size: 16px;
+    box-sizing: content-box;				
+    border-radius: 5px;
+}
+button.btn1:hover{
+    background-color: #a54b4a;
+}
+button.btn1:active{
+    position:relative;
+    top:1px;
+  
 }

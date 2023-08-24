@@ -3,7 +3,7 @@ function openedit(){
     popBox.style.display = "block";
 }
 
-function closePop(){
+function closePoP(){
     let popDiv = document.getElementById("edit-window");
     popDiv.style.display = "none";
 }
