@@ -12,6 +12,7 @@
         <script src="../scripts/jquery3.7.0.js"></script>
         <script src="../scripts/public.js" defer></script>
         <script src="../scripts/homework-board.js"></script>
+        <script>ReadFromJson()</script>
     </head>
     <body background="../images/bgp2.jpg">
         <nav>
@@ -43,25 +44,25 @@
                     </div>
                     <!--交互按钮-->
                     <div class="button-edit">
-                        <button onclick="openedit();ShowContentCh()" class="open" type="button">编辑</button>
+                        <button onclick="openeditch();ShowContentCh()" class="open" type="button">编辑</button>
                     </div>
-                    <div id="edit-window" class="edit-window">
+                    <div id="edit-window-ch" class="edit-window">
                         <div class="close">
-                            <p><a class="cws" href="javascript:void(0);" onclick='closePoP()'">[x]</a></p>
+                            <p><a class="cws" href="javascript:void(0);" onclick='closePoPch()'">[x]</a></p>
                             <div class="input">
-                                <label for="ch1ip" class="cws">内容1:</label>
+                                <label for="chip1" class="cws">内容1:</label>
                                 <input type="text" id="chip1" class="input" value="">
-                                <label for="ch2ip" class="cws">内容2:</label>
+                                <label for="chip2" class="cws">内容2:</label>
                                 <input type="text" id="chip2" class="input" value="">
-                                <label for="ch3ip" class="cws">内容3:</label>
+                                <label for="chip3" class="cws">内容3:</label>
                                 <input type="text" id="chip3" class="input" value="">
-                                <label for="ch4ip" class="cws">内容4:</label>
+                                <label for="chip4" class="cws">内容4:</label>
                                 <input type="text" id="chip4" class="input" value="">
-                                <label for="ch5ip" class="cws">内容5:</label>
+                                <label for="chip5" class="cws">内容5:</label>
                                 <input type="text" id="chip5" class="input" value="">
                             </div>
                             <div class="close-button">
-                                <button class="close" onclick="closePoP();ChangeContentCh()" type="button">保存并关闭</button>
+                                <button class="close" onclick="closePoPch();ChangeContentCh()" type="button">保存并关闭</button>
                             </div>
                         </div>
                     </div>
@@ -86,10 +87,30 @@
                             </ul>
                         </div>
                         <!--详细内容-->
-                        <div class="botton">
-
-                        </div>
                         <!--交互按钮-->
+                        <div class="button-edit">
+                            <button onclick="openeditma();ShowContentMa()" class="open" type="button">编辑</button>
+                        </div>
+                        <div id="edit-window-ma" class="edit-window">
+                            <div class="close">
+                                <p><a class="cws" href="javascript:void(0);" onclick='closePoPma()'">[x]</a></p>
+                                <div class="input">
+                                    <label for="maip1" class="cws">内容1:</label>
+                                    <input type="text" id="maip1" class="input" value="">
+                                    <label for="maip2" class="cws">内容2:</label>
+                                    <input type="text" id="maip2" class="input" value="">
+                                    <label for="maip3" class="cws">内容3:</label>
+                                    <input type="text" id="maip3" class="input" value="">
+                                    <label for="maip4" class="cws">内容4:</label>
+                                    <input type="text" id="maip4" class="input" value="">
+                                    <label for="maip5" class="cws">内容5:</label>
+                                    <input type="text" id="maip5" class="input" value="">
+                                </div>
+                                <div class="close-button">
+                                    <button class="close" onclick="closePoPma();ChangeContentMa()" type="button">保存并关闭</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--右侧内容-->
@@ -112,10 +133,30 @@
                             </ul>
                         </div>
                         <!--详细内容-->
-                        <div class="botton">
-
-                        </div>
                         <!--交互按钮-->
+                        <div class="button-edit">
+                            <button onclick="openediten();ShowContentEn()" class="open" type="button">编辑</button>
+                        </div>
+                        <div id="edit-window-en" class="edit-window">
+                            <div class="close">
+                                <p><a class="cws" href="javascript:void(0);" onclick='closePoPen()'">[x]</a></p>
+                                <div class="input">
+                                    <label for="enip1" class="cws">内容1:</label>
+                                    <input type="text" id="enip1" class="input" value="">
+                                    <label for="enip2" class="cws">内容2:</label>
+                                    <input type="text" id="enip2" class="input" value="">
+                                    <label for="enip3" class="cws">内容3:</label>
+                                    <input type="text" id="enip3" class="input" value="">
+                                    <label for="enip4" class="cws">内容4:</label>
+                                    <input type="text" id="enip4" class="input" value="">
+                                    <label for="enip5" class="cws">内容5:</label>
+                                    <input type="text" id="enip5" class="input" value="">
+                                </div>
+                                <div class="close-button">
+                                    <button class="close" onclick="closePoPen();ChangeContentEn()" type="button">保存并关闭</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--右侧内容-->
@@ -138,10 +179,30 @@
                             </ul>
                         </div>
                         <!--详细内容-->
-                        <div class="botton">
-
-                        </div>
                         <!--交互按钮-->
+                        <div class="button-edit">
+                            <button onclick="openeditph();ShowContentPh()" class="open" type="button">编辑</button>
+                        </div>
+                        <div id="edit-window-ph" class="edit-window">
+                            <div class="close">
+                                <p><a class="cws" href="javascript:void(0);" onclick='closePoPph()'">[x]</a></p>
+                                <div class="input">
+                                    <label for="phip1" class="cws">内容1:</label>
+                                    <input type="text" id="phip1" class="input" value="">
+                                    <label for="phip2" class="cws">内容2:</label>
+                                    <input type="text" id="phip2" class="input" value="">
+                                    <label for="phip3" class="cws">内容3:</label>
+                                    <input type="text" id="phip3" class="input" value="">
+                                    <label for="phip4" class="cws">内容4:</label>
+                                    <input type="text" id="phip4" class="input" value="">
+                                    <label for="phip5" class="cws">内容5:</label>
+                                    <input type="text" id="phip5" class="input" value="">
+                                </div>
+                                <div class="close-button">
+                                    <button class="close" onclick="closePoPph();ChangeContentPh()" type="button">保存并关闭</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--右侧内容-->
@@ -164,10 +225,29 @@
                             </ul>
                         </div>
                         <!--详细内容-->
-                        <div class="botton">
-
+                        <div class="button-edit">
+                            <button onclick="openeditcl();ShowContentCl()" class="open" type="button">编辑</button>
                         </div>
-                        <!--交互按钮-->
+                        <div id="edit-window-cl" class="edit-window">
+                            <div class="close">
+                                <p><a class="cws" href="javascript:void(0);" onclick='closePoPcl()'">[x]</a></p>
+                                <div class="input">
+                                    <label for="clip1" class="cws">内容1:</label>
+                                    <input type="text" id="clip1" class="input" value="">
+                                    <label for="clip2" class="cws">内容2:</label>
+                                    <input type="text" id="clip2" class="input" value="">
+                                    <label for="clip3" class="cws">内容3:</label>
+                                    <input type="text" id="clip3" class="input" value="">
+                                    <label for="clip4" class="cws">内容4:</label>
+                                    <input type="text" id="clip4" class="input" value="">
+                                    <label for="clip5" class="cws">内容5:</label>
+                                    <input type="text" id="clip5" class="input" value="">
+                                </div>
+                                <div class="close-button">
+                                    <button class="close" onclick="closePoPcl();ChangeContentCl()" type="button">保存并关闭</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--右侧内容-->
@@ -190,10 +270,30 @@
                             </ul>
                         </div>
                         <!--详细内容-->
-                        <div class="botton">
-
-                        </div>
                         <!--交互按钮-->
+                        <div class="button-edit">
+                            <button onclick="openeditbi();ShowContentBi()" class="open" type="button">编辑</button>
+                        </div>
+                        <div id="edit-window-bi" class="edit-window">
+                            <div class="close">
+                                <p><a class="cws" href="javascript:void(0);" onclick='closePoPbi()'">[x]</a></p>
+                                <div class="input">
+                                    <label for="biip1" class="cws">内容1:</label>
+                                    <input type="text" id="biip1" class="input" value="">
+                                    <label for="biip2" class="cws">内容2:</label>
+                                    <input type="text" id="biip2" class="input" value="">
+                                    <label for="biip3" class="cws">内容3:</label>
+                                    <input type="text" id="biip3" class="input" value="">
+                                    <label for="biip4" class="cws">内容4:</label>
+                                    <input type="text" id="biip4" class="input" value="">
+                                    <label for="biip5" class="cws">内容5:</label>
+                                    <input type="text" id="biip5" class="input" value="">
+                                </div>
+                                <div class="close-button">
+                                    <button class="close" onclick="closePoPbi();ChangeContentBi()" type="button">保存并关闭</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--右侧内容-->
@@ -216,8 +316,28 @@
                             </ul>
                         </div>
                         <!--详细内容-->
-                        <div class="botton">
-
+                        <div class="button-edit">
+                            <button onclick="openeditpo();ShowContentPo()" class="open" type="button">编辑</button>
+                        </div>
+                        <div id="edit-window-po" class="edit-window">
+                            <div class="close">
+                                <p><a class="cws" href="javascript:void(0);" onclick='closePoPpo()'">[x]</a></p>
+                                <div class="input">
+                                    <label for="poip1" class="cws">内容1:</label>
+                                    <input type="text" id="poip1" class="input" value="">
+                                    <label for="poip2" class="cws">内容2:</label>
+                                    <input type="text" id="poip2" class="input" value="">
+                                    <label for="poip3" class="cws">内容3:</label>
+                                    <input type="text" id="poip3" class="input" value="">
+                                    <label for="poip4" class="cws">内容4:</label>
+                                    <input type="text" id="poip4" class="input" value="">
+                                    <label for="poip5" class="cws">内容5:</label>
+                                    <input type="text" id="poip5" class="input" value="">
+                                </div>
+                                <div class="close-button">
+                                    <button class="close" onclick="closePoPpo();ChangeContentPo()" type="button">保存并关闭</button>
+                                </div>
+                            </div>
                         </div>
                         <!--交互按钮-->
                     </div>
@@ -242,8 +362,28 @@
                             </ul>
                         </div>
                         <!--详细内容-->
-                        <div class="botton">
-
+                        <div class="button-edit">
+                            <button onclick="openeditot();ShowContentOt()" class="open" type="button">编辑</button>
+                        </div>
+                        <div id="edit-window-ot" class="edit-window">
+                            <div class="close">
+                                <p><a class="cws" href="javascript:void(0);" onclick='closePoPot()'">[x]</a></p>
+                                <div class="input">
+                                    <label for="otip1" class="cws">内容1:</label>
+                                    <input type="text" id="otip1" class="input" value="">
+                                    <label for="otip2" class="cws">内容2:</label>
+                                    <input type="text" id="otip2" class="input" value="">
+                                    <label for="otip3" class="cws">内容3:</label>
+                                    <input type="text" id="otip3" class="input" value="">
+                                    <label for="otip4" class="cws">内容4:</label>
+                                    <input type="text" id="otip4" class="input" value="">
+                                    <label for="otip5" class="cws">内容5:</label>
+                                    <input type="text" id="otip5" class="input" value="">
+                                </div>
+                                <div class="close-button">
+                                    <button class="close" onclick="closePoPot();ChangeContentOt()" type="button">保存并关闭</button>
+                                </div>
+                            </div>
                         </div>
                         <!--交互按钮-->
                     </div>
@@ -262,5 +402,8 @@
 
             -->
         </footer>
+        <script>
+        FillElement();
+        </script>
     </body>
 </html>
