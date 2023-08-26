@@ -285,8 +285,12 @@ function FillElement(){
     document.getElementById('ot5').innerHTML = result.others5
 }
 
-function WriteToJson(keyname,valuetorp){
-    var vtg = result.keyname;
-    var str = vtg.replace(vtg,valuetorp)
-    result.keyname = str
-}
+function change_room_charge() {
+    var chargeArray = JSON.parse($('#chargeArray').val());
+    $.each(chargeArray, function(index, item) {
+      var key = Object.keys(item)[0];
+      item[key].charge = 666;
+    });
+    $('#chargeArray').val(JSON.stringify(chargeArray));
+    console.log($('#chargeArray').val());
+  }
