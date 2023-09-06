@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Operation Example</title>
+</head>
+<body>
+  <button id="loadButton">Load JSON</button>
+  <div>
+    <textarea id="jsonTextArea" rows="10" cols="50"></textarea>
+  </div>
+  <button id="updateButton">Update and Save</button>
+
+  <script>
+    const loadButton = document.getElementById('loadButton');
+    const jsonTextArea = document.getElementById('jsonTextArea');
+    const updateButton = document.getElementById('updateButton');
+
+    loadButton.addEventListener('click', loadJSON);
+    updateButton.addEventListener('click', updateAndSave);
+
+    function loadJSON() {
+      // Perform an Ajax request to get the JSON data
+      fetch('setting.json')
+        .then(response => response.json())
+        .then(data => {
+          jsonTextArea.value = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          console.error('Error loading JSON:', error);
+        });
+    }
+
+    function updateAndSave() {
+      const newData = JSON.parse(jsonTextArea.value);
+
+      // Perform an Ajax request to update the JSON data on the server
+      fetch('update.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newData)
+      })
+        .then(response => response.text())
+        .then(message => {
+          console.log(message);
+        })
+        .catch(error => {
+          console.error('Error updating JSON:', error);
+        });
+    }
+  </script>
+</body>
+</html>

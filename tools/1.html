@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Local File Operation Example</title>
+</head>
+<body>
+  <button id="loadButton">Load JSON</button>
+  <div>
+    <textarea id="jsonTextArea" rows="10" cols="50"></textarea>
+  </div>
+  <button id="updateButton">Update and Save</button>
+
+  <script>
+    const loadButton = document.getElementById('loadButton');
+    const jsonTextArea = document.getElementById('jsonTextArea');
+    const updateButton = document.getElementById('updateButton');
+    let fileContent = null; // To store the file content temporarily
+
+    loadButton.addEventListener('click', loadJSON);
+    updateButton.addEventListener('click', updateAndSave);
+
+    function loadJSON() {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+
+      fileInput.addEventListener('change', event => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            fileContent = event.target.result;
+            jsonTextArea.value = fileContent;
+          };
+          reader.readAsText(file);
+        }
+      });
+
+      fileInput.click();
+    }
+
+    function updateAndSave() {
+      if (fileContent) {
+        const newData = JSON.parse(jsonTextArea.value);
+        const updatedContent = JSON.stringify(newData, null, 2);
+
+        const blob = new Blob([updatedContent], { type: 'application/json' });
+        const blobUrl = URL.createObjectURL(blob);
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = blobUrl;
+        downloadLink.download = 'updated_setting.json';
+        downloadLink.click();
+
+        URL.revokeObjectURL(blobUrl);
+      }
+    }
+  </script>
+</body>
+</html>

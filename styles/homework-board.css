@@ -3,6 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-attachment: fixed;
+    background-size: 100%;
 }
 main.homework-board{
     margin-top: 0px;

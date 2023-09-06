@@ -293,4 +293,5 @@ function change_room_charge() {
     });
     $('#chargeArray').val(JSON.stringify(chargeArray));
     console.log($('#chargeArray').val());
-  }
+}
+
