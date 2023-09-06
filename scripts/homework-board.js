@@ -95,9 +95,13 @@ function ChangeContent(iptr,litw){
 //iptr:要读取的<input>元素的id
 //litw:要写入的<li>元素的id
 
+function Reload(){
+    location.reload();
+}
 
-
-
+function OpenEditor() {
+    window.location.href='JsonEditor://45'
+}
 
 function ChangeContentCh(){
     ChangeContent('chip1','ch1');
