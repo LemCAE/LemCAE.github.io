@@ -1,4 +1,3 @@
-# LemCAE.github.io 的概述
 
 正如你所见，这是一个github.io项目
 
