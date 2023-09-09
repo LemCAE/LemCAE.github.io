@@ -95,14 +95,6 @@ function ChangeContent(iptr,litw){
 //iptr:要读取的<input>元素的id
 //litw:要写入的<li>元素的id
 
-function Reload(){
-    location.reload();
-}
-
-function OpenEditor() {
-    window.location.href='JsonEditor://45'
-}
-
 function ChangeContentCh(){
     ChangeContent('chip1','ch1');
     ChangeContent('chip2','ch2');
@@ -235,17 +227,6 @@ function ShowContentOt(){
     ShowContent('otip5','ot5');
 }
 
-function ReadFromJson(){
-    t =  $.ajax({
-        url: "homeworkboard-setting.json",
-        type: "GET",
-        dataType: "json",
-        async: false,
-        });	
-    tj=t.responseText;
-    result =$.parseJSON(tj)
-}
-
 function FillElement(){
     document.getElementById('ch1').innerHTML = result.chinese1
     document.getElementById('ch2').innerHTML = result.chinese2
@@ -289,13 +270,21 @@ function FillElement(){
     document.getElementById('ot5').innerHTML = result.others5
 }
 
-function change_room_charge() {
-    var chargeArray = JSON.parse($('#chargeArray').val());
-    $.each(chargeArray, function(index, item) {
-      var key = Object.keys(item)[0];
-      item[key].charge = 666;
-    });
-    $('#chargeArray').val(JSON.stringify(chargeArray));
-    console.log($('#chargeArray').val());
+function Reload(){
+    location.reload();
 }
 
+function OpenEditor() {
+    window.location.href='JsonEditor://45'
+}
+
+function ReadFromJson(){
+    t =  $.ajax({
+        url: "homeworkboard-setting.json",
+        type: "GET",
+        dataType: "json",
+        async: false,
+        });	
+    tj=t.responseText;
+    result =$.parseJSON(tj)
+}
