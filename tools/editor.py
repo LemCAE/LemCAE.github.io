@@ -87,11 +87,11 @@ def exit_without_save():
         pass
 def show_about():
     messagebox.showinfo('关于', '''这是一个配套网页作业板的编辑器！
-是由LemCAE用他那孱弱的技术堆出来的!
 在这里，可以配置每项作业的内容以及是否显示它们
 然后就没有然后了~
 
-Last Update:2023/10/21''')
+Last Update:2023/10/21
+Github 项目地址:https://github.com/LemCAE/LemCAE.github.io''')
 def set():
     messagebox.showinfo('设置', '还没写啦')
 def reset_setting():
