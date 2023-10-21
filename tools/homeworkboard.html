@@ -377,6 +377,21 @@
                         <div class="button-edit">
                             <button onclick="WriteToJson()" class="open" type="button">编辑</button>
                         </div>
+
+                        <div id="edit-json" class="edit-window">
+                            <p><a class="cws" href="javascript:void(0);" onclick='closeJsonEditor()'">[x]</a></p>
+                            <p class="notice">
+                                由于种种不可名状的原因,目前暂不能在该页面中进行可保存的更改
+                                <br />
+                                请手动找到[Editor.exe]文件,并使用其进行更改§(*￣▽￣*)§
+                                <br />
+                                Tips:更改完后记得点"刷新"~
+                            </p>
+                            <div class="close-button">
+                                <button class="close" onclick="closeJsonEditor()" type="button">关闭</button>
+                            </div>
+                        </div>
+
                         <div id="edit-window-ot" class="edit-window">
                             <div class="close">
                                 <p><a class="cws" href="javascript:void(0);" onclick='closePoPot()'">[x]</a></p>

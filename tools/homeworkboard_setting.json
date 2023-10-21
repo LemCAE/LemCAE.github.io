@@ -1,0 +1,93 @@
+{
+    "chinese1": "",
+    "chinese2": "",
+    "chinese3": "",
+    "chinese4": "",
+    "chinese5": "",
+    "math1": "",
+    "math2": "",
+    "math3": "",
+    "math4": "",
+    "math5": "",
+    "english1": "",
+    "english2": "",
+    "english3": "",
+    "english4": "",
+    "english5": "",
+    "physics1": "",
+    "physics2": "",
+    "physics3": "",
+    "physics4": "",
+    "physics5": "",
+    "chemistry1": "",
+    "chemistry2": "",
+    "chemistry3": "",
+    "chemistry4": "",
+    "chemistry5": "",
+    "biology1": "",
+    "biology2": "",
+    "biology3": "",
+    "biology4": "",
+    "biology5": "",
+    "politics1": "",
+    "politics2": "",
+    "politics3": "",
+    "politics4": "",
+    "politics5": "",
+    "others1": "",
+    "others2": "",
+    "others3": "",
+    "others4": "",
+    "others5": "",
+    "hide_values": [
+        {
+            "chinese1": "block",
+            "chinese2": "block",
+            "chinese3": "block",
+            "chinese4": "block",
+            "chinese5": "block"
+        },
+        {
+            "math1": "block",
+            "math2": "block",
+            "math3": "block",
+            "math4": "block",
+            "math5": "block"
+        },
+        {
+            "english1": "block",
+            "english2": "block",
+            "english3": "block",
+            "english4": "block",
+            "english5": "block"
+        },
+        {
+            "physics1": "block",
+            "physics2": "block",
+            "physics3": "block",
+            "physics4": "block",
+            "physics5": "block"
+        },
+        {
+            "chemistry1": "block",
+            "chemistry2": "block",
+            "chemistry3": "block",
+            "chemistry4": "block",
+            "chemistry5": "block"
+        },
+        {
+            "biology1": "block",
+            "biology2": "block",
+            "biology3": "block",
+            "biology4": "block",
+            "biology5": "block"
+        },
+        {
+            "others1": "block",
+            "others2": "block",
+            "others3": "block",
+            "others4": "block",
+            "others5": "block"
+        }
+    ]
+}
