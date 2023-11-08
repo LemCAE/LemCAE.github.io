@@ -29,11 +29,6 @@
     "biology3": "",
     "biology4": "",
     "biology5": "",
-    "politics1": "",
-    "politics2": "",
-    "politics3": "",
-    "politics4": "",
-    "politics5": "",
     "others1": "",
     "others2": "",
     "others3": "",
@@ -41,53 +36,58 @@
     "others5": "",
     "hide_values": [
         {
-            "chinese1": "block",
-            "chinese2": "block",
-            "chinese3": "block",
-            "chinese4": "block",
-            "chinese5": "block"
+            "chinese1": "none",
+            "chinese2": "none",
+            "chinese3": "none",
+            "chinese4": "none",
+            "chinese5": "none"
         },
         {
-            "math1": "block",
-            "math2": "block",
-            "math3": "block",
-            "math4": "block",
-            "math5": "block"
+            "math1": "none",
+            "math2": "none",
+            "math3": "none",
+            "math4": "none",
+            "math5": "none"
         },
         {
-            "english1": "block",
-            "english2": "block",
-            "english3": "block",
-            "english4": "block",
-            "english5": "block"
+            "english1": "none",
+            "english2": "none",
+            "english3": "none",
+            "english4": "none",
+            "english5": "none"
         },
         {
-            "physics1": "block",
-            "physics2": "block",
-            "physics3": "block",
-            "physics4": "block",
-            "physics5": "block"
+            "physics1": "none",
+            "physics2": "none",
+            "physics3": "none",
+            "physics4": "none",
+            "physics5": "none"
         },
         {
-            "chemistry1": "block",
-            "chemistry2": "block",
-            "chemistry3": "block",
-            "chemistry4": "block",
-            "chemistry5": "block"
+            "chemistry1": "none",
+            "chemistry2": "none",
+            "chemistry3": "none",
+            "chemistry4": "none",
+            "chemistry5": "none"
         },
         {
-            "biology1": "block",
-            "biology2": "block",
-            "biology3": "block",
-            "biology4": "block",
-            "biology5": "block"
+            "biology1": "none",
+            "biology2": "none",
+            "biology3": "none",
+            "biology4": "none",
+            "biology5": "none"
         },
         {
-            "others1": "block",
-            "others2": "block",
-            "others3": "block",
-            "others4": "block",
-            "others5": "block"
+            "others1": "none",
+            "others2": "none",
+            "others3": "none",
+            "others4": "none",
+            "others5": "none"
+        }
+    ],
+    "settings": [
+        {
+            "auto_hide": "off"
         }
     ]
 }

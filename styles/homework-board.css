@@ -16,7 +16,7 @@ main.homework-board{
 }
 div.subject{
     width: 49%;
-    height: 235px;
+    height: 100%;
     top: 0.5%;
     border: #00000086 1px solid;
     border-radius: 5px;
@@ -159,4 +159,8 @@ div.input{
 }
 p.notice{
     font-size: 20px;
+}
+#empty-place{
+    height: 36px;
+    width: 100%;
 }
