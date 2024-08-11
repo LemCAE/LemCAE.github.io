@@ -244,10 +244,11 @@
         }
         document.getElementById('change').addEventListener('click', changeMenuShow);
         document.addEventListener('keydown', function(event) {
-                if (event.keyCode === 109 || event.keyCode === 77) {
-                    //77:M;109:m
-                    changeMenuShow()
-                }
+            console.log(event.keyCode);
+            if (event.keyCode === 77) {
+                //77:M,m
+                changeMenuShow()
+            }
         });
         var divElement = document.getElementById('control-box');
         document.addEventListener('click', function(event) {
