@@ -27,7 +27,7 @@
 <meta property="og:description" content="背景图片的设置一般来说，网页背景图片是设置成居中、铺满且不重复的。要达到这一点，可以在css里面设置： 123456body &#123;	background-image: url();        background-size: cover;        background-position: center;        background-repeat: no-repeat;&amp;#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-11T05:48:22.000Z">
-<meta property="article:modified_time" content="2024-08-11T07:41:29.054Z">
+<meta property="article:modified_time" content="2024-08-11T08:35:31.223Z">
 <meta property="article:author" content="LemCAE">
 <meta property="article:tag" content="HTML">
 <meta name="twitter:card" content="summary_large_image">
@@ -302,7 +302,7 @@
                 <h3 id="背景图片的设置"><a href="#背景图片的设置" class="headerlink" title="背景图片的设置"></a>背景图片的设置</h3><p>一般来说，网页背景图片是设置成居中、铺满且不重复的。要达到这一点，可以在css里面设置：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">body</span> &#123;<br>	<span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>();<br>        <span class="hljs-attribute">background-size</span>: cover;<br>        <span class="hljs-attribute">background-position</span>: center;<br>        <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>其中，<code>background-image: url()</code>指定了背景图片的位置，<code>background: cover</code>使得背景图片<strong>在保留宽高比</strong>的情况下**缩放至铺满页面，<code>background-position: center</code>和 <code>background-repeat: no-repeat</code>则分别使背景居中和不重复。</p>
+<p>其中，<code>background-image: url()</code>指定了背景图片的位置，<code>background: cover</code>使得背景图片<strong>在保留宽高比</strong>的情况下<strong>缩放至铺满页面</strong>，<code>background-position: center</code>和 <code>background-repeat: no-repeat</code>则分别使背景居中和不重复。</p>
 <h3 id="多个元素的排序"><a href="#多个元素的排序" class="headerlink" title="多个元素的排序"></a>多个元素的排序</h3><p>在排列一些内容或链接时，经常希望他们可以按行列规律排序，这里主要使用 <code>display: flex</code>属性达到这一效果：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span>&#123;<br>	<span class="hljs-attribute">display</span>: flex;<br>        <span class="hljs-attribute">flex-wrap</span>: wrap;<br>        <span class="hljs-attribute">align-items</span>: center;<br>        <span class="hljs-attribute">justify-content</span>: space-around;<br>&#125;<br></code></pre></td></tr></table></figure>
 
