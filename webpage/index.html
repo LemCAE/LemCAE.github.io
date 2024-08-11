@@ -15,25 +15,25 @@
                 </div>
                 <p class="content">返回主页</p>
             </div>
-            <div class="navblock working" onclick="window.open('https://hexo.io/zh-cn/docs/','_blank')">
+            <div class="navblock program" onclick="window.open('https://hexo.io/zh-cn/docs/','_blank')">
                 <div class="name" title="点击进入">
                     <p class="title">Hexo使用手册</p>
                 </div>
                 <p class="content">Hexo的官方文档</br>也许可以帮上忙</p>
             </div>
-            <div class="navblock working" onclick="window.open('https://fluid-dev.github.io/hexo-fluid-docs/guide/','_blank')">
+            <div class="navblock program" onclick="window.open('https://fluid-dev.github.io/hexo-fluid-docs/guide/','_blank')">
                 <div class="name" title="点击进入">
                     <p class="title">Fluid使用手册</p>
                 </div>
                 <p class="content">Fluid的官方文档</br>有什么不知道的可以来里面找</p>
             </div>
-            <div class="navblock self" onclick="window.open('./countdown','_self')">
+            <div class="navblock selfwork" onclick="window.open('./countdown','_self')">
                 <div class="name" title="点击进入">
                     <p class="title">倒计时</p>
                 </div>
-                <p class="content">就是一个普通的倒计时</br>并没有什么特别之处</p>
+                <p class="content">一个普通的倒计时</br>并没有什么特别之处</p>
             </div>
-            <div class="navblock recaeating" onclick="window.open('https://www.bilibili.com','_blank')">
+            <div class="navblock recaeation" onclick="window.open('https://www.bilibili.com','_blank')">
                 <div class="name" title="点击进入">
                     <p class="title">bilibili</p>
                 </div>
@@ -73,7 +73,7 @@
         }
         .name{
             height: 100%;
-            border-right:1px dashed rgb(165, 165, 165);
+            border-right:1px dashed rgb(255, 255, 255);
             margin: 0;
             display: flex;
             align-items: center;
@@ -82,25 +82,34 @@
         .navblock:hover{
             background-color: rgba(255, 255, 255, 0.7);
         }
-        .self{
+        .selfwork{
             background-color: rgba(183, 255, 245, 0.25);
             border: 1px solid rgb(183, 255, 245);
+            .name{
+                border-right:1px dashed rgb(183, 255, 245);
+            }
         }
-        .self:hover{
+        .selfwork:hover{
             background-color: rgba(183, 255, 245, 0.7);
         }
-        .working{
+        .program{
             background-color: rgba(221, 162, 255, 0.25);
             border: 1px solid rgb(221, 162, 255);
+            .name{
+                border-right:1px dashed rgb(221, 162, 255);
+            }
         }
-        .working:hover{
+        .program:hover{
             background-color: rgba(221,162,255,0.7);
         }
-        .recaeating{
+        .recaeation{
             background-color: rgba(255, 206, 150, 0.25);
             border: 1px solid rgb(255, 206, 150);
+            .name{
+                border-right:1px dashed rgb(255, 206, 150);
+            }
         }
-        .recaeating:hover{
+        .recaeation:hover{
             background-color: rgba(255, 206, 150, 0.7);
         }
         .title{
