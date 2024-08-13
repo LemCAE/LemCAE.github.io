@@ -27,11 +27,13 @@
 <meta property="og:description" content="这里主要记录一些HTML中的方法和分析！ CSS Style类型背景图片的设置一般来说，网页背景图片是设置成居中、铺满且不重复的。要达到这一点，可以在css里面设置： 123456body &#123;	background-image: url();	background-size: cover;	background-position: center;	background-repeat: n">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-11T05:48:22.000Z">
-<meta property="article:modified_time" content="2024-08-11T14:56:09.659Z">
+<meta property="article:modified_time" content="2024-08-13T04:55:41.088Z">
 <meta property="article:author" content="LemCAE">
 <meta property="article:tag" content="HTML">
 <meta name="twitter:card" content="summary_large_image">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>HTML基本笔记 - LemCAE&#39;s Blogs</title>
@@ -246,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          782 字
+          962 字
         
       </span>
     
@@ -257,12 +259,21 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
     
   </div>
 
@@ -295,6 +306,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <h1 id="seo-header">HTML基本笔记</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年8月13日 下午
+                  
+                
+              </p>
             
             
               <div class="markdown-body">
@@ -932,7 +951,9 @@
 <h3 id="倒计时"><a href="#倒计时" class="headerlink" title="倒计时"></a>倒计时</h3><p>JavaScript中，<code>setInterval()</code>函数提供了按照一定时间间隔执行指定函数的功能，而通过这个函数，便可以编写一个简单的倒计时：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> timecount<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">countdown</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-keyword">let</span> timeLeft = <span class="hljs-title function_">newTime</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;countdown&#x27;</span>).<span class="hljs-property">innerHTML</span>);<br>	timeLeft -= <span class="hljs-number">1000</span>;<br>	<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;countdown&#x27;</span>).<span class="hljs-property">innerHTML</span> = <span class="hljs-string">`<span class="hljs-subst">$&#123;lastTime(timeLeft).hours.toString().padStart(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>:<span class="hljs-subst">$&#123;lastTime(timeLeft).minutes.toString().padStart(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>:<span class="hljs-subst">$&#123;lastTime(timeLeft).seconds.toString().padStart(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>`</span>;<br>	<span class="hljs-keyword">if</span> (timeLeft &lt;= <span class="hljs-number">3000</span> &amp;&amp; <span class="hljs-title function_">getSetTime</span>() &gt; <span class="hljs-number">3000</span>) &#123;<br>		<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;countdown&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">color</span> = <span class="hljs-string">&#x27;#eb1515&#x27;</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (timeLeft &lt;= <span class="hljs-number">0</span>) &#123;<br>		<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;audio&#x27;</span>).<span class="hljs-title function_">play</span>();<br>		<span class="hljs-built_in">clearInterval</span>(timecount);<br>	&#125;<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">startCountdown</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;audio&#x27;</span>).<span class="hljs-title function_">load</span>();<br>	<span class="hljs-keyword">let</span> timeLeft = <span class="hljs-title function_">getSetTime</span>();<br>	<span class="hljs-keyword">if</span> (timeLeft &gt; <span class="hljs-number">0</span>) &#123;<br>		<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;countdown&#x27;</span>).<span class="hljs-property">innerHTML</span> = <span class="hljs-string">`<span class="hljs-subst">$&#123;lastTime(timeLeft).hours.toString().padStart(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>:<span class="hljs-subst">$&#123;lastTime(timeLeft).minutes.toString().padStart(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>:<span class="hljs-subst">$&#123;lastTime(timeLeft).seconds.toString().padStart(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>`</span>;<br>		timecount = <span class="hljs-built_in">setInterval</span>(countdown, <span class="hljs-number">1000</span>);<br>		<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;countdown&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">color</span> = <span class="hljs-string">&#x27;&#x27;</span>;<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;请输入有效时间&#x27;</span>);<br>	&#125;<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">pauseCountdown</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-built_in">clearInterval</span>(timecount);<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">resumeCountdown</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-title function_">getSetTime</span>() &gt; <span class="hljs-number">0</span> &amp;&amp; timecount != <span class="hljs-literal">null</span> &amp;&amp; timecount &gt;= <span class="hljs-number">1000</span>) &#123;<br>	timecount = <span class="hljs-built_in">setInterval</span>(countdown, <span class="hljs-number">1000</span>);<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;倒计时已结束或未开始&#x27;</span>);<br>	&#125;<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">resetCountdown</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-built_in">clearInterval</span>(timecount);<br>	<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;countdown&#x27;</span>).<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&#x27;00:00:00&#x27;</span>;<br>	<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;countdown&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">color</span> = <span class="hljs-string">&#x27;&#x27;</span>;<br>	<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;audio&#x27;</span>).<span class="hljs-title function_">load</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>待会再来分析吧……（ε&#x3D;ε&#x3D;ε&#x3D;┏(゜ロ゜;)┛）</p>
+<p>其中的核心部分是 <code>setInterval(countdown, 1000)</code>以及 <code>clearInterval(timecount)</code>。</p>
+<p>在 <code>setInterval(countdown, 1000)</code>中，<code>countdown</code>是每过一段设定时间后执行的函数，<code>1000</code>则为指定的时间（单位ms）。在这段代码里是通过先设定一个时间数 <code>timeLeft</code>，并在每次函数执行时将其数值减去1000（单位均为ms）来达到倒计时的效果。<code>clearInterval(timecount)</code>则用于清除倒计时。</p>
+<p>需要指出的是，上面代码中初始时间的获取是读取的一个内容形如 <code>hh:mm:ss</code>的 <code>&lt;p&gt;</code>元素达到的，而 <code>&lt;p&gt;</code>元素里的内容则通过一个读取 <code>&lt;input&gt;</code>控件数值的函数 <code>getSetTime()</code>获取（也用于判断设定时间以决定是否更改文本颜色）。</p>
 <p><em>未完待续……</em></p>
 
                 
@@ -1034,6 +1055,41 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'LemCAE/LemCAE.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
@@ -1274,6 +1330,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
