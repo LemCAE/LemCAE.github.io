@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="solarized-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C 语言知识点复习 · 2 小时</title>
+<link rel="stylesheet" href="./assets/fonts.css">
+<link rel="stylesheet" href="./assets/base.css">
+<link rel="stylesheet" id="theme-link" href="./assets/themes/solarized-light.css">
+<link rel="stylesheet" href="./assets/animations/animations.css">
+<link rel="stylesheet" href="./deck.css">
+</head>
+<body data-themes="solarized-light" data-theme-base="./assets/themes/">
+<div class="deck">
+
+<!-- ============ 阶段 0 · 开场 ============ -->
+
+<section class="slide cover-slide center tc" data-title="封面">
+  <div>
+    <p class="kicker">南京航空航天大学</p>
+    <h1 class="h1" style="font-size:74px;margin-bottom:10px">C 语言 · 知识点复习</h1>
+    <p class="lede" style="max-width:60ch;margin:12px auto 0">考试：单选 + 程序设计。<br>复习：概念规则 + 例题 + 读程序方法</p>
+    <div class="pill-stack" style="justify-content:center">
+      <span class="pill">概念：背规则</span>
+      <span class="pill">读程序：列表法</span>
+      <span class="pill">编程：套模板</span>
+    </div>
+  </div>
+  <div class="deck-footer"><span>阶段 0 · 开场</span><span class="slide-number" data-current="1" data-total="41"></span></div>
+  <div class="notes">
+    考试 60 道单选加编程题。以下内容按真题库整理，考什么讲什么。
+    讲解分三部分：概念规则、读程序题（列表法）、编程题（套模板）。
+  </div>
+</section>
+
+<section class="slide kb" data-title="考试结构">
+  <div class="stag">阶段 0 · 开场</div>
+  <h2 class="h2">考试范围</h2>
+  <p class="sub">考试结构：单选 ＋ 程序设计</p>
+  <div class="grid g3 mt-m">
+    <div class="card card-accent"><h4>概念规则</h4><p class="dim">背规则、认反例</p></div>
+    <div class="card card-accent"><h4>读程序题</h4><p class="dim">用列表法逐行填表</p></div>
+    <div class="card card-accent"><h4>编程题</h4><p class="dim">套模板，对照输出验证</p></div>
+  </div>
+  <div class="memo mt-l"><b>以下内容不用看：</b>位运算· 链表· 递归进阶· 指针数组 · 多文件编译。</div>
+  <div class="rule"><b>高频考点：</b>运算符 13 题、函数 10 题、字符串 10 题、循环 8 题、文件 8 题——这五类约参考题题的一半。</div>
+  <div class="notes">
+    考试 60 道单选加编程题。目标：单选六成，编程两三道。
+    讲解按三部分：概念规则、读程序题（列表法）、编程模板。
+    高频考点是运算符、函数、字符串、循环、文件五类，约一半题量，下面按此顺序讲。
+  </div>
+</section>
+
+<!-- ============ 阶段 1 · 知识点讲解 + 例题 ============ -->
+
+<section class="slide kb" data-title="1 概述">
+  <div class="stag">阶段 1 · <b>1 概述</b></div>
+  <h2 class="h2">程序怎么来</h2>
+  <div class="rule"><b>规则①</b>程序由函数构成，只能有一个 main。<b>②</b>步骤：源程序 → 目标程序（<b>编译</b>）→ 连接 → 可执行程序。<b>③</b>注释可出现在任意合适处。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q1</span>以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>一个 C 程序只能实现一种算法</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>一个 C 函数可单独作为一个源文件</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>程序可由一个或多个函数组成</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>程序可由多个程序文件组成</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 一个程序可以同时实现多种算法、多个函数。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q2</span>以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>用计算机语言写的程序叫源程序</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>编译是把源程序翻译成目标程序</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>先编码调试，编码中再确定算法</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>写完都是先编译、后链接、最后运行</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 步骤是"先分析问题、设计算法，再编码调试"，算法在编码<b>之前</b>，不是编码中。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q41</span>以下叙述<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>注释可出现在程序中任意合适处</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>目前只支持 /* */ 一种注释</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>所有函数名都可由用户命名</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>分号是分隔符，不是语句一部分</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— C 支持 // 和 /* */ 两种注释；main 由系统命名；分号是语句的一部分。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q82</span>高级语言源程序转成目标程序，要用__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>编辑程序</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>驱动程序</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>诊断程序</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>编译程序</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— "翻译"这一步就是<b>编译</b>。</div>
+  </div>
+  <div class="notes">
+    概述四条规则。程序由<strong>函数组成</strong>，一个程序只能有一个 main。<strong>编译</strong>把源程序翻译成目标程序，连接再生成可执行程序。
+    Q1：A 是错的，因为一个程序可以做好几种算法。考点是"程序由函数构成、可包含多种算法"。
+    Q2：C 错，"先编码、编码中才定算法"顺序反了，先定算法再写码。
+    Q41：C 错，main、printf 这类名字不是用户随便命名的。
+    这几题直接套规则即可。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.1 标识符">
+  <div class="stag">阶段 1 · <b>2.1 保留字和标识符</b></div>
+  <h2 class="h2">标识符四则</h2>
+  <div class="rule"><b>命名规则：</b>① 只能由字母、数字、下划线组成；② <b>首字符不能是数字</b>；③ 区分大小写；④ <b>不能是关键字</b>。预定义标识符（printf）可用但不推荐。</div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q35</span>标识符的第一个字符__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>必须为字母</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>必须为下划线</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>必须为字母或下划线</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>可为字母、数字、下划线任一</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 首字符是字母或下划线，数字开头的不是合法标识符。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q75</span>不能作为合法用户标识符的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>answer</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>to</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>signed</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>_if</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— signed 是<b>关键字</b>（数据类型修饰词），不能当变量名。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q48</span>以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>标识符只能由字母、数字、下划线组成</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>标识符第一个字符必须为字母或下划线</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>关键字和预定义标识符都不能作变量名</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>标识符区分大小写</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 关键字不能用，但<b>预定义标识符（printf）可以用</b>，只是不推荐。</div>
+  </div>
+  <div class="notes">
+    标识符四条规则：字母数字下划线、首字符不能是数字、区分大小写、不能是关键字。
+    Q35：首字符是字母或下划线，选 C。
+    Q75：signed 是关键字，不能当变量名。
+    Q48：C 说"关键字和预定义标识符都不能用"是错的——预定义标识符（printf）可以用，只是不推荐。
+    口诀：首不能数，名不撞字，大小写要分清。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.2 数据类型">
+  <div class="stag">阶段 1 · <b>2.2 基本数据类型</b></div>
+  <h2 class="h2">数据在内存里怎么存</h2>
+  <div class="rule"><b>规则：</b>int 存<b>补码</b>、char 存<b>ASCII 码</b>；C <b>没有逻辑类型</b>；float/double 以指数形式存放<b>有误差</b>；各类型占字节数<b>由编译系统决定</b>。</div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q3</span>char 型数据在内存中的存储形式是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>BCD 码</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>ASCII 码</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>原码</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>反码</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— char 存 ASCII 码，int 存补码。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q8</span>关于数据类型，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>C 语言中没有逻辑类型</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>int 型数据在内存中存的是反码</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>int、char、short 占字节由编译系统决定</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>float 以指数形式存放，往往有误差</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— int 存的是<b>补码</b>，不是反码。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q7</span>关于数据类型，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>准确表示自然数应使用整数类型</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>存多位小数用双精度类型</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>修饰词只能用于整型和字符型</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>只处理真假，应使用逻辑类型</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— C 没有逻辑类型，真/假用 0/非 0 表示。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q84</span>long、int、short 占用内存大小的叙述，正确的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>均占 4 个字节</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>根据数据大小决定</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>由用户自己定义</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>由 C 编译系统决定</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 字节数由编译系统决定（不同平台可能不同）。</div>
+  </div>
+  <div class="notes">
+    这一页四条规则。<strong>int 存补码，char 存 ASCII 码</strong>，对应 Q3 和 Q8。
+    Q7：C 没有逻辑类型，真/假用 0 和非 0 表示。
+    各类型占字节数由<strong>编译系统决定</strong>，对应 Q84。
+    float 以指数形式存放，所以判断"能否精确表示"时会有误差。
+    这四题都是概念判断，套规则即可。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.3 字符常量">
+  <div class="stag">阶段 1 · <b>2.3 常量与变量 · ①字符常量</b></div>
+  <h2 class="h2">字符常量与转义</h2>
+  <div class="rule"><b>规则：</b>字符常量=单引号、只能一个字符；转义用 <b>\</b> 引导（八进制最多 3 位、十六进制最多 2 位）；<b>大小写差 32</b>：'A'=65、'a'=97。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q4</span>ch 为字符变量，以下赋值<b>错误</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>ch='\';</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>ch=62+3;</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>ch=NULL;</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>ch='\xaa';</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— <b>转义符 \ 后面必须有内容</b>，'\' 是编译错误。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q47</span>char c='\72'; 则 c__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>包含 1 个字符</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>包含 2 个字符</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>包含 3 个字符</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>说明不合法</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— '\72' 是一个八进制转义字符，<b>整体算 1 个字符</b>。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q115</span>八进制表示的字符常量 '\101' 是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>字符 A</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>字符 a</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>字符 e</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>非法的常量</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 八进制 101 = 十进制 65 = 'A'。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q14</span>ch='A'，则 (ch&gt;='A'&amp;&amp;ch&lt;='Z') ? (ch+32) : ch 的值是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>'A'</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>'a'</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>'Z'</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>'z'</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 大写满足条件，+32 变成小写 'a'。<b>大小写差 32</b>，读程序中大小写转换会用到。</div>
+  </div>
+  <div class="notes">
+    字符常量三条规则。第一，<strong>单引号里只能一个字符</strong>，转义符 \ 后面必须有内容，所以 '\' 编译报错，对应 Q4。
+    第二，<strong>'\72' 八进制转义整体算一个字符</strong>，对应 Q47。'\101' 八进制等于十进制 65，是 'A'，对应 Q115。
+    第三，<strong>大小写差 32</strong>：'a' 比 'A' 大 32。Q14 是大小写转换，条件成立 +32。
+    注意大小写差 32，读程序题中大小写转换会用到。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.3 常量变量">
+  <div class="stag">阶段 1 · <b>2.3 常量与变量 · ②常量与变量</b></div>
+  <h2 class="h2">常量类型与变量三要素</h2>
+  <div class="rule"><b>规则：</b>整型常量只有八（0 开头）/十/十六（0x 开头）进制，<b>无二进制</b>；字符串常量用双引号；变量<b>先定义后使用</b>，定义同时初始化<b>不能连续赋值</b>；变量三要素=名/类型/值。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q87</span>均是合法整型常量的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>139、-0xffff、012</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>-0xcde、01a、0xe</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>-01、986012、0668</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>-0x48a、2e5、0x</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— B 的 01a 非法、C 的 0668（8 非法八进制）、D 的 2e5 是实型、0x 缺数字。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q10</span>double x; 不可以赋值给 x 的常量是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>123</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>100000</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>'A'</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>"abc"</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— "abc" 是字符串常量，不能赋给 double 变量。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q44</span>下列变量定义和表达式中，<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>int a=1; a+=-a+=a*a;</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>int a=1,b=2; a=7+b=a+7;</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>int a=1,b=2,c=3; a=b==c;</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>int x=y=10;</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— a=b==c 合法（先算 b==c 得 0/1）；D 的 y 未定义，连续赋值也不行。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q86</span>关于常量和变量，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>C 有 4 种基本常量：整型、实型、字符、字符串</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>const 变量定义时必须初始化</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>变量三要素=变量名、变量的值、变量的运算</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>变量必须先定义后使用</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 三要素是<b>变量名、类型、值</b>，没有"运算"。</div>
+  </div>
+  <div class="notes">
+    这一页两条规则。
+    <strong>整型常量只有八、十、十六进制，没有二进制。</strong>八进制 0 开头，十六进制 0x 开头。Q87 中 0668 不合法，八进制里没有 8。
+    <strong>字符串常量用双引号，类型不同不能互相赋值。</strong>Q10 里 "abc" 是字符串，不能赋给 double。Q86 中变量三要素应是<strong>名、类型、值</strong>，"运算"不属于三要素。
+    Q44：int x=y=10 错误，y 未定义，且定义时不能连续赋值。
+  </div>
+</section>
+
+<section class="slide kb" data-title="运算符总表">
+  <div class="stag">阶段 1 · <b>2.4 运算符和表达式 · 总表</b></div>
+  <h2 class="h2">运算符优先级总表</h2>
+  <p class="sub">按优先级从高到低排列；口诀"单算关逻条赋逗"是它的简化版。</p>
+  <table class="ops">
+    <tr><th>类别</th><th>运算符</th><th>结合性</th></tr>
+    <tr><td>后缀</td><td>() [] -&gt; . ++ --</td><td>从左到右</td></tr>
+    <tr><td>一元（单目）</td><td>+ - ! ~ ++ -- (type) * &amp; sizeof</td><td><b>从右到左</b></td></tr>
+    <tr><td>乘除</td><td>* / %</td><td>从左到右</td></tr>
+    <tr><td>加减</td><td>+ -</td><td>从左到右</td></tr>
+    <tr class="skip"><td>移位</td><td>&lt;&lt; &gt;&gt;</td><td>从左到右</td></tr>
+    <tr><td>关系</td><td>&lt; &lt;= &gt; &gt;=</td><td>从左到右</td></tr>
+    <tr><td>相等</td><td>== !=</td><td>从左到右</td></tr>
+    <tr class="skip"><td>位与 AND</td><td>&amp;</td><td>从左到右</td></tr>
+    <tr class="skip"><td>位异或 XOR</td><td>^</td><td>从左到右</td></tr>
+    <tr class="skip"><td>位或 OR</td><td>|</td><td>从左到右</td></tr>
+    <tr><td>逻辑与 AND</td><td>&amp;&amp;</td><td>从左到右</td></tr>
+    <tr><td>逻辑或 OR</td><td>||</td><td>从左到右</td></tr>
+    <tr><td>三元（条件）</td><td>?:</td><td><b>从右到左</b></td></tr>
+    <tr><td>赋值</td><td>= += -= *= /= %= &gt;&gt;= &lt;&lt;= &amp;= ^= |=</td><td><b>从右到左</b></td></tr>
+    <tr><td>逗号</td><td>,</td><td>从左到右</td></tr>
+  </table>
+  <div class="memo mt-m"><b>灰色行</b>（移位、位与、位异或、位或）属于位运算，考纲不要求，可跳过。其余按口诀记上下顺序即可。</div>
+  <div class="notes">
+    运算符优先级从高到低：后缀、一元、乘除、加减、移位、关系、相等、位与、位异或、位或、逻辑与、逻辑或、条件、赋值、逗号。
+    结合性：一元、条件、赋值从右到左，其余从左到右。
+    简化记忆用口诀"单算关逻条赋逗"。位运算相关行（移位、&amp;、^、|）考纲不要求，可跳过。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.4 优先级">
+  <div class="stag">阶段 1 · <b>2.4 运算符和表达式 · ①优先级</b></div>
+  <h2 class="h2">优先级口诀：单算关逻条赋逗</h2>
+  <div class="rule"><b>口诀：</b>单目 &gt; 算术(* / % 高于 + -) &gt; 关系 &gt; 逻辑(&amp;&amp; 高于 ||) &gt; 条件 ?: &gt; 赋值 &gt; 逗号。<b>sizeof 是运算符不是函数</b>，跟类型名要加括号。</div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q5</span>关于优先级和结合性，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>逗号运算符优先级最低</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>算术 &lt; 关系 &lt; 赋值 &lt; 逻辑与</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>条件运算符结合性自右向左</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>同级运算符按结合性方向运算</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 顺序说反了：<b>算术 &gt; 关系 &gt; 逻辑与 &gt; 赋值</b>。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q116</span>下列运算符中优先级最高的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>&lt;=</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>+</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>&amp;&amp;</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>!=</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— + 是算术运算，高于关系（&lt;= !=）和逻辑（&amp;&amp;）。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q6</span>关于 sizeof，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>sizeof(int) 是合法表达式</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>sizeof int 是合法表达式</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>sizeof i 是合法表达式</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>sizeof 是关键字，sizeof() 是运算符</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 跟类型名 sizeof(int) 必须加括号；sizeof i（变量）不用括号。</div>
+  </div>
+  <div class="notes">
+    优先级，不背全表，只背<b>上下顺序</b>，口诀"<strong>单算关逻条赋逗</strong>"。
+    单目最高，下来算术、关系、逻辑、条件、赋值、逗号最低。
+    <strong>【提问】</strong>"算术和关系谁高？"——算术高。所以 Q5 说"算术小于关系"是错的，选 B。
+    Q116 里 + 是算术，当然比关系、逻辑都高。
+    sizeof 单独注意：<strong>它是运算符不是函数</strong>，后跟类型名必须加括号 sizeof(int)，跟变量可不写括号 sizeof i。Q6 中"sizeof int 合法"是错的，选 B。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.4 自增整除">
+  <div class="stag">阶段 1 · <b>2.4 运算符和表达式 · ②自增/整除/取余</b></div>
+  <h2 class="h2">自增 · 整除 · 取余</h2>
+  <div class="rule"><b>规则：</b>i++ 先用后加，++i 先加后用，<b>只能用于变量</b>；/ 两边都整→整除、有实数→实数除；% 两边<b>必须整数</b>；字符按 ASCII 参与运算。</div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q45</span>关于自增自减，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>只能作用于变量，不能作用于常量或表达式</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>++i 是先变后用，i-- 是先用后变</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>结合性是自右向左</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>若 i 已定义，则 (-i)++ 是合法的</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— <b>(-i) 是表达式，不能自增</b>；自增只能作用于变量。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q85</span>关于算术运算符，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>要整除，/ 两边都要求整型</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>要小数，/ 两边都必须实型</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>% 两边操作数都必须是整数</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>* / % 优先级相同</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 要小数<b>一边是实数就行</b>：5.0/2=2.5，不是两边都要。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q88</span>int a,b; a=1+'a'; b=2+7%-4-'A'; 则 a、b 的值是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>-63, -64</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>98, -60</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>1, -60</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>79, 78</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 1+'a'=1+97=98；7%-4=3，2+3-65=-60。</div>
+  </div>
+  <div class="notes">
+    三个注意点。
+    第一，<strong>自增只能用于变量</strong>。(-i)++ 不合法，因为 (-i) 是表达式。对应 Q45，选 D。
+    第二，<strong>整除</strong>：5/2=2，5.0/2=2.5。要得小数，一边是实数即可。Q85 中"两边都必须实型"是错的，选 B。
+    第三，% 两边必须整数，<strong>结果符号随被除数</strong>：7%-4=3。Q88 中 a=1+'a'=98（字符按 ASCII 参与运算），b=2+3-65=-60，选 B。
+    字符按 ASCII 参与运算，是 char 存 ASCII 的体现。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.4 逻辑条件逗号">
+  <div class="stag">阶段 1 · <b>2.4 运算符和表达式 · ③逻辑/条件/逗号</b></div>
+  <h2 class="h2">逻辑值 · 短路 · 条件 · 逗号</h2>
+  <div class="rule"><b>规则：</b>逻辑表达式的值一定是 <b>0 或 1</b>，"真"=非零；<b>&amp;&amp; || 短路求值</b>；条件运算 ?: 自右向左、前真后假；<b>逗号表达式值=最右</b>。</div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q52</span>在 C 语言中，逻辑"真"等价于__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>大于零的数</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>大于零的整数</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>非零的数</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>非零的整数</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 只要非零就是真，负数也算真。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q76</span>int a=2,b=3,c=0; 下列正确的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>a&gt;b!=c 与 a&gt;(b!=c) 执行顺序一样</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>!a!=(b!=c) 表达式的值为 1</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>a||(b=c) 执行后 b 的值为 0</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>a&amp;&amp;b&gt;c 的结果为假</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— !a=0，b!=c=1，0!=1 → 真=1。C 错：a 为真，|| 短路，b=c 不执行。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q12</span>w=1,x=2,y=3,z=4，则 w&lt;x?w:y&lt;z?y:z 的值是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>4</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>3</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>2</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>1</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 自右向左：先 y&lt;z?y:z=3，再 w&lt;x?w:3，1&lt;2 真 → 取 w=1。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q36</span>k 的值是 4，计算 (j=4, k--) 后，j 和 k 的值为__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>j=3, k=3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>j=3, k=4</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>j=4, k=4</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>j=4, k=3</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 逗号表达式整体值=最右的 k--=4；执行后 j=4，k=3。</div>
+  </div>
+  <div class="notes">
+    这一页是逻辑运算的汇总。
+    第一，"真"就是<strong>非零</strong>，负数也算真。Q52 选非零的数。易错点：字符 '0' 的 ASCII 是 48，非零所以为真；'\0' 才是 0，二者不同。
+    第二，<strong>短路求值</strong>。a||(b=c)，a 为真，右边赋值不执行。读程序题中常见。
+    第三，条件运算<strong>自右向左</strong>，Q12 从右边先拆，最后 1&lt;2 取 w=1，选 D。
+    第四，<strong>逗号表达式的值是最右边那个</strong>，Q36 里整体值 4，但执行完 j=4、k=3，选 D。
+  </div>
+</section>
+
+<section class="slide kb" data-title="2.5 类型转换">
+  <div class="stag">阶段 1 · <b>2.5 类型转换</b></div>
+  <h2 class="h2">强制转换只截断，不舍入</h2>
+  <div class="rule"><b>规则：</b>(int)x 只取整数部分（截断），<b>x 本身不变</b>；混合运算里任何类型与 float 运算结果都是 double。</div>
+  <div class="quiz lg" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q9</span>程序输出结果是？</p>
+    <div class="code"><span class="p">#include</span> &lt;stdio.h&gt;
+<span class="k">int</span> <span class="t">main</span>(){
+    <span class="k">float</span> x=<span class="n">3.6</span>;
+    <span class="k">int</span> i;
+    i=(<span class="k">int</span>)x;
+    <span class="k">printf</span>(<span class="s">"x=%f,i=%d\n"</span>,x,i);
+    <span class="k">return</span> <span class="n">0</span>;
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>x=3.600000,i=4</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>x=3,i=3</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>x=3.600000,i=3</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>x=3,i=3.600000</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— (int)3.6 截断=3，<b>x 仍是 3.600000 不受影响</b>。</div>
+  </div>
+  <div class="notes">
+    类型转换一条规则：<strong>(int)x 是截断，不是四舍五入</strong>，3.6 强转 int 得 3。强转只影响转换结果，<strong>x 本身不变</strong>。
+    Q9：i=3，x 仍是 3.600000，选 C。强转不改原变量是易错点。
+    任何类型与 float 一起运算，结果都是 double。
+  </div>
+</section>
+
+<section class="slide kb" data-title="3.2 printf">
+  <div class="stag">阶段 1 · <b>3.2 格式化输入输出 · ①printf</b></div>
+  <h2 class="h2">printf 一张表</h2>
+  <div class="rule"><b>格式符：</b>%d 十进制 · %c 字符 · %f 实数 · %s 字符串 · %o 八进制 · %x 十六进制 · %% 百分号。<b>宽度精度 %5.1f</b>（宽 5、留 1 位小数）；非格式符<b>原样输出</b>。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q89</span>程序输出结果是？</p>
+    <div class="code"><span class="k">char</span> c=<span class="s">'A'</span>; <span class="k">int</span> n=<span class="n">66</span>; <span class="k">float</span> f=<span class="n">23.456</span>;
+<span class="k">printf</span>(<span class="s">"c=%d\tc=%o\n"</span>, c,c);
+<span class="k">printf</span>(<span class="s">"n=%c\tn=%x\n"</span>, n,n);
+<span class="k">printf</span>(<span class="s">"f=%5.1f\tf=%3.2f\n"</span>,f,f);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>c=65 c=101<br>　n=B n=42<br>　f=23.5 f=23.46</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>c=65 c=101<br>　n=B n=42<br>　f=23.5 f=.46</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>c=97 c=141<br>　n=B n=42<br>　f=23.5 f=0.46</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>c=65 c=101<br>　n=B n=41<br>　f=23.5 f=.46</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 程序输出三行（每条 printf 末尾有 \n）：
+    <div class="code">c=65 c=101
+n=B n=42
+f=23.5 f=23.46</div>
+    %o 是 65 的八进制 101；%x 是 66 的十六进制 42；%5.1f=23.5、%3.2f=23.46（宽度不够不截断，所以不是 .46）。</div>
+  </div>
+  <div class="notes">
+    printf 这题是格式符全家桶。<strong>%d 和 %c 可以互打</strong>：c=%d 打出 65（ASCII），n=%c 打出 'B'（66 对应的字符）。
+    %o 是八进制，65 的八进制是 101；%x 是十六进制，66 的十六进制是 42。<strong>%5.1f</strong> 就是占 5 格、留 1 位小数，23.456 四舍五入到 23.5。<strong>%3.2f</strong> 是留 2 位，23.46——注意宽度不够不截断，所以不是 .46。
+    把格式符记全即可。答案是 A。
+  </div>
+</section>
+
+<section class="slide kb" data-title="3.2 scanf">
+  <div class="stag">阶段 1 · <b>3.2 格式化输入输出 · ②scanf 与转义</b></div>
+  <h2 class="h2">scanf 三个注意点</h2>
+  <div class="rule"><b>坑：</b>① 第二参数必须是<b>地址</b>（变量加 &amp;，数组名/指针<b>不加</b>）；② 格式串里的普通字符要<b>原样输入</b>；③ 前面 %d 回车后，<b>%c 会读到残留回车</b>。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q23</span>scanf("name=%s num=%d", name, &amp;num) 输入 name=Lili num=1001 后，输出 printf("%s",name) 为__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>Lili</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>name=Lili</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>Lili num=</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>name=Lili num=1001</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 格式串里 name= 只是"提示"，输入要照打，但 name 变量只存 Lili。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q72</span>以下程序段完全正确的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>int *p; scanf("%d", &amp;p);</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>int *p; scanf("%d", p);</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>int k,*p=&amp;k; scanf("%d", p);</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>int k,*p; *p=&amp;k; scanf("%d", p);</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 指针先指向 k 再 scanf；A 取的是指针变量的地址、B 的 p 是野指针、D *p=&amp;k 写法错。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q24</span>不能正确为字符数组输入数据的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>char s[5]; scanf("%s", &amp;s);</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>char s[5]; scanf("%s", s);</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>char s[5]; scanf("%s", &amp;s[0]);</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>char s[5]; gets(s);</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— <b>数组名已是地址，不能再加 &amp;</b>；A 是 &amp;s（指针的地址），错。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q50</span>printf("a\bre\'hi\'y\\\bou\n") 的输出结果是__（\b 是退格）</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>a\bre'hi'y\bou</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>a\bre'hi'y\bou</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>re'hi'you</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>abre'hi'y\bou</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— \b 退格删前一个字符：a 被删、\\ 后被删，最后剩 re'hi'you。</div>
+  </div>
+  <div class="memo mt-m"><b>残留回车：</b>先 scanf("%d") 回车，再 scanf("%c") 读到的就是那个回车——中间要 getchar() 吃掉。编程题必碰。</div>
+  <div class="notes">
+    scanf 三个注意点。
+    第一，<strong>第二参数必须是地址</strong>。变量加 &amp;，数组名本身就是地址，不能再加。Q24 中 scanf("%s",&amp;s) 错误，选 A。
+    第二，<strong>格式串里的普通字符要原样输入</strong>。Q23 输入须带 name=，但 name 变量只存 Lili，输出 Lili，选 A。
+    第三，<strong>残留回车</strong>。先 %d 回车后，回车留在缓冲区，下一个 %c 读到的是回车。编程题中需用 getchar() 吃掉回车。
+    Q72：scanf 配指针，须先让指针指向变量，C 正确。
+    Q50：转义效果，退格 \b 删前一个字符，结果为 re'hi'you。
+  </div>
+</section>
+
+<section class="slide kb" data-title="4.3 选择结构">
+  <div class="stag">阶段 1 · <b>4.2+4.3 语句与选择 · ①规则</b></div>
+  <h2 class="h2">if / else 基本规则</h2>
+  <div class="rule"><b>规则：</b>复合语句 {} 后<b>不加分号</b>；if 后表达式有括号；else 就近匹配；if/else 子句可是任意合法语句。</div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q94</span>关于程序结构，以下<b>错误</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>程序由顺序、选择、循环三种结构组成</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>复合语句指一对花括号括起的若干语句</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>复合语句花括号之后需要加分号</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>C 是结构化程序设计语言</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 复合语句的 { } 后<b>不需要</b>加分号。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q11</span>以下叙述<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>if 语句只能嵌套一层</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>不能在 else 子句中再嵌套 if</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>改变 if-else 缩进会改变执行流程</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>if 和 else 子句可以是任意合法语句</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— if/else 子句可以是任意合法 C 语句（含复合语句）。</div>
+  </div>
+  <div class="notes">
+    选择结构要点。
+    复合语句 {} 后<b>不加分号</b>，对应 Q94，选 C。
+    Q11：if/else 子句可以是任意合法语句。
+    switch 语句详见下一页。
+  </div>
+</section>
+
+<section class="slide kb" data-title="4.3 switch">
+  <div class="stag">阶段 1 · <b>4.3 选择结构 · switch 语句</b></div>
+  <h2 class="h2">switch 语句</h2>
+  <div class="rule"><b>规则：</b>switch 后表达式必须是<b>整型</b>（整型、字符、枚举），不能是 float/double；<b>case 后必须是常量</b>，不能是变量或表达式；default 可选；<b>没有 break 会贯穿</b>到下一个 case。</div>
+  <div class="code"><span class="c">// 有 break：只执行匹配的 case</span>
+<span class="k">int</span> x=<span class="n">2</span>;
+<span class="k">switch</span>(x){
+  <span class="k">case</span> <span class="n">1</span>: <span class="k">printf</span>(<span class="s">"A"</span>); <span class="k">break</span>;
+  <span class="k">case</span> <span class="n">2</span>: <span class="k">printf</span>(<span class="s">"B"</span>); <span class="k">break</span>;  <span class="c">// 匹配到 x=2</span>
+  <span class="k">default</span>: <span class="k">printf</span>(<span class="s">"D"</span>);
+}  <span class="c">// 输出：B</span></div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">自编</span>把每个 case 的 break 去掉，输出结果是？</p>
+    <div class="code"><span class="k">int</span> x=<span class="n">2</span>;
+<span class="k">switch</span>(x){
+  <span class="k">case</span> <span class="n">1</span>: <span class="k">printf</span>(<span class="s">"A"</span>);
+  <span class="k">case</span> <span class="n">2</span>: <span class="k">printf</span>(<span class="s">"B"</span>);
+  <span class="k">case</span> <span class="n">3</span>: <span class="k">printf</span>(<span class="s">"C"</span>);
+  <span class="k">default</span>: <span class="k">printf</span>(<span class="s">"D"</span>);
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>B</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>BCD</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>ABCD</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>D</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 无 break 时从匹配的 case 2 一路贯穿到末尾：B、C、D，default 也执行。<b>case 只做入口匹配，遇到 break 或 switch 结束才停。</b></div>
+  </div>
+  <div class="notes">
+    switch 四条规则。
+    第一，switch 后的表达式必须是整型，包括整型、字符、枚举，不能是 float、double。
+    第二，case 后必须是常量，不能是变量或表达式。
+    第三，default 可选，所有 case 都不匹配时执行。
+    第四，也是重点：没有 break 会贯穿到下一个 case。例子中 x=2 匹配 case 2，有 break 输出 B 结束；去掉 break，从 case 2 执行到 default，输出 BCD。
+    记法：case 只是入口，执行到 break 或 switch 结束才停。
+  </div>
+</section>
+
+<section class="slide kb" data-title="4.3 读程序">
+  <div class="stag">阶段 1 · <b>4.3 选择结构 · ②读程序</b></div>
+  <h2 class="h2">空语句陷阱 · 嵌套 if</h2>
+  <div class="rule"><b>陷阱：</b><b>if(x&lt;=3);</b> 分号结束的是<b>空语句</b>，else 就近与后面的 if 配对。</div>
+  <div class="quiz lg" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q95</span>程序输出结果是？</p>
+    <div class="code"><span class="k">int</span> a=<span class="n">1</span>,b=<span class="n">0</span>;
+<span class="k">if</span>(!a) b++;
+<span class="k">else if</span> (a==<span class="n">0</span>){
+    <span class="k">if</span> (a) b+=<span class="n">2</span>;
+} <span class="k">else</span> b+=<span class="n">3</span>;
+<span class="k">printf</span>(<span class="s">"%d"</span>,b);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>0</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>1</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>2</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>3</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— a=1 非零：!a=0 假 → else if(a==0) 假 → else b+=3 → b=3。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q91</span>输入 x 在哪个范围才会有输出？</p>
+    <div class="code"><span class="k">scanf</span>(<span class="s">"%d"</span>,&amp;x);
+<span class="k">if</span>(x&lt;=<span class="n">3</span>); <span class="k">else</span>
+<span class="k">if</span>(x!=<span class="n">10</span>) <span class="k">printf</span>(<span class="s">"x=%d\n"</span>,x);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>小于 3 的整数</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>不大于 10 的整数</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>大于 3 或等于 10 的整数</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>大于 3 且不等于 10 的整数</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— if(x&lt;=3); 分号使 if 失效（空语句），else 对应第二个 if：x&gt;3 且 x≠10。</div>
+  </div>
+  <div class="notes">
+    Q91 的陷阱：<strong>if(x&lt;=3); 后面有分号</strong>，该 if 管的是空语句。else 与第二个 if 配对。要输出，须 x&gt;3 且 x≠10，选 D。if 后跟分号的陷阱是常考点。
+    Q95：嵌套 if 逐层判断，a=1 非零，!a 假，a==0 假，进入 else，b+=3，b=3，选 D。
+  </div>
+</section>
+
+<section class="slide kb" data-title="4.4 循环基础">
+  <div class="stag">阶段 1 · <b>4.4 循环结构 · ①do-while 与空循环</b></div>
+  <h2 class="h2">do-while · 空循环</h2>
+  <div class="rule"><b>规则：</b>do-while <b>至少执行一次</b>；<b>循环体是"一条语句"</b>，空循环用分号结尾。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q93</span>关于 while 和 do-while，<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>do-while 循环体至少无条件执行一次</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>while 的循环条件比 do-while 严格</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>while 和 do-while 都可能一次不执行</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>do-while 循环体不能是复合语句</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— do-while 先执行后判断，至少跑一次；while 可能一次都不跑。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q54</span>执行 for(j=1;j&lt;5;j++); 后，变量 j 的值是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>4</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>5</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>6</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 分号是空循环体，只计数：j 到 5 时 j&lt;5 假，退出，j=5。</div>
+  </div>
+  <div class="notes">
+    循环基础两条规则。
+    第一，<strong>do-while 至少执行一次</strong>，while 可能一次不执行。Q93 选 A。
+    第二，<strong>空循环</strong>，for(j=1;j&lt;5;j++) 后面是分号，循环体为空，只计数到 j=5。循环结束后的变量值是常考点。Q54 选 C。
+  </div>
+</section>
+
+<section class="slide kb" data-title="4.4 break continue">
+  <div class="stag">阶段 1 · <b>4.4 循环结构 · ②break/continue</b></div>
+  <h2 class="h2">continue 跳过 · break 跳出</h2>
+  <div class="rule"><b>规则：</b>continue 结束<b>本次</b>循环去下一次；break 跳出<b>整个</b>循环。</div>
+  <div class="quiz lg" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q15</span>程序输出结果是？</p>
+    <div class="code"><span class="k">for</span>(i=<span class="n">1</span>;i&lt;=<span class="n">5</span>;i++){
+    <span class="k">if</span>(i%<span class="n">2</span>) <span class="k">printf</span>(<span class="s">"*"</span>);
+    <span class="k">else</span> <span class="k">continue</span>;
+    <span class="k">printf</span>(<span class="s">"#"</span>);
+}
+<span class="k">printf</span>(<span class="s">"$"</span>);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>*#*#*#$</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>*#*#$</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>#*#*#*$</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>#*#*$</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— i 奇打印 *#，偶被 continue 跳过 #：1→*#，2→跳过，3→*#，4→跳过，5→*#，最后 $。</div>
+  </div>
+  <div class="quiz lg" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q37</span>程序输出结果是？</p>
+    <div class="code"><span class="k">for</span>(n=<span class="n">1</span>;n&lt;=<span class="n">10</span>;n++){
+    <span class="k">if</span>(n%<span class="n">3</span>==<span class="n">0</span>) <span class="k">continue</span>;
+    <span class="k">printf</span>(<span class="s">"%d"</span>,n);
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>12457810</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>369</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>12</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>1234567890</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 3、6、9 被 continue 跳过，其余照打。</div>
+  </div>
+  <div class="notes">
+    <strong>continue 跳过本次，break 跳出整个循环。</strong>Q15 中 i 奇数打 *#，偶数被 continue 跳过 #，结果为 *#*#*#$，选 A。
+    Q37：3 的倍数被 continue 跳过，输出 12457810，选 A。
+    两题相同：continue 只跳过本次循环体后面的语句。
+  </div>
+</section>
+
+<section class="slide kb" data-title="4.4 循环进阶">
+  <div class="stag">阶段 1 · <b>4.4 循环结构 · ②进阶</b></div>
+  <h2 class="h2">判断用旧值 · 自增照常执行</h2>
+  <div class="rule"><b>关键规则：</b>for 条件<b>判断用旧值，判断完自增照样执行</b>（哪怕最后一次）。</div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q117</span>执行 for(i=1;i++&lt;4;); 后，变量 i 的值是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>4</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>5</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>不定</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— i=4 时判断（旧值 4&lt;4 假），但 i++ 照常执行 → i=5。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q77</span>不是无限循环的语句为__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>for(y=0,x=1;x&gt;++y;x=i++) i=x;</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>for(;;x++=i);</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>while(1){x++;}</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>for(i=10;;i--) sum+=i;</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— B 的 x++=i 是非法赋值；C、D 条件为空是无限；A 条件最终会假。</div>
+  </div>
+  <div class="quiz lg" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q13</span>程序输出结果是？</p>
+    <div class="code"><span class="k">int</span> sum=<span class="n">0</span>, x=<span class="n">5</span>;
+<span class="k">do</span>
+    sum+=x;
+<span class="k">while</span>(!--x);
+<span class="k">printf</span>(<span class="s">"%d\n"</span>,sum);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>0</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>5</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>14</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>15</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— !--x = !(--x)：先 x 减为 4，!4=0 假，退出。<table class="trace"><tr><th>轮次</th><th>sum</th><th>--x</th><th>!结果</th></tr><tr><td>1</td><td>0+5=5</td><td>4</td><td>假，退出</td></tr></table></div>
+  </div>
+  <div class="notes">
+    循环进阶核心规则：<strong>判断用旧值，自增照常执行</strong>。
+    Q117，for(i=1;i++&lt;4;)。最后一次判断时 i 为 4，4&lt;4 假，但条件中的后缀自增 i++ 判断完仍执行，退出时 i=5，选 C。
+    Q77：找非死循环。B 的 x++=i 非法赋值；C、D 条件为空是无限循环；A 条件最终为假，会退出。
+    Q13 用列表法：do 先执行 sum+=x 得 5；while(!--x)，!--x 即 !(--x)，x 先减为 4，!4=0 假，退出。sum=5，选 B。列表法用于所有读程序题。
+  </div>
+</section>
+
+<section class="slide kb" data-title="5.1 函数返回">
+  <div class="stag">阶段 1 · <b>5.1 函数 · ①返回类型与 return</b></div>
+  <h2 class="h2">返回值类型 · return</h2>
+  <div class="rule"><b>规则：</b>返回值类型由<b>定义时</b>指定、缺省 int；<b>return 只能返回一个值</b>；无返回值用 void。</div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q20</span>函数返回值的类型由__决定</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>return 语句中的表达式类型</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>调用该函数的主调函数类型</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>调用函数时临时</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>定义函数时所指定的函数类型</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 返回值类型由定义时指定的函数类型决定。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q56</span>函数值类型的定义可缺省，此时隐含类型是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>void</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>double</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>float</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>int</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 缺省返回类型是 int。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q79</span>以下叙述中<b>错误</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>形参在函数未被调用时不分配存储空间</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>定义在主调函数之前则不必加说明</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>通过 return 可以向主调返回多个值</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>形参和实参类型一般要一致</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— return 只能返回一个值；想带回多个要靠指针参数。</div>
+  </div>
+  <div class="notes">
+    返回值和 return 三条规则。
+    返回值类型由<strong>定义时指定</strong>，缺省是 int，对应 Q20、Q56。
+    <strong>return 只能返回一个值</strong>，Q79 中说能返回多个是错的，选 C。要带回多个值，用指针参数，后面讲。
+  </div>
+</section>
+
+<section class="slide kb" data-title="5.1 形参语法">
+  <div class="stag">阶段 1 · <b>5.1 函数 · ②形参与定义形式</b></div>
+  <h2 class="h2">形参逐个声明类型</h2>
+  <div class="rule"><b>规则：</b>形参要<b>逐个声明类型</b>（不能写 int x, y）；定义形式 = 返回值类型 + 函数名 + (形参类型列表)；实参类型顺序与形参对应。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q119</span>正确的函数定义形式是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>double fun(int x,int y) {...}</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>double fun(int x;int y) {...}</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>double fun(int x,int y); {...}</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>double fun(int x,y); {...}</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— B 用分号分隔形参错、C 定义后多分号、D 的 int x,y 没给 y 声明类型。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q60</span>能正确求解两单精度数之和的程序是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>float add(float x,float y){float r; r=x+y; return r;}</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>float add(float x, y){float r; r=x+y; return r;}</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>int add(float x,float y){float r; r=x+y; return r;}</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>void add(float x,float y){int r; r=x+y; return r;}</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— B 形参缺类型、C 返回类型应为 float、D void 不能 return 值。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q96</span>根据程序写出函数的首部：void main 中 int a; float b; 调用 fun(b,a)，函数内 printf("%d,%f",a,b)__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>void fun(float a,float b)</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>void fun(float b,int a)</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>void fun(int a,float b[])</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>void fun(int b,float a)</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 实参顺序 b(float)、a(int)，形参类型顺序 float,int 对应，与形参名无关。</div>
+  </div>
+  <div class="notes">
+    形参必须<strong>逐个声明类型</strong>，Q119 中 int x,y 不行，选 A。
+    Q60：B 形参缺类型、C 返回类型错、D void 却 return，只有 A 正确。
+    Q96：实参形参对应，fun(b,a)，b 是 float、a 是 int，形参类型顺序为 float,int，与名字无关，选 B。
+  </div>
+</section>
+
+<section class="slide kb" data-title="5.1 传值传址">
+  <div class="stag">阶段 1 · <b>5.1 函数 · ②传值 vs 传地址</b></div>
+  <h2 class="h2">传值 vs 传地址</h2>
+  <div class="rule"><b>规则：</b>实参→形参是<b>单向值拷贝</b>，传值改不了实参、传地址才能改；<b>main 可调用其他函数，但不能定义其他函数</b>。</div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q57</span>调用函数时，实参和形参之间的数据传递方式是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>地址传递</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>单向值传递</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>由实参传形参，再由形参传回实参</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>由用户指定传递方式</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 单向值传递：形参改不影响实参。</div>
+  </div>
+  <div class="quiz lg" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q109</span>程序输出结果是？</p>
+    <div class="code"><span class="k">void</span> <span class="t">fun</span>(<span class="k">int</span> a){
+    <span class="k">int</span> b=<span class="n">2</span>; a=b; a=a*<span class="n">2</span>;
+    <span class="k">printf</span>(<span class="s">"%d,"</span>,a);
+}
+<span class="k">int</span> <span class="t">main</span>(){ <span class="k">int</span> k=<span class="n">3</span>; <span class="t">fun</span>(k); <span class="k">printf</span>(<span class="s">"%d\n"</span>,k); }</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>4,3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>4,4</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>6,3</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>6,6</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 传值：函数内 a=4，但 k 是"复印件"的原件，仍是 3 → 4,3。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q18</span>下面说法<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>main 必须在其它函数之前定义</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>main 可在其它函数之后定义，可调用但不能定义其他函数</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>main 不可调用但可定义其他函数</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>main 必须定义在其它函数之后</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— main 位置不限，可调用但不能定义其他函数（C 函数不能嵌套定义）。</div>
+  </div>
+  <div class="notes">
+    函数题的核心是<strong>传值</strong>：实参→形参是值拷贝，形参相当于实参的副本，改副本不影响实参。
+    Q109：fun(k) 传值，函数内 a=4，但 k 仍是 3，输出 4,3，选 A。指针传地址时对照此规则。
+    Q18：main 可调用其他函数，但<strong>不能定义其他函数</strong>（不能嵌套定义）。
+  </div>
+</section>
+
+<section class="slide kb" data-title="5.2 原型递归">
+  <div class="stag">阶段 1 · <b>5.2+5.3 函数 · ③原型/嵌套/递归</b></div>
+  <h2 class="h2">原型声明 · 嵌套调用 · 递归</h2>
+  <div class="rule"><b>规则：</b>定义在前<b>不必声明</b>，先调用后定义<b>必须先声明原型</b>；嵌套调用从里往外算；A 调 B、B 调 A 是<b>间接递归</b>。</div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q97</span>程序输出结果是？</p>
+    <div class="code"><span class="k">int</span> <span class="t">fun</span>(<span class="k">int</span> x){ <span class="k">return</span> x*<span class="n">2</span>; }
+<span class="k">int</span> <span class="t">main</span>(){ <span class="k">int</span> n=<span class="n">1</span>,m; m=<span class="t">fun</span>(<span class="t">fun</span>(<span class="t">fun</span>(n))); <span class="k">printf</span>(<span class="s">"%d\n"</span>,m); }</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>4</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>8</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>1</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>2</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 1→2→4→8，函数嵌套调用从里往外算。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q17</span>关于函数声明，以下<b>不正确</b>的说法是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>定义在调用之前，可不必加原型声明</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>函数外部已声明，各主调函数不必再声明</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>调用之前一定要声明函数原型</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>标准库不需要函数原型声明</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 定义在前就不必声明，"一定要声明"太绝对。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q59</span>关于 C 函数，叙述<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>每个函数至少一个参数</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>每个函数都必须返回一个值</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>先调用后定义，被调用前必须先声明</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>函数不能自己调用自己</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 先调用后定义必须声明；D 错，函数能递归。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q99</span>funA 调用 funB，funB 又调用 funA，则__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>直接递归</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>间接递归</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>递归定义</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>C 中不允许这种递归</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— A 调 B、B 调 A，是间接递归。</div>
+  </div>
+  <div class="notes">
+    这一页是原型和递归。
+    Q97 嵌套调用：<strong>从里往外算</strong>，1 翻倍三次是 8，选 B。
+    原型声明一句话：<strong>定义在前就不必声明，先调用后定义就必须先声明</strong>。Q17 说"一定要声明"太绝对，是错的；Q59 说"先调用后定义必须声明"，是对的。
+    Q99：A 调 B、B 调 A，是间接递归。
+    函数部分核心：传值是值拷贝、定义在前不需声明。
+  </div>
+</section>
+
+<section class="slide kb" data-title="5.4 存储类别">
+  <div class="stag">阶段 1 · <b>5.4 作用域和存储类别</b></div>
+  <h2 class="h2">static · 全局遮蔽 · auto</h2>
+  <div class="rule"><b>规则：</b>static：只初始化一次、值保留、<b>默认 0</b>；全局变量默认 0；<b>局部遮蔽全局</b>（同名内层优先）；局部变量隐含 auto。</div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q78</span>输入 ab，程序输出结果是？</p>
+    <div class="code"><span class="k">static</span> <span class="k">char</span> a[<span class="n">3</span>];
+<span class="k">scanf</span>(<span class="s">"%s"</span>,a);
+<span class="k">printf</span>(<span class="s">"%c,%c"</span>,a[<span class="n">1</span>],a[<span class="n">2</span>]);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>a,b</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>a,</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>b,</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>程序出错</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 输入 "ab"：a[0]='a'、a[1]='b'，static 数组 a[2] 默认 0='\0' → 输出 b,。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q98</span>程序输出结果是？（全局 vs 块内局部）</p>
+    <div class="code"><span class="k">int</span> a=<span class="n">3</span>;
+<span class="k">int</span> <span class="t">main</span>(){
+    <span class="k">int</span> s=<span class="n">0</span>;
+    { <span class="k">int</span> a=<span class="n">5</span>;  s+=a++; }
+    s+=a++;
+    <span class="k">printf</span>(<span class="s">"%d\n"</span>,s);
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>11</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>10</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>7</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>8</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 块内 a=5：s=5；出块后 a 是全局 3：s=5+3=8。</div>
+  </div>
+  <div class="notes">
+    存储类别三条规则。
+    第一，<strong>static 默认值是 0</strong>。Q78，static char a[3] 没初始化，a[2] 就是 0 也就是 '\0'。输入 "ab" 后 a[1]='b'、a[2]='\0'，输出 b 和一个空，选 C。
+    <strong>【提问】</strong>"块里定义了 a=5，出块之后 a 是谁？"——是全局的 3。<strong>局部遮蔽全局，但只在块内生效</strong>。Q98：块里 s+=5，出块 s+=3，总共 8，选 D。
+    变体 Q16、Q19 在最后的综合复习中讲，此处先掌握"static 默认 0、局部遮蔽全局"。
+  </div>
+</section>
+
+<section class="slide kb" data-title="6.1 宏定义">
+  <div class="stag">阶段 1 · <b>6.1+6.2 编译预处理</b></div>
+  <h2 class="h2">宏是文本替换，不是数学</h2>
+  <div class="rule"><b>规则：</b>#define 在<b>预处理</b>阶段（真正编译前）做<b>文本替换</b>；宏定义行<b>不加分号</b>、不必在程序开头；<b>宏参要加括号</b>。</div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q101</span>#define N 100，以下叙述<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>定义了标识符 N 的值为整数 100</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>预处理时用 100 替换标识符 N</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>编译时用 100 替换 N</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>运行时用 100 替换 N</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— 替换发生在<b>预处理</b>（编译之前），不是编译时也不是运行时。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q21</span>#define NUM 15 / #define DNUM NUM+NUM，则 DNUM/2+NUM*2 的值为__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>45</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>67</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>52</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>90</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 先替换再算：NUM+NUM/2+NUM*2 = 15+7+30 = 52（15/2 整除=7）。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q22</span>预处理命令的特点：①均以#开头 ②必在程序开头 ③后面不加分号 ④真正编译前处理，正确的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>①②</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>①③④</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>①③</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>①②③④</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— ②错：<b>不必在程序开头</b>，宏可写在中间。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q62</span>系统库函数在使用时，要用到__命令</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>#include</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>#define</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>#if</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>#else</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 用库函数（printf/scanf 等）要 #include 对应头文件。</div>
+  </div>
+  <div class="memo mt-m"><b>带参宏：</b>#define SQR(x) x*x 时，SQR(1+2)=1+2*1+2=5！<b>宏参要写成 (x)*(x)</b> 才安全。真题没直接考，但 01 是重点。</div>
+  <div class="notes">
+    宏是<strong>预处理阶段的文本替换，不是数学运算</strong>。
+    Q21：DNUM 定义成 NUM+NUM 未加括号，DNUM/2 替换后是 NUM+NUM/2，不是 (NUM+NUM)/2。计算得 15+7+30=52，选 C。<strong>先替换，再计算；15/2 整除得 7。</strong>宏不加括号是常考点。
+    替换发生在<strong>预处理</strong>，不是编译时或运行时，对应 Q101、Q22。
+    带参宏：SQR(x) 写成 x*x 时，SQR(1+2)=1+2*1+2=5，宏参需加括号 (x)*(x)。
+  </div>
+</section>
+
+<section class="slide kb" data-title="7.1 数组定义">
+  <div class="stag">阶段 1 · <b>7.1 一/二维数组 · ①定义与越界</b></div>
+  <h2 class="h2">数组"三不行"</h2>
+  <div class="rule"><b>规则：</b>定义时 [] 里<b>必须是常量</b>、访问<b>不能越界</b>；二维数组<b>列数不可省</b>（int a[][3] 对）；数组不能整体赋值/比较（字符串可整体输入输出）。</div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q65</span>int a[8]={1..8}，对元素的<b>非法</b>引用是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>a[0]</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>a[9-6]</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>a[4*2]</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>a[2*3]</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— a[4*2]=a[8]，合法下标只有 0–7，越界。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q38</span>不能正确定义二维数组的选项是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>int a[2][2]={{1},{2}};</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>int a[][2]={1,2,3,4};</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>int a[2][2]={{1},2,3};</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>int a[2][]={{1,2},{3,4}};</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— <b>列数不可省</b>：int a[2][] 错；int a[][2] 对。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q103</span>正确的数组定义语句是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>int a[1][4]={1,2,3,4,5};</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>float a[3][]={{1},{2},{3}};</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>long a[2][3]={{1},{1,2},{1,2,3}};</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>double a[][3]={0};</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— A 初值个数超界、B 列数省了、C 行数超界（给了 3 行只有 2 行）。</div>
+  </div>
+  <div class="notes">
+    数组三个规矩：<strong>定义时[]里是常量，访问别越界，二维列数不能省。</strong>
+    Q65 里 a[4*2] 就是 a[8]，数组 a[8] 下标只能 0 到 7，越界了，选 C。注意 4*2 是表达式算出来 8，不是 4。
+    <strong>【放慢】</strong>二维数组的关键：<strong>列数不能省，行数可以省</strong>。int a[][2] 合法，int a[2][] 非法。这是 Q38 和 Q103 的考点，两个一起背。
+    Q103 里 A 初值给了 5 个超过 4 个、C 给了 3 行但只定义了 2 行，都错，只有 D 对。
+  </div>
+</section>
+
+<section class="slide kb" data-title="7.1 数组名作参数">
+  <div class="stag">阶段 1 · <b>7.1 一/二维数组 · ②数组名作参数</b></div>
+  <h2 class="h2">数组名 = 首地址</h2>
+  <div class="rule"><b>规则：</b>数组名是<b>首地址（地址常量）</b>；数组名作参数传的是<b>地址</b>，主调数组可能被改；建议同时传元素个数。*(p+i) 等价 p[i]。</div>
+  <div class="quiz lg" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q29</span>程序输出结果是？</p>
+    <div class="code"><span class="k">int</span> a[]={<span class="n">1</span>,<span class="n">2</span>,<span class="n">3</span>,<span class="n">4</span>,<span class="n">5</span>};
+<span class="k">int</span> x,y,*p; p=a;
+x=*(p+<span class="n">2</span>);
+<span class="k">printf</span>(<span class="s">"%d:%d\n"</span>, *p, x);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>1:3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>1:1</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>3:3</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>3:1</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— p=a 指向 a[0]，*p=1；*(p+2)=a[2]=3 → 1:3。</div>
+  </div>
+  <div class="memo mt-m"><b>阶段 2 回顾：</b>Q63（二维数组作参数+下标嵌套）、Q71（fun(&amp;a[3]) 指针偏移）这两道更综合的，放到最后的综合复习。列表法在那里上阵。</div>
+  <div class="notes">
+    数组名就是<strong>首地址</strong>，所以数组名作参数，传的是地址，不是值。这意味着函数里改数组，主调的数组真的会变——这点和传值完全相反。
+    <strong>【提问】</strong>"p=a 之后 *p 是几？"——1，p 指向 a[0]。*(p+2) 是 a[2]，是 3。所以输出 1:3，选 A。
+    <strong>【放慢】</strong> *(p+i) 就等于 p[i]，这两种写法等价，后面指针章节还会用到。
+    Q63、Q71 更综合，分别考二维数组作参数下标套下标、传 &amp;a[3] 后用 p[5] 访问，放在最后综合复习用列表法演示。此处先掌握"数组名=地址"。
+  </div>
+</section>
+
+<section class="slide kb" data-title="7.2 字符数组长度">
+  <div class="stag">阶段 1 · <b>7.2 字符数组/字符串 · ①长度与 '\0'</b></div>
+  <h2 class="h2">'\0' 决定长度</h2>
+  <div class="rule"><b>规则：</b>字符串常量自动补 <b>'\0'</b>，逐个字符定义<b>没有</b> '\0'；strlen 数到 '\0'（不含），<b>占用字节含 '\0'</b>；"abc" 占 4 字节。</div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q25</span>char a[]="abcdefg"; char b[]={'a','b','c','d','e','f','g'}; 正确的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>数组 a 和 b 等价</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>a 和 b 长度相同</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>a 的长度大于 b 的长度</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>a 的长度小于 b 的长度</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— a 是字符串常量自动带 '\0'，长 8；b 逐个字符长 7。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q118</span>字符数组长度为 5 的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>char a[]={'h','a','b','c','d'};</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>char b[]={'h','a','b','c','d','\0'};</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>char c[10]={'h','a','b','c','d'};</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>char d[6]={'h','a','b','c','\0'};</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 逐个字符定义、没有 '\0'，长度 5；B 有 '\0' 长 6、C 是 10、D 是 6。</div>
+  </div>
+  <div class="memo mt-m"><b>阶段 2 回顾：</b>Q31（while(*t++) 数 strlen）也是综合复习的重点题。</div>
+  <div class="notes">
+    长度题的关键是 <strong>'\0'</strong>。
+    <strong>【提问】</strong>"char a[]="abc" 占几个字节？"——4 个，末尾藏了一个 '\0'。而逐个字符定义 {'a','b','c'} 只有 3 个，没有 '\0'。
+    Q25 里 a 是字符串常量自动补 '\0' 所以更长，选 C。Q118 里 A 是 {'h','a','b','c','d'} 没有 '\0'，正好长度 5，选 A。
+    <strong>双引号字符串自动补 \0；单引号逐个字符定义没有 \0。</strong>这决定了 strlen 和 sizeof 的数法。
+  </div>
+</section>
+
+<section class="slide kb" data-title="7.2 字符串函数">
+  <div class="stag">阶段 1 · <b>7.2 字符数组/字符串 · ②字符串函数</b></div>
+  <h2 class="h2">四个字符串函数 + 整体 IO</h2>
+  <div class="rule"><b>规则：</b>字符串可<b>整体输入输出</b>（%s/puts/gets），但<b>不能整体赋值/比较</b>；strcpy 目标在前、strcat 追加、strcmp 比大小；<b>char *s="abc"</b> 是合法字符串赋值。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q32</span>能正确进行字符串赋值的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>char *s="ABCDE";</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>char s[5]={'A','B','C','D','E'};</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>char *s; gets(s);</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>char s[4][5]={"ABCDE"};</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— B 无 '\0'、C 的 s 未初始化野指针、D 列宽 5 装不下 "ABCDE"（含 \0 要 6 个）。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q26</span>对 C 语言字符数组的描述中<b>错误</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>字符数组可以存放字符</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>字符串可整体输入、输出</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>可以用 = 对字符数组整体赋值</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>不可用关系运算符比较字符串</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 数组<b>不能整体赋值</b>，只能逐个元素或字符串函数。</div>
+  </div>
+  <div class="quiz lg" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q70</span>程序输出结果是？</p>
+    <div class="code"><span class="k">char</span> a[<span class="n">10</span>]=<span class="s">"abc"</span>, *b=<span class="s">"312"</span>, *c=<span class="s">"xyz"</span>;
+<span class="k">strcpy</span>(a+<span class="n">1</span>, b+<span class="n">2</span>);
+<span class="k">puts</span>(<span class="k">strcat</span>(a, c+<span class="n">1</span>));</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>a12cyz</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>12yz</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>a2yz</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>bc2yz</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 逐步推导：
+    <table class="trace"><tr><th>步骤</th><th>操作</th><th>a 的内容</th></tr>
+    <tr><td>初始</td><td>char a[10]="abc"</td><td>a b c \0</td></tr>
+    <tr><td>①</td><td>strcpy(a+1, b+2)</td><td>a 2 \0</td></tr>
+    <tr><td>②</td><td>strcat(a, c+1)</td><td>a 2 y z \0</td></tr></table>
+    <b>① strcpy(a+1, b+2)：</b>b="312"，b+2 指向 '2'（字符串 "2"）；a+1 是 a[1] 的地址，从 a[1] 起覆盖写入 "2\0"，a 的 'b' 被 '2' 覆盖 → "a2"。<br>
+    <b>② strcat(a, c+1)：</b>c="xyz"，c+1 指向 "yz"；strcat 在 a 末尾的 '\0' 处追加 "yz" → "a2yz"。<br>
+    要点：strcpy 目标在前、源在后，覆盖并补 '\0'；strcat 从末尾追加，自动补 '\0'。</div>
+  </div>
+  <div class="notes">
+    字符串函数有四个：<strong>strlen 数长度、strcpy 目标在前、strcat 追加、strcmp 比大小。</strong>
+    还有一个大原则：字符串能<strong>整体输入输出</strong>，但不能<strong>整体赋值、整体比较</strong>。Q26 说能用 = 整体赋值是错的，选 C。Q105 里 puts 一次只能放一个字符串，选 D。
+    <strong>【提问】</strong>"char *s="ABCDE" 算不算合法赋值？"——算！指针指向字符串字面量是合法的，这是 Q32，选 A。
+    <strong>【放慢】</strong>Q70 综合：strcpy(a+1, b+2)，a+1 是 a 的第 2 个字符位置，把 "312" 的第 3 个字符 "2" 拷进去，a 变成 "a2"。再 strcat 追加 c+1 的 "yz"，最后 "a2yz"，选 C。
+  </div>
+</section>
+
+<section class="slide kb" data-title="8 结构体">
+  <div class="stag">阶段 1 · <b>8 结构体 / typedef</b></div>
+  <h2 class="h2">结构体 sizeof 与 typedef</h2>
+  <div class="rule"><b>规则：</b>sizeof = <b>成员字节数之和</b>；<b>typedef 只定义类型、不分配空间</b>；可整体赋值、<b>不可整体比较/输入输出</b>，成员不共享空间。</div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q28</span>struct s{short a; char b; float f;}; 则 sizeof(struct s) 为__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>7</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>6</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>4</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— short(2)+char(1)+float(4) = 7。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q107</span>struct s{int a; char b; float f;}; sizeof(struct s) 为__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>4</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>7</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>9</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— int(4)+char(1)+float(4) = 9。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q108</span>struct data{int i; char c; double d;} x; 叙述<b>错误</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>x 的地址与 x.i 的地址相同</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>struct data 是一个类型名</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>初始化时可对所有成员同时赋初值</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>成员 i、c、d 占用同一存储空间</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 各成员<b>各自占空间</b>，不共享（共用体才共享）。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q67</span>typedef struct{int a; char c;} W; 叙述<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>编译后为 W 分配 5 字节</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>编译后为 W 分配 6 字节</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>编译后为 W 分配 8 字节</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>编译后不为 W 分配存储空间</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— typedef 只是起别名，<b>不分配空间</b>；定义变量才分配。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q27</span>typedef int num[12]; num stud; 叙述<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>num 是类型名，stud 是整型变量</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>num 是类型名，stud 是整型数组名</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>num 是整型数组名，stud 是整型变量</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>num 是整型数组名，stud 也是数组名</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— num 是 int[12] 的别名（类型名），stud 是 int 数组变量。</div>
+  </div>
+  <div class="notes">
+    结构体三条规则。
+    第一，<strong>sizeof = 成员字节数相加</strong>。short+char+float=2+1+4=7，int+char+float=4+1+4=9，这是 Q28 和 Q107。
+    第二，<strong>typedef 只是起个类型名，不分配任何空间</strong>，Q67 选 D；定义变量才占内存。
+    第三，成员之间<strong>不共享空间</strong>，Q108 里说 i、c、d 占用同一空间是错的，选 D——那是共用体 union 才共享。
+    <strong>【放慢】</strong>Q27 有点绕：typedef int num[12]，就是把"int 数组 12 个"起了个名字叫 num，所以 num 是类型名，stud 是整型数组，选 B。
+  </div>
+</section>
+
+<section class="slide kb" data-title="9 指针">
+  <div class="stag">阶段 1 · <b>9 指针</b></div>
+  <h2 class="h2">指针作函数参数的两条铁律</h2>
+  <div class="rule"><b>规则：</b>指针必须先指向（<b>初始化</b>）再用，否则野指针；<b>函数内改"形参指针的指向"传不回去，只有改 *指针 指向的内容才有效</b>。</div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q69</span>程序输出结果是？</p>
+    <div class="code"><span class="k">void</span> <span class="t">fun</span>(<span class="k">int</span> *a){
+    <span class="k">int</span> b=<span class="n">2</span>; a=&amp;b; *a=*a*<span class="n">2</span>;
+    <span class="k">printf</span>(<span class="s">"%d,"</span>,*a);
+}
+<span class="k">int</span> <span class="t">main</span>(){ <span class="k">int</span> k=<span class="n">3</span>,*p=&amp;k; <span class="t">fun</span>(p);
+    <span class="k">printf</span>(<span class="s">"%d,%d\n"</span>,k,*p); }</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>4,3,3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>4,3,4</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>6,3,6</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>6,6,6</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 函数内 a=&amp;b 把指针"拐走"指向局部 b，*a=4；main 的 k=3、*p=3 都不变 → 4,3,3。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q30</span>程序输出结果是？</p>
+    <div class="code"><span class="k">void</span> <span class="t">fun</span>(<span class="k">int</span> *p1,<span class="k">int</span> *p2,<span class="k">int</span> *s){
+    <span class="k">int</span> c; s=&amp;c;
+    *s = *p1 + *(p2++);
+}
+<span class="k">int</span> <span class="t">main</span>(){ <span class="k">int</span> a[<span class="n">2</span>]={<span class="n">1</span>,<span class="n">2</span>},b[<span class="n">2</span>]={<span class="n">10</span>,<span class="n">20</span>},*s=a;
+    <span class="t">fun</span>(a,b,s); <span class="k">printf</span>(<span class="s">"%d\n"</span>,*s); }</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>11</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>10</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>1</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>2</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 函数内 s=&amp;c 只改了形参，main 的 s 仍指向 a[0]=1 → 输出 1。</div>
+  </div>
+  <div class="notes">
+    指针作函数参数两条规则。
+    <strong>规则一：改 *指针 指向的内容才有效；改"形参指针的指向"传不回去。</strong>
+    Q69：fun(p) 传入 p 指向 k 的地址，函数内 a=&amp;b 使形参指针指向局部变量 b，再 *a=*a*2 改的是 b。函数内输出 4，main 的 k=3、*p=3 不变，输出 4,3,3，选 A。
+    Q30 同理：函数内 s=&amp;c 改指向，main 的 s 仍指向 a[0]，输出 1，选 C。
+    总结：<strong>要改实参，改 *指针 指向的内容，不改指针本身。</strong>
+  </div>
+</section>
+
+<section class="slide kb" data-title="11 文件①">
+  <div class="stag">阶段 1 · <b>11 数据文件 · ①四步与 fopen 失败</b></div>
+  <h2 class="h2">文件四步 · fopen 失败</h2>
+  <div class="rule"><b>规则：</b>四步：<b>FILE *fp → fopen → 读写 → fclose</b>；fopen 失败返回 <b>NULL</b>。</div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q113</span>若执行 fopen 函数发生错误，函数的返回值是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>地址值</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>1</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>EOF</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>NULL</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— fopen 失败返回 NULL。</div>
+  </div>
+  <div class="quiz" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q40</span>可将数据按数据类型分别以__的形式存在磁盘上</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>内存</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>缓冲区</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>文件</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>寄存器</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— 数据按类型以"文件"形式存磁盘。</div>
+  </div>
+  <div class="notes">
+    文件四步：<strong>FILE *fp → fopen → 读写 → fclose</strong>。
+    fopen 失败返回 <strong>NULL</strong>，对应 Q113。
+    Q40：数据按类型以"文件"形式存磁盘。
+  </div>
+</section>
+
+<section class="slide kb" data-title="11 文件②">
+  <div class="stag">阶段 1 · <b>11 数据文件 · ②覆盖写与读写</b></div>
+  <h2 class="h2">"w" 覆盖 · fprintf/fscanf</h2>
+  <div class="rule"><b>规则：</b>fprintf/fscanf 第一个参数是<b>文件指针</b>（不是文件名）；"w" 是<b>覆盖</b>写入。</div>
+  <div class="quiz lg" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q73</span>file.txt 原有内容 hello，运行以下程序后内容为__</p>
+    <div class="code"><span class="k">FILE</span> *f; f=<span class="t">fopen</span>(<span class="s">"file.txt"</span>,<span class="s">"w"</span>);
+<span class="t">fprintf</span>(f,<span class="s">"abc"</span>); <span class="t">fclose</span>(f);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>abclo</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>abc</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>helloabc</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>abchello</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— "w" 是覆盖写入，hello 被清掉，只剩 abc。</div>
+  </div>
+  <div class="quiz lg" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q34</span>程序运行结果是？</p>
+    <div class="code"><span class="k">FILE</span> *fp; <span class="k">int</span> a[<span class="n">10</span>]={<span class="n">1</span>,<span class="n">2</span>,<span class="n">3</span>},i,n;
+fp=<span class="t">fopen</span>(<span class="s">"d1.dat"</span>,<span class="s">"w"</span>);
+<span class="k">for</span>(i=<span class="n">0</span>;i&lt;<span class="n">3</span>;i++) <span class="t">fprintf</span>(fp,<span class="s">"%d"</span>,a[i]);
+<span class="t">fprintf</span>(fp,<span class="s">"\n"</span>); <span class="t">fclose</span>(fp);
+fp=<span class="t">fopen</span>(<span class="s">"d1.dat"</span>,<span class="s">"r"</span>);
+<span class="t">fscanf</span>(fp,<span class="s">"%d"</span>,&amp;n); <span class="t">fclose</span>(fp);
+<span class="k">printf</span>(<span class="s">"%d\n"</span>,n);</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>321</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>12300</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>1</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>123</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 写入 "123"，读回 %d 读到 123。</div>
+  </div>
+  <div class="notes">
+    <strong>【提问】</strong>"文件里原来有 hello，用 w 打开写入 abc，结果是什么？"——w 是<strong>覆盖写</strong>，hello 没了，只剩 abc，这是 Q73，选 B。
+    Q34 走一遍流程：写入 123，fclose 关掉，再用 r 打开读回来，读到 123，选 D。<strong>fscanf/fprintf 第一个参数是文件指针</strong>，不是文件名。
+  </div>
+</section>
+
+<section class="slide kb" data-title="11 文件③">
+  <div class="stag">阶段 1 · <b>11 数据文件 · ③标准设备与 fputc</b></div>
+  <h2 class="h2">标准设备 · fputc · 数据流</h2>
+  <div class="rule"><b>规则：</b>标准输入=<b>键盘</b>；getchar 从键盘读、<b>不是</b>磁盘文件；fputc(ch, fp2)（字符在前、指针在后）；文件按<b>数据流</b>分文本/二进制。</div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q74</span>把 f1 内容拷到 f2，横线处应填：while((ch=fgetc(fp1))!=EOF) fputc(___)</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>ch,"fname"</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>fp2, ch</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>ch</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>ch, fp2</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— fputc(字符, 文件指针)：ch 在前、fp2 在后。</div>
+  </div>
+  <div class="quiz" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q120</span>系统的标准输入文件是指__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>键盘</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>显示器</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>软盘</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>硬盘</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A</b> —— 标准输入是键盘，标准输出是显示器。</div>
+  </div>
+  <div class="quiz" data-correct="B">
+    <p class="quiz-q"><span class="qnum">Q33</span>以下叙述中<b>错误</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>gets 用于从终端读入字符串</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>getchar 用于从磁盘文件读入字符</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>fputs 用于把字符串输出到文件</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>fwrite 用于以二进制输出数据到文件</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 B</b> —— getchar 从<b>键盘</b>读，不是磁盘文件。</div>
+  </div>
+  <div class="quiz" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q80</span>关于 C 语言数据文件的叙述<b>正确</b>的是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>文件由 ASCII 组成，只能读写文本文件</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>文件由二进制组成，只能读写二进制文件</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>文件由记录组成，分二进制和文本</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>文件由数据流组成，分二进制和文本</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D</b> —— 文件是数据流，分文本、二进制两种。</div>
+  </div>
+  <div class="notes">
+    文件补充四题。
+    <strong>fputc(字符, 文件指针)</strong>，字符在前、指针在后，Q74 选 D。
+    标准输入是<strong>键盘</strong>，Q120 选 A。getchar 从键盘读，不从磁盘文件读，Q33 选 B。
+    文件本质：<strong>数据流，分文本和二进制</strong>，Q80 选 D。
+    文件部分要点：NULL、覆盖写、fputc 顺序、数据流。
+  </div>
+</section>
+
+<!-- ============ 阶段 2 · 读程序综合复习 ============ -->
+
+<section class="slide kb" data-title="列表法">
+  <div class="stag">阶段 2 · <b>综合复习 · 读程序</b></div>
+  <h2 class="h2">读程序题 · 列表法</h2>
+  <div class="rule"><b>方法：先写表，再判断。</b>把每次循环/每条语句后的变量值逐格填入表格，避免心算。</div>
+  <div class="code" style="font-size:16px">表头：<span class="c">轮次 | 变量值 | 条件 | 输出</span>
+
+逐行填写，不跳步。重点检查三处：
+  <span class="k">① 判断条件用的是旧值还是新值</span>
+  <span class="k">② 自增是否执行</span>
+  <span class="k">③ 函数改的是形参还是它指向的内容</span></div>
+  <div class="memo"><b>适用：</b>所有要求计算输出的读程序题。选项差异可通过表格逐项核对。</div>
+  <div class="notes">
+    读程序题统一用列表法：先写表，再判断。
+    表头：轮次、变量值、条件、输出，逐行填写。
+    重点检查三处：判断用旧值还是新值、自增是否执行、函数改的是形参还是内容。
+    下面五道综合题用列表法逐题演示。
+  </div>
+</section>
+
+<section class="slide kb" data-title="收尾 Q19">
+  <div class="stag">阶段 2 · <b>综合复习 · 1/5 全局遮蔽+自增</b></div>
+  <h2 class="h2">Q19 · 三个知识点叠加</h2>
+  <div class="quiz lg" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q19</span>程序输出结果是？</p>
+    <div class="code"><span class="k">int</span> d=<span class="n">1</span>;
+<span class="k">void</span> <span class="t">fun</span>(<span class="k">int</span> p){
+    <span class="k">int</span> d=<span class="n">5</span>;
+    d+=p++;
+    <span class="k">printf</span>(<span class="s">"%d "</span>,d);
+}
+<span class="k">int</span> <span class="t">main</span>(){ <span class="k">int</span> a=<span class="n">3</span>;
+    <span class="t">fun</span>(a);
+    d+=a++;
+    <span class="k">printf</span>(<span class="s">"%d "</span>,d);
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>8 4</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>9 6</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>9 4</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>8 5</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A：8 4</b> —— 注意 fun 里的 d 是<b>局部变量</b>（遮蔽全局），main 里的 d 才是全局 1。
+    <table class="trace"><tr><th>位置</th><th>变量</th><th>运算</th><th>结果</th></tr><tr><td>fun</td><td>局部 d=5</td><td>d+=p++ → 5+3</td><td>输出 8</td></tr><tr><td>main</td><td>全局 d=1</td><td>d+=a++ → 1+3</td><td>输出 4</td></tr></table></div>
+  </div>
+  <div class="notes">
+    <strong>【放慢】</strong>这题综合了全局遮蔽、自增时机、函数调用三个知识点。
+    先看 fun 里：它自己定义了 <strong>局部 d=5</strong>，把全局 d 遮住了。d+=p++，p 是形参 3，先加后自增，d=5+3=8，输出 8。注意 p++ 的后缀自增，是先加完才自增，所以 p 变成 4 也无所谓。
+    main 里：d 是<b>全局</b>的 1。d+=a++，a=3，1+3=4，输出 4。
+    所以是 8 4，选 A。
+    <strong>关键判断：</strong>函数里有没有重新定义同名变量？定义了就是局部的，跟全局没关系。
+  </div>
+</section>
+
+<section class="slide kb" data-title="收尾 Q16">
+  <div class="stag">阶段 2 · <b>综合复习 · 2/5 extern 全局</b></div>
+  <h2 class="h2">Q16 · extern 引用外部全局</h2>
+  <div class="quiz lg" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q16</span>程序输出结果是？</p>
+    <div class="code"><span class="k">void</span> <span class="t">num</span>(){
+    <span class="k">extern</span> <span class="k">int</span> x,y;
+    <span class="k">int</span> a=<span class="n">15</span>,b=<span class="n">10</span>;
+    x=a-b; y=a+b;
+}
+<span class="k">int</span> x,y;
+<span class="k">int</span> <span class="t">main</span>(){
+    <span class="k">int</span> a=<span class="n">7</span>,b=<span class="n">5</span>;
+    x=a+b; y=a-b;
+    <span class="t">num</span>();
+    <span class="k">printf</span>(<span class="s">"%d, %d\n"</span>,x,y);
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>12, 2</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>不确定</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>5, 25</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>1, 12</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C：5, 25</b> —— extern 声明让 num 里用的 x、y 是<b>全局</b>那组（不是 main 的局部 a、b）。
+    <table class="trace"><tr><th>执行</th><th>x</th><th>y</th></tr><tr><td>main：x=a+b</td><td>12</td><td>—</td></tr><tr><td>main：y=a-b</td><td>12</td><td>2</td></tr><tr><td>num：x=a-b=5</td><td>5</td><td>2</td></tr><tr><td>num：y=a+b=25</td><td>5</td><td>25</td></tr></table></div>
+  </div>
+  <div class="notes">
+    这题考 extern：num 函数里写 <strong>extern int x,y</strong>，意思是"x、y 用的是外面定义的那组全局变量"，而不是 num 自己的局部 a、b。
+    <strong>【提问】</strong>"main 里先给 x、y 赋值了，num 一调用会不会把它覆盖？"——会！num 里 x=a-b、y=a+b 用的是它自己的局部 a=15、b=10，所以 x=5、y=25。
+    注意 main 里的 a、b（7 和 5）和 num 里的 a、b（15 和 10）是<strong>两对不同的变量</strong>。
+    所以最后输出 5, 25，选 C。
+    <strong>列表法关键：</strong>分清"哪一组 a、b"，再填表，就不会错。
+  </div>
+</section>
+
+<section class="slide kb" data-title="收尾 Q71">
+  <div class="stag">阶段 2 · <b>综合复习 · 3/5 指针偏移</b></div>
+  <h2 class="h2">Q71 · 从 &amp;a[3] 开始的下标</h2>
+  <div class="quiz lg" data-correct="D">
+    <p class="quiz-q"><span class="qnum">Q71</span>程序输出结果是？</p>
+    <div class="code"><span class="k">void</span> <span class="t">fun</span>(<span class="k">int</span> *p){
+    <span class="k">printf</span>(<span class="s">"%d\n"</span>, p[<span class="n">5</span>]);
+}
+<span class="k">int</span> <span class="t">main</span>(){
+    <span class="k">int</span> a[<span class="n">10</span>]={<span class="n">1</span>,<span class="n">2</span>,<span class="n">3</span>,<span class="n">4</span>,<span class="n">5</span>,<span class="n">6</span>,<span class="n">7</span>,<span class="n">8</span>,<span class="n">9</span>,<span class="n">10</span>};
+    <span class="t">fun</span>(&amp;a[<span class="n">3</span>]);
+    <span class="k">return</span> <span class="n">0</span>;
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>5</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>6</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>8</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>9</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 D：9</b> —— p 指向 a[3]，p[5] 就是从 a[3] 再往后数 5 个 = a[8]。
+    <table class="trace"><tr><th>p 指向</th><th>a[0]..a[9]</th><th>p[5] =</th></tr><tr><td>p=&amp;a[3]</td><td>1 2 3 4 5 6 7 8 9 10</td><td>a[8]=9</td></tr></table></div>
+  </div>
+  <div class="notes">
+    这题的陷阱在<b>指针的起点</b>。
+    <strong>fun(&amp;a[3])</strong> 传进去的是 a[3] 的地址，也就是从下标 3 开始。函数里 p[5]，p 是以 a[3] 为起点的，所以 p[5] = a[3+5] = <strong>a[8] = 9</strong>。
+    易错点：p[5] 不等于 a[5]。<strong>指针从哪开始，下标就从哪重新数。</strong>p 指向 a[3]，p[0] 才是 a[3]。
+    列表法画一行：p 指向 a[3]，然后往后数 5 格，落点是 a[8]=9，选 D。
+  </div>
+</section>
+
+<section class="slide kb" data-title="收尾 Q63">
+  <div class="stag">阶段 2 · <b>综合复习 · 4/5 下标套下标</b></div>
+  <h2 class="h2">Q63 · b[i][b[j][i]] 下标套下标</h2>
+  <div class="quiz lg" data-correct="A">
+    <p class="quiz-q"><span class="qnum">Q63</span>程序输出结果是？</p>
+    <div class="code"><span class="k">int</span> <span class="t">fun</span>(<span class="k">int</span> b[][<span class="n">3</span>]){
+    <span class="k">int</span> i,j,t=<span class="n">0</span>;
+    <span class="k">for</span>(i=<span class="n">0</span>;i&lt;<span class="n">3</span>;i++)
+       <span class="k">for</span>(j=i;j&lt;=i;j++)
+          t+=b[i][b[j][i]];
+    <span class="k">return</span> t;
+}
+<span class="k">int</span> <span class="t">main</span>(){
+    <span class="k">int</span> b[<span class="n">3</span>][<span class="n">3</span>]={<span class="n">0</span>,<span class="n">1</span>,<span class="n">2</span>,<span class="n">0</span>,<span class="n">1</span>,<span class="n">2</span>,<span class="n">0</span>,<span class="n">1</span>,<span class="n">2</span>};
+    <span class="k">printf</span>(<span class="s">"%d"</span>,<span class="t">fun</span>(b));
+    <span class="k">return</span> <span class="n">0</span>;
+}</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>3</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>4</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>1</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>9</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 A：3</b> —— 内层 for(j=i;j&lt;=i) 说明 j 恒等于 i，所以 b[i][b[j][i]] = b[i][b[i][i]]。又因为 b[i][i] 的值恰好是 i（0、1、2），用它当下标取到的还是 b[i][i]。
+    <table class="trace"><tr><th>i</th><th>b[i][i] 的值</th><th>b[i][b[i][i]] 的结果</th><th>t 累加</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>2</td><td>2</td><td>3</td></tr></table></div>
+  </div>
+  <div class="notes">
+    这题是下标嵌套，用列表法逐层计算。
+    先看内层循环 <strong>for(j=i; j&lt;=i; j++)</strong>——j 从 i 到 i，只跑一次，所以 j 恒等于 i。
+    <strong>【放慢】</strong>那 b[i][b[j][i]] 里，把 j 换成 i：b[i][b[i][i]]。先算里面的 b[i][i]：i=0 时是 b[0][0]=0，所以外层取 b[0][0]=0；i=1 时 b[1][1]=1，取 b[1][1]=1；i=2 时 b[2][2]=2，取 b[2][2]=2。
+    累加 0+1+2=3，选 A。
+    <strong>口诀：下标套下标，先算里面那层，再当外面的下标用。</strong>以后看到 b[x][b[y][z]] 这种，永远先剥里面。
+  </div>
+</section>
+
+<section class="slide kb" data-title="收尾 Q31">
+  <div class="stag">阶段 2 · <b>综合复习 · 5/5 指针+自增+字符串</b></div>
+  <h2 class="h2">Q31 · while(*t++) 到底停在哪儿</h2>
+  <div class="quiz lg" data-correct="C">
+    <p class="quiz-q"><span class="qnum">Q31</span>函数 int fun(char *s){ char *t=s; while(*t++); return(t-s); } 的功能是__</p>
+    <div class="quiz-opts">
+      <div class="quiz-opt" data-k="A"><b>A</b>计算 s 所指字符串的长度</div>
+      <div class="quiz-opt" data-k="B"><b>B</b>比较两个字符串的大小</div>
+      <div class="quiz-opt" data-k="C"><b>C</b>计算 s 所指字符串占用内存字节的个数</div>
+      <div class="quiz-opt" data-k="D"><b>D</b>将 s 所指字符串复制到 t</div>
+    </div>
+    <span class="quiz-cta">展开答案</span>
+    <div class="quiz-ans"><b>答案 C</b> —— t 从 s 出发，指针逐步走到字符串末尾的 '\0' 之后，t-s = 从头到 '\0' 的字节数（含 \0）。
+    <table class="trace"><tr><th>字符</th><th>'a'</th><th>'b'</th><th>'c'</th><th>'\0'</th><th>停在这</th></tr><tr><td>t 指向</td><td>s</td><td>+1</td><td>+2</td><td>+3</td><td>+4</td></tr></table>
+    <b>注意</b>：*t++ 先取 t 指向的字符判断，<b>不管真假 t 都会自增</b>。所以读 '\0'（假）退出时，t 已经再前进一格到 '\0' 后面，t-s=4（对 "abc"）。这就是"占用内存字节数"（含 \0），而不是 strlen 的 3。</div>
+  </div>
+  <div class="notes">
+    这题综合了指针、自增、字符串三个知识点。
+    <strong>【放慢】</strong>while(*t++)，注意这是后缀自增：<strong>先取 *t 判断，判断完 t 照样 +1</strong>——哪怕读到的字符是 0（'\0'）。
+    所以 t 一路走：'a'、'b'、'c'、读到 '\0' 是假退出，但 t 已经又前进一格。对 "abc"，t 最后停在起始地址 +4 的位置。
+    t-s 就是 4。<strong>它数的是"占用内存字节数"，含末尾的 \0</strong>，所以不是 strlen（那会返回 3），答案选 C。
+    这题就是验证前面那句"判断用旧值、自增照常执行"的，只是这次发生在指针上。
+  </div>
+</section>
+
+</div>
+<script>
+(function(){
+  document.querySelectorAll('.quiz').forEach(function(q){
+    q.addEventListener('click', function(){
+      if(q.classList.contains('revealed')) return;
+      var letter = q.getAttribute('data-correct');
+      q.classList.add('revealed');
+      q.querySelectorAll('.quiz-opt').forEach(function(o){
+        if(o.getAttribute('data-k') === letter) o.classList.add('is-correct');
+      });
+    });
+  });
+})();
+</script>
+<script src="./assets/runtime.js"></script>
+</body></html>

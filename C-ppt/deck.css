@@ -1,0 +1,85 @@
+/* deck.css — C 补考冲刺 deck，solarized-light 之上的教学组件 */
+:root{
+  --font-sans:'Inter','Noto Sans SC','Microsoft YaHei','微软雅黑',sans-serif;
+  --font-mono:'JetBrains Mono','Consolas','Microsoft YaHei','微软雅黑',monospace;
+}
+body{font-family:var(--font-sans)}
+
+/* 内容页：顶部对齐，允许滚动防溢出 */
+.slide.kb{justify-content:flex-start;padding:34px 64px 52px;overflow-y:auto}
+.slide.kb .h2{font-size:34px;margin:0 0 3px;line-height:1.15}
+.sub{font-size:16px;color:var(--text-2);margin:0 0 14px;line-height:1.5}
+
+/* 阶段标签 */
+.stag{display:inline-block;padding:5px 14px;border-radius:999px;font-size:13px;font-weight:700;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);margin-bottom:14px;letter-spacing:.06em}
+.stag b{color:var(--accent)}
+
+/* 规则条 / 记忆点 */
+.rule{background:var(--surface-2);border-left:4px solid var(--accent);padding:9px 16px;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:11px;font-size:17px;line-height:1.55}
+.rule b{color:var(--accent)}
+.memo{background:#fff8e6;border:1px dashed var(--warn);border-radius:var(--radius-sm);
+  padding:8px 14px;font-size:15px;line-height:1.55;margin-bottom:11px}
+.memo b{color:#b58900}
+
+/* quiz —— 先出题，点击揭答案 */
+.quiz{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:9px 16px 8px;margin-bottom:9px;box-shadow:var(--shadow);cursor:pointer;transition:border-color .2s var(--ease)}
+.quiz:hover{border-color:var(--accent)}
+.quiz .qnum{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;
+  color:#fff;background:var(--accent);border-radius:6px;padding:1px 8px;margin-right:9px;vertical-align:2px}
+.quiz-q{font-size:16px;font-weight:600;color:var(--text-1);margin:0 0 5px;line-height:1.45}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px;align-items:start}
+.quiz-opt{font-size:14px;color:var(--text-2);line-height:1.4;padding:2px 8px;border-radius:6px;min-width:0;overflow-wrap:anywhere}
+.quiz-opt b{display:inline-block;width:21px;color:var(--text-3);font-family:var(--font-mono)}
+.quiz-opt.is-correct{background:rgba(133,153,0,.13);color:var(--text-1);font-weight:600}
+.quiz-opt.is-correct b{color:#859900}
+.quiz-cta{display:inline-block;margin-top:4px;font-size:12px;font-weight:800;color:#1b6e9e;letter-spacing:.04em}
+.quiz-ans{display:none;margin-top:6px;border-top:1px dashed var(--border);padding-top:6px;
+  font-size:15px;line-height:1.5;color:var(--text-1)}
+.quiz-ans b{color:#859900}
+.quiz.revealed .quiz-cta{display:none}
+.quiz.revealed .quiz-ans{display:block}
+
+/* 代码块（读程序） */
+.code{background:#073642;color:#fdf6e3;border-radius:var(--radius);padding:10px 16px;
+  font-family:var(--font-mono);font-size:13px;line-height:1.5;overflow-x:auto;white-space:pre;margin:0 0 9px}
+.code .k{color:#cb4b16}.code .s{color:#2aa198}.code .c{color:#93a1a1;font-style:italic}
+.code .n{color:#b58900}.code .p{color:#d33682}
+
+/* 运算符优先级总表 */
+table.ops{width:100%;border-collapse:collapse;font-size:16px}
+table.ops th{background:var(--surface-2);color:var(--text-2);text-align:left;padding:6px 14px;
+  border:1px solid var(--border);font-size:14px}
+table.ops td{padding:5px 14px;border:1px solid var(--border);color:var(--text-1)}
+table.ops td:nth-child(1){white-space:nowrap}
+table.ops td:nth-child(2){font-family:var(--font-mono);font-size:15px}
+table.ops td:nth-child(3){text-align:right;white-space:nowrap;font-size:14px}
+table.ops td b{color:#cb4b16}
+table.ops tr.skip td{color:var(--text-3);opacity:.5}
+table.ops tr.skip td b{color:var(--text-3)}
+
+/* 列表法追踪表 */
+table.trace{width:100%;border-collapse:collapse;margin:6px 0 2px;font-size:14px}
+table.trace th{background:var(--surface-2);color:var(--text-2);text-align:left;padding:4px 10px;
+  border:1px solid var(--border);font-size:12px}
+table.trace td{padding:4px 10px;border:1px solid var(--border);font-family:var(--font-mono);color:var(--text-1)}
+table.trace tr:nth-child(even) td{background:var(--surface-2)}
+
+/* 收尾页的题号大标 */
+.quiz.lg .quiz-q{font-size:18px}
+.quiz.lg .quiz-opts{grid-template-columns:1fr}
+.quiz.lg .quiz-opt{font-size:15px}
+
+/* 封面：继承 base 的 .slide 绝对定位铺满视口；只让内容区浮在渐变之上，footer 保持绝对定位贴底 */
+.cover-slide{background:var(--bg);overflow:hidden}
+.cover-slide::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(900px 500px at 80% -10%, rgba(38,139,210,.14), transparent 60%),
+             radial-gradient(700px 500px at 10% 110%, rgba(42,161,152,.14), transparent 60%)}
+.cover-slide > div:not(.deck-footer){position:relative}
+.pill-stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.pill-stack .pill{font-size:14px;padding:6px 14px}
+
+/* 简单一句话题（不占两列选项） */
+.quiz.simple .quiz-opts{grid-template-columns:1fr}
