@@ -16,16 +16,16 @@
 
 <section class="slide cover-slide center tc" data-title="封面">
   <div>
-    <p class="kicker">南京航空航天大学</p>
-    <h1 class="h1" style="font-size:74px;margin-bottom:10px">C 语言 · 知识点复习</h1>
-    <p class="lede" style="max-width:60ch;margin:12px auto 0">考试：单选 + 程序设计。<br>复习：概念规则 + 例题 + 读程序方法</p>
+    <p class="kicker">C语言程序设计</p>
+    <h1 class="h1" style="font-size:74px;margin-bottom:10px">知识点复习</h1>
+    <p class="lede" style="max-width:60ch;margin:12px auto 0">考试：单选 + 程序设计<br>复习：概念规则 + 例题 + 读程序方法</p>
     <div class="pill-stack" style="justify-content:center">
       <span class="pill">概念：背规则</span>
       <span class="pill">读程序：列表法</span>
       <span class="pill">编程：套模板</span>
     </div>
   </div>
-  <div class="deck-footer"><span>阶段 0 · 开场</span><span class="slide-number" data-current="1" data-total="41"></span></div>
+  <div class="deck-footer"><span>阶段 0 · 开场</span><span class="slide-number" data-current="1" data-total="55"></span></div>
   <div class="notes">
     考试 60 道单选加编程题。以下内容按真题库整理，考什么讲什么。
     讲解分三部分：概念规则、读程序题（列表法）、编程题（套模板）。
@@ -346,10 +346,11 @@
     <tr><td>赋值</td><td>= += -= *= /= %= &gt;&gt;= &lt;&lt;= &amp;= ^= |=</td><td><b>从右到左</b></td></tr>
     <tr><td>逗号</td><td>,</td><td>从左到右</td></tr>
   </table>
-  <div class="memo mt-m"><b>灰色行</b>（移位、位与、位异或、位或）属于位运算，考纲不要求，可跳过。其余按口诀记上下顺序即可。</div>
+  <div class="rule mt-m"><b>结合性：</b>同优先级运算符连续出现时，决定<b>先算哪边</b>。<b>从左到右</b>：a-b-c = (a-b)-c，先算左边。<b>从右到左</b>：a=b=c 等价 a=(b=c)，先算右边再赋给左边。<b>右结合的只有三个：一元、三元（条件）、赋值</b>，其余都从左到右。</div>
+  <div class="memo"><b>灰色行</b>（移位、位与、位异或、位或）属于位运算，考纲不要求，可跳过。其余按口诀记上下顺序即可。</div>
   <div class="notes">
     运算符优先级从高到低：后缀、一元、乘除、加减、移位、关系、相等、位与、位异或、位或、逻辑与、逻辑或、条件、赋值、逗号。
-    结合性：一元、条件、赋值从右到左，其余从左到右。
+    结合性：同优先级连续出现时，决定先算哪边。左结合先算左边，a-b-c 即 (a-b)-c；右结合先算右边，赋值 a=b=c 即 a=(b=c)。右结合的只有三个：一元、三元、赋值，其余都是从左到右。
     简化记忆用口诀"单算关逻条赋逗"。位运算相关行（移位、&amp;、^、|）考纲不要求，可跳过。
   </div>
 </section>
@@ -609,7 +610,16 @@ f=23.5 f=23.46</div>
       <div class="quiz-opt" data-k="D"><b>D</b>abre'hi'y\bou</div>
     </div>
     <span class="quiz-cta">展开答案</span>
-    <div class="quiz-ans"><b>答案 C</b> —— \b 退格删前一个字符：a 被删、\\ 后被删，最后剩 re'hi'you。</div>
+    <div class="quiz-ans"><b>答案 C</b> —— 逐字符推导，\b 把光标退回一格、下一个字符覆盖它：
+    <table class="trace"><tr><th>读到的内容</th><th>效果</th><th>当前输出</th></tr>
+    <tr><td>a</td><td>写入</td><td>a</td></tr>
+    <tr><td>\b</td><td>退格，光标回到 a 上</td><td>（光标在 a 处）</td></tr>
+    <tr><td>r e</td><td>写入，覆盖 a</td><td>re</td></tr>
+    <tr><td>\' h i \' y</td><td>写入</td><td>re'hi'y</td></tr>
+    <tr><td>\\</td><td>写入（转义的反斜杠）</td><td>re'hi'y\</td></tr>
+    <tr><td>\b</td><td>退格，光标回到 \ 上</td><td>（光标在 \ 处）</td></tr>
+    <tr><td>o u</td><td>写入，覆盖 \</td><td>re'hi'you</td></tr></table>
+    转义说明：\b 退格、\' 是引号、\\ 是反斜杠、\n 换行。</div>
   </div>
   <div class="memo mt-m"><b>残留回车：</b>先 scanf("%d") 回车，再 scanf("%c") 读到的就是那个回车——中间要 getchar() 吃掉。编程题必碰。</div>
   <div class="notes">
@@ -1426,7 +1436,13 @@ x=*(p+<span class="n">2</span>);
       <div class="quiz-opt" data-k="D"><b>D</b>2</div>
     </div>
     <span class="quiz-cta">展开答案</span>
-    <div class="quiz-ans"><b>答案 C</b> —— 函数内 s=&amp;c 只改了形参，main 的 s 仍指向 a[0]=1 → 输出 1。</div>
+    <div class="quiz-ans"><b>答案 C</b> —— 关键：函数内 s=&amp;c 让形参指针指向局部变量 c，main 的 s 不受影响。
+    <table class="trace"><tr><th>位置</th><th>s 指向</th><th>执行</th><th>结果</th></tr>
+    <tr><td>main</td><td>a[0]</td><td>int *s=a</td><td>*s=1</td></tr>
+    <tr><td>fun 内</td><td>局部变量 c</td><td>s=&amp;c</td><td>形参 s 改指向 c</td></tr>
+    <tr><td>fun 内</td><td>局部变量 c</td><td>*s = *p1 + *(p2++) = 1+10</td><td>c=11（与 main 无关）</td></tr>
+    <tr><td>main</td><td>仍指向 a[0]</td><td>printf("%d", *s)</td><td>输出 1</td></tr></table>
+    <b>*(p2++)</b>：先取 *p2=b[0]=10，再 p2++（后置自增，已无关紧要）。<b>*s=11 写入的是局部变量 c</b>，main 的 s 仍指向 a[0]=1，输出 1。</div>
   </div>
   <div class="notes">
     指针作函数参数两条规则。
@@ -1434,6 +1450,39 @@ x=*(p+<span class="n">2</span>);
     Q69：fun(p) 传入 p 指向 k 的地址，函数内 a=&amp;b 使形参指针指向局部变量 b，再 *a=*a*2 改的是 b。函数内输出 4，main 的 k=3、*p=3 不变，输出 4,3,3，选 A。
     Q30 同理：函数内 s=&amp;c 改指向，main 的 s 仍指向 a[0]，输出 1，选 C。
     总结：<strong>要改实参，改 *指针 指向的内容，不改指针本身。</strong>
+  </div>
+</section>
+
+<section class="slide kb" data-title="11 文件知识">
+  <div class="stag">阶段 1 · <b>11 数据文件 · 读写知识点</b></div>
+  <h2 class="h2">文件读写知识点</h2>
+  <div class="rule"><b>文件四步：</b>FILE *fp → fopen → 读写 → fclose。<b>fopen 失败返回 NULL</b>。</div>
+  <div class="grid g2 mt-m">
+    <div class="card"><h4>fopen 模式</h4>
+      <p class="dim" style="margin-top:6px">"r" 读 · "w" 覆盖写（清空原有内容）· "a" 追加写。<br>打开失败（如文件不存在）返回 <b>NULL</b>。</p>
+    </div>
+    <div class="card"><h4>读写函数</h4>
+      <p class="dim" style="margin-top:6px">fprintf/fscanf 格式化（<b>第一参数是文件指针</b>）· fgetc/fputc 字符 · fgets/fputs 字符串。</p>
+    </div>
+  </div>
+  <div class="code"><span class="c">// 写：w 打开 → fprintf 写入 → fclose</span>
+<span class="k">FILE</span> *fp = <span class="t">fopen</span>(<span class="s">"d.txt"</span>, <span class="s">"w"</span>);
+<span class="t">fprintf</span>(fp, <span class="s">"%d %d\n"</span>, <span class="n">12</span>, <span class="n">34</span>);
+<span class="t">fclose</span>(fp);
+
+<span class="c">// 读：r 打开 → fscanf 读出 → fclose</span>
+<span class="k">int</span> a, b;
+fp = <span class="t">fopen</span>(<span class="s">"d.txt"</span>, <span class="s">"r"</span>);
+<span class="t">fscanf</span>(fp, <span class="s">"%d %d"</span>, &amp;a, &amp;b);  <span class="c">// a=12, b=34</span>
+<span class="t">fclose</span>(fp);</div>
+  <div class="memo mt-m"><b>EOF（文件结束标志）：</b>读到文件末尾时，fgetc/fscanf 等返回 <b>EOF</b>（值为 -1）。逐字符读完整文件：<code>while((ch=fgetc(fp)) != EOF) putchar(ch);</code><b>注意区分：fopen 失败返回 NULL，读到底返回 EOF，不是一回事。</b></div>
+  <div class="notes">
+    文件读写知识点。
+    文件四步：FILE *fp → fopen → 读写 → fclose。
+    fopen 模式：r 读、w 覆盖写、a 追加写。fopen 失败返回 NULL。
+    读写函数：fprintf/fscanf 格式化，第一个参数是文件指针；fgetc/fputc 字符；fgets/fputs 字符串。
+    读写例子：写用 w 打开、fprintf 写入 12 和 34、fclose；读用 r 打开、fscanf 读出到 a、b、fclose。fscanf 按格式串读入，读到 12、34 分别存进 a、b。
+    EOF 是文件结束标志，读到末尾时 fgetc/fscanf 返回 EOF（值 -1），常用 while((ch=fgetc(fp))!=EOF) 判断读完。EOF 和 fopen 失败返回的 NULL 是两回事。
   </div>
 </section>
 
@@ -1450,7 +1499,8 @@ x=*(p+<span class="n">2</span>);
       <div class="quiz-opt" data-k="D"><b>D</b>NULL</div>
     </div>
     <span class="quiz-cta">展开答案</span>
-    <div class="quiz-ans"><b>答案 D</b> —— fopen 失败返回 NULL。</div>
+    <div class="quiz-ans"><b>答案 D</b> —— fopen 打开失败（如文件不存在、无权限）返回 <b>NULL</b>，不是 EOF。
+    <b>区分两个标志：</b>EOF（值 -1）是<b>读函数</b>（fgetc/fscanf）读到文件末尾时返回的；NULL 是<b>fopen 打开失败</b>时返回的。两者不是一回事。</div>
   </div>
   <div class="quiz" data-correct="C">
     <p class="quiz-q"><span class="qnum">Q40</span>可将数据按数据类型分别以__的形式存在磁盘上</p>
@@ -1503,7 +1553,14 @@ fp=<span class="t">fopen</span>(<span class="s">"d1.dat"</span>,<span class="s">
       <div class="quiz-opt" data-k="D"><b>D</b>123</div>
     </div>
     <span class="quiz-cta">展开答案</span>
-    <div class="quiz-ans"><b>答案 D</b> —— 写入 "123"，读回 %d 读到 123。</div>
+    <div class="quiz-ans"><b>答案 D</b> —— 按步骤走文件读写：
+    <table class="trace"><tr><th>步骤</th><th>操作</th><th>文件内容</th></tr>
+    <tr><td>①</td><td>fopen("d1.dat","w")</td><td>清空</td></tr>
+    <tr><td>②</td><td>for 写 a[0..2]：fprintf(fp,"%d",a[i])</td><td>123（连写无分隔）</td></tr>
+    <tr><td>③</td><td>fprintf(fp,"\n"); fclose(fp)</td><td>123\n</td></tr>
+    <tr><td>④</td><td>fopen("d1.dat","r")；fscanf(fp,"%d",&amp;n)</td><td>读到 123</td></tr>
+    <tr><td>⑤</td><td>printf("%d",n)</td><td>输出 123</td></tr></table>
+    <b>关键：</b>fprintf 用 %d 连写，文件内容是数字串 "123"（无空格），fscanf 的 %d 一次读整个数字串 → n=123。若写入带空格成 "1 2 3"，则只读到 1。<b>fprintf/fscanf 第一个参数是文件指针 fp</b>。</div>
   </div>
   <div class="notes">
     <strong>【提问】</strong>"文件里原来有 hello，用 w 打开写入 abc，结果是什么？"——w 是<strong>覆盖写</strong>，hello 没了，只剩 abc，这是 Q73，选 B。
@@ -1752,6 +1809,371 @@ fp=<span class="t">fopen</span>(<span class="s">"d1.dat"</span>,<span class="s">
   </div>
 </section>
 
+<!-- ============ 阶段 3 · 编程题 ============ -->
+
+<section class="slide kb" data-title="阶段3 开场">
+  <div class="stag">阶段 3 · <b>编程题</b></div>
+  <h2 class="h2">编程题怎么拿分</h2>
+  <div class="rule"><b>拿分逻辑：</b>写对框架（读入 → 处理 → 输出）就有基础分。<b>先识别题型，再套对应套路</b>；写完跑一遍，对照预期输出。</div>
+  <table class="ops">
+    <tr><th>真题（03 程序设计）</th><th>套路</th></tr>
+    <tr><td>#5 1~599 被 3 整除含 5</td><td>套路 1 数位拆分</td></tr>
+    <tr><td>#7 平方和</td><td>套路 1 变式 · 累加</td></tr>
+    <tr><td>#2 体操打分（去最高最低）</td><td>套路 2 极值 / 统计</td></tr>
+    <tr><td>#11 gcd 辗转相除</td><td>套路 3</td></tr>
+    <tr><td>#12 statistic 正负个数</td><td>套路 4 函数 + 指针带回多值</td></tr>
+    <tr><td>#3 统计字符 / #8 getDigits</td><td>套路 5 字符串遍历</td></tr>
+    <tr><td>#4 回文（含 filter）</td><td>套路 5 回文</td></tr>
+    <tr><td>#9 阶梯计费</td><td>套路 6 分段计费</td></tr>
+    <tr><td>#10 反序数</td><td>套路 7 反序数</td></tr>
+    <tr><td>#1 倒三角</td><td>套路 8 嵌套循环打印</td></tr>
+    <tr><td>#6 二进制转八进制</td><td>套路 9 进制转换</td></tr>
+  </table>
+  <div class="memo mt-m"><b>模板适用性：</b>12 道真题全部对应到 9 个套路，直接套；指针带回多值 / 字符串遍历 / 极值统计是<b>宽套路</b>，换壳题也能套；万一出池外新题，靠"识别题型 + 读入→处理→输出 框架"写基础分。</div>
+  <div class="notes">
+    编程题先讲怎么拿分：写对框架就有分，读入、处理、输出三步齐全就保底。
+    关键是先识别题型，再套套路。这张表把 11 道真题映射到后面的套路。
+    模板的适用性：池内题直接套；宽套路能换壳；新题靠框架兜底。
+    下面每个套路：先看题目，然后点"下一步"逐步展开代码，跟着写。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路1 数位拆分">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 1 数位拆分</b></div>
+  <h2 class="h2">套路 1 · 数位拆分</h2>
+  <p class="sub">真题 #5：找出 1~599 中能被 3 整除且至少有一位数字为 5 的整数（如 15、51、513），每行 8 个，最后输出个数（66 个）。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 定义变量 + 循环</div><div class="code"><span class="k">int</span> i, n=<span class="n">0</span>, gw, sw, bw;
+<span class="k">for</span>(i=<span class="n">1</span>; i&lt;=<span class="n">599</span>; i++){</div></div>
+    <div class="step"><div class="step-cap">② 拆位 + 判断 + 计数换行</div><div class="code">    gw = i%<span class="n">10</span>;      <span class="c">// 个位</span>
+    sw = i/<span class="n">10</span>%<span class="n">10</span>;   <span class="c">// 十位</span>
+    bw = i/<span class="n">100</span>;      <span class="c">// 百位</span>
+    <span class="k">if</span>(i%<span class="n">3</span>==<span class="n">0</span> &amp;&amp; (gw==<span class="n">5</span>||sw==<span class="n">5</span>||bw==<span class="n">5</span>)){
+        <span class="k">printf</span>(<span class="s">"%d\t"</span>, i);  n++;
+        <span class="k">if</span>(n%<span class="n">8</span>==<span class="n">0</span>) <span class="k">printf</span>(<span class="s">"\n"</span>);
+    }</div></div>
+    <div class="step"><div class="step-cap">③ 输出个数</div><div class="code">}
+<span class="k">printf</span>(<span class="s">"\n共 %d 个\n"</span>, n);</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>共 <b>66</b> 个，每行 8 个数。</div>
+  </div>
+  <div class="memo mt-m"><b>套路拆位：</b>x%10 取个位 → x/10 丢掉个位 → 循环可拆任意位。变式 <b>平方和</b>（#7）就是循环累加：<code>s += i*i</code>。</div>
+  <div class="notes">
+    套路 1 是数位拆分。真题 #5：1 到 599，能被 3 整除且含数字 5。
+    第 1 步：定义变量、for 循环从 1 到 599。
+    第 2 步：拆位——i%10 个位，i/10%10 十位，i/100 百位；判断 i%3==0 且任一位等于 5，满足就打印并计数，每 8 个换行。
+    第 3 步：循环结束输出总个数 66。
+    现场跟着敲：先敲 for，再敲拆位，再敲 if。
+    变式平方和就是简单累加，s += i*i。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路2 极值统计">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 2 极值 / 统计</b></div>
+  <h2 class="h2">套路 2 · 极值 / 统计</h2>
+  <p class="sub">真题 #2：n 位评委打分（1~100），去掉一个最高分和一个最低分，求其余 n-2 个的平均分（保留 3 位小数）。输入 n 再输入 n 个分数。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 第一个数做 max/min 种子</div><div class="code"><span class="k">int</span> n, i, s, sum=<span class="n">0</span>, max, min;
+<span class="k">scanf</span>(<span class="s">"%d"</span>, &amp;n);
+<span class="k">scanf</span>(<span class="s">"%d"</span>, &amp;s);
+max = min = s;   sum += s;   <span class="c">// 第一个数同时做初值</span></div></div>
+    <div class="step"><div class="step-cap">② 循环读入，更新 sum/max/min</div><div class="code"><span class="k">for</span>(i=<span class="n">2</span>; i&lt;=n; i++){
+    <span class="k">scanf</span>(<span class="s">"%d"</span>, &amp;s);
+    sum += s;
+    <span class="k">if</span>(s&gt;max) max=s;
+    <span class="k">if</span>(s&lt;min) min=s;
+}</div></div>
+    <div class="step"><div class="step-cap">③ 去掉最高最低，算平均</div><div class="code"><span class="k">printf</span>(<span class="s">"%.3f\n"</span>, (sum-max-min)/(<span class="k">double</span>)(n-<span class="n">2</span>));</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>输入 7 个分 1 9 5 6 7 8 4 → 6.000</div>
+  </div>
+  <div class="memo mt-m"><b>常错点：</b>第一个数要先读出来做种子（否则 max/min 没初值）；平均值要 <b>(double)</b> 强转防整除；n-2 不能为 0。</div>
+  <div class="notes">
+    套路 2 是极值统计。真题 #2 体操打分。
+    第 1 步：先读第一个分数，同时当 max 和 min 的初值，并加进 sum。
+    第 2 步：循环读剩下 n-1 个，更新 sum、max、min。
+    第 3 步：去掉最高最低，除以 n-2，记得 double 强转，%.3f 保留 3 位。
+    现场跟着敲：先敲读入和种子，再敲循环，再敲输出。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路3 gcd">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 3 gcd</b></div>
+  <h2 class="h2">套路 3 · gcd 辗转相除</h2>
+  <p class="sub">真题 #11：编写 <code>int gcd(int x, int y)</code> 辗转相除求最大公约数；主函数给 a[8]、b[8]，求对应 gcd 存入 c[8] 并输出。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 写 gcd 函数</div><div class="code"><span class="k">int</span> <span class="t">gcd</span>(<span class="k">int</span> x, <span class="k">int</span> y){
+    <span class="k">int</span> k;
+    <span class="k">while</span>(k = x%y){   <span class="c">// 注意是赋值 =，余数非 0 就继续</span>
+        x = y;  y = k;
+    }
+    <span class="k">return</span> y;
+}</div></div>
+    <div class="step"><div class="step-cap">② 主函数调用，逐对求 gcd</div><div class="code"><span class="k">int</span> a[<span class="n">8</span>]={<span class="n">24</span>,<span class="n">1007</span>,<span class="n">956</span>,<span class="n">705</span>,<span class="n">574</span>,<span class="n">371</span>,<span class="n">416</span>,<span class="n">35</span>};
+<span class="k">int</span> b[<span class="n">8</span>]={<span class="n">60</span>,<span class="n">631</span>,<span class="n">772</span>,<span class="n">201</span>,<span class="n">262</span>,<span class="n">763</span>,<span class="n">1000</span>,<span class="n">77</span>};
+<span class="k">int</span> c[<span class="n">8</span>], i;
+<span class="k">for</span>(i=<span class="n">0</span>; i&lt;<span class="n">8</span>; i++) c[i]=<span class="t">gcd</span>(a[i], b[i]);
+<span class="k">for</span>(i=<span class="n">0</span>; i&lt;<span class="n">8</span>; i++) <span class="k">printf</span>(<span class="s">"%4d"</span>, c[i]);</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>&nbsp; 12&nbsp;&nbsp; 1&nbsp;&nbsp; 4&nbsp;&nbsp; 3&nbsp;&nbsp; 2&nbsp;&nbsp; 7&nbsp;&nbsp; 8&nbsp;&nbsp; 7</div>
+  </div>
+  <div class="memo mt-m"><b>常错点：</b>while 里写成 <code>==</code> 就死循环；返回值写 x 不写 y。<b>记法：</b>gcd(24,60)：60%24=12 → 24%12=0 → 返回 12。</div>
+  <div class="notes">
+    套路 3 是 gcd 辗转相除。
+    第 1 步：写 gcd 函数，while(k=x%y)，余数非 0 就替换 x、y，最后返回 y。注意是赋值 = 不是 ==。
+    第 2 步：主函数两个数组逐对调用 gcd 存入 c，输出。
+    现场推一遍 gcd(24,60)：60%24=12，24%12=0，返回 12。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路4 指针带回">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 4 函数 + 指针带回多值</b></div>
+  <h2 class="h2">套路 4 · 函数 + 指针带回多值</h2>
+  <p class="sub">真题 #12：编写 <code>void statistic(int *a,int n,int *posi,int *nega)</code> 统计数组正数、负数个数，通过指针带回。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 写函数，用指针带回结果</div><div class="code"><span class="k">void</span> <span class="t">statistic</span>(<span class="k">int</span> *a, <span class="k">int</span> n, <span class="k">int</span> *posi, <span class="k">int</span> *nega){
+    <span class="k">int</span> i;
+    *posi = *nega = <span class="n">0</span>;
+    <span class="k">for</span>(i=<span class="n">0</span>; i&lt;n; i++){
+        <span class="k">if</span>(*(a+i) &gt; <span class="n">0</span>)   (*posi)++;
+        <span class="k">else if</span>(*(a+i) &lt; <span class="n">0</span>) (*nega)++;
+    }
+}</div></div>
+    <div class="step"><div class="step-cap">② 主函数传地址调用</div><div class="code"><span class="k">int</span> arr[<span class="n">10</span>]={<span class="n">1</span>,<span class="n">-2</span>,<span class="n">3</span>,<span class="n">0</span>,<span class="n">-5</span>,<span class="n">6</span>,<span class="n">0</span>,<span class="n">8</span>,<span class="n">-9</span>,<span class="n">10</span>};
+<span class="k">int</span> p=<span class="n">0</span>, ng=<span class="n">0</span>;
+<span class="t">statistic</span>(arr, <span class="n">10</span>, &amp;p, &amp;ng);
+<span class="k">printf</span>(<span class="s">"正数=%d 负数=%d\n"</span>, p, ng);</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>正数=5 负数=3</div>
+  </div>
+  <div class="memo mt-m"><b>套路：</b>函数只能 return 一个值，想带回多个结果就用指针参数——主函数传 <code>&amp;变量</code>，函数里写 <code>*指针</code>。同一套路的 02 题 stat：通过指针带回 max/min、return 平均值。</div>
+  <div class="notes">
+    套路 4 是函数加指针带回多值。
+    第 1 步：函数里通过指针 *posi、*nega 统计正负数个数。
+    第 2 步：主函数传 &amp;p、&amp;ng，函数把结果写进指针指向的变量。
+    核心：函数只能 return 一个值，多个结果靠指针参数带出。主函数传地址，函数里改 *指针。
+    02 的 stat 是同一套路：指针带回 max/min，return 平均值。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路5 字符串">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 5 字符串遍历 / 回文</b></div>
+  <h2 class="h2">套路 5 · 字符串遍历 / 回文</h2>
+  <p class="sub">真题 #3 统计字符、#8 getDigits、#4 回文。核心：gets 读入 → for 遍历 s[i] → 分类处理 → 补 '\0'。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 统计各类字符（#3）</div><div class="code"><span class="k">char</span> s[<span class="n">100</span>];
+<span class="k">int</span> i, da=<span class="n">0</span>, xiao=<span class="n">0</span>, num=<span class="n">0</span>;
+<span class="t">gets</span>(s);
+<span class="k">for</span>(i=<span class="n">0</span>; s[i]!=<span class="s">'\0'</span>; i++){
+    <span class="k">if</span>(s[i]&gt;=<span class="s">'A'</span>&amp;&amp;s[i]&lt;=<span class="s">'Z'</span>) da++;
+    <span class="k">else if</span>(s[i]&gt;=<span class="s">'a'</span>&amp;&amp;s[i]&lt;=<span class="s">'z'</span>) xiao++;
+    <span class="k">else if</span>(s[i]&gt;=<span class="s">'0'</span>&amp;&amp;s[i]&lt;=<span class="s">'9'</span>) num++;
+}</div></div>
+    <div class="step"><div class="step-cap">② 回文 + filter（#4）</div><div class="code"><span class="c">// filter：去非字母 + 转大写</span>
+<span class="k">void</span> <span class="t">filter</span>(<span class="k">char</span> *s){
+    <span class="k">int</span> i, j=<span class="n">0</span>;
+    <span class="k">for</span>(i=<span class="n">0</span>; s[i]; i++)
+        <span class="k">if</span>(s[i]&gt;=<span class="s">'a'</span>&amp;&amp;s[i]&lt;=<span class="s">'z'</span>) s[j++]=s[i]-<span class="n">32</span>;  <span class="c">// 小写转大写</span>
+        <span class="k">else if</span>(s[i]&gt;=<span class="s">'A'</span>&amp;&amp;s[i]&lt;=<span class="s">'Z'</span>) s[j++]=s[i];
+    s[j]=<span class="s">'\0'</span>;
+}
+<span class="c">// 回文：双指针首尾比</span>
+<span class="k">int</span> <span class="t">palin</span>(<span class="k">char</span> *s){
+    <span class="k">int</span> i=<span class="n">0</span>, j=<span class="t">strlen</span>(s)-<span class="n">1</span>;
+    <span class="k">while</span>(i&lt;j){ <span class="k">if</span>(s[i]!=s[j]) <span class="k">return</span> <span class="n">0</span>; i++; j--; }
+    <span class="k">return</span> <span class="n">1</span>;
+}</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>#3 输入 "A Student &amp; 5 Teachers." → 大写=3 小写=13 数字=1 空格=4 其他=2　·　#4 输入 "Madam, I'm Adam" → filter 后 MADAMIMADAM → <b>yes</b></div>
+  </div>
+  <div class="memo mt-m"><b>套路三件套：</b>gets 读入 → for(i=0;s[i];i++) 遍历 → 构造字符串末尾补 '\0'。<b>#8 getDigits</b> 是同一套路：数字字符挑进 s2，最后 s2[j]='\0'。</div>
+  <div class="notes">
+    套路 5 是字符串。
+    #3 统计字符：gets 读入，for 遍历每个字符，按 ASCII 范围分类计数。
+    #4 回文：先 filter 去掉非字母、小写转大写，再用双指针首尾比较。
+    #8 getDigits 是同一遍历套路，把数字字符挑出来放进 s2，记得末尾补 '\0'。
+    现场跟着敲：先敲遍历，再敲分类判断，回文就加 filter 和双指针。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路6 分段计费">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 6 分段计费</b></div>
+  <h2 class="h2">套路 6 · 分段计费（分档条件）</h2>
+  <p class="sub">真题 #9 阶梯计费：第一档 ≤276 按 3.1、第二档 ≤480 按 3.72、第三档 4.65，每档只对超出部分计价。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 定义 + 读入</div><div class="code"><span class="k">double</span> x, fee;
+<span class="k">scanf</span>(<span class="s">"%lf"</span>, &amp;x);</div></div>
+    <div class="step"><div class="step-cap">② 分档判断，前几档要累加</div><div class="code"><span class="k">if</span>(x &lt;= <span class="n">276</span>)        fee = x*<span class="n">3.1</span>;
+<span class="k">else if</span>(x &lt;= <span class="n">480</span>)   fee = <span class="n">276</span>*<span class="n">3.1</span> + (x-<span class="n">276</span>)*<span class="n">3.72</span>;
+<span class="k">else</span>                fee = <span class="n">276</span>*<span class="n">3.1</span> + (<span class="n">480</span>-<span class="n">276</span>)*<span class="n">3.72</span> + (x-<span class="n">480</span>)*<span class="n">4.65</span>;</div></div>
+    <div class="step"><div class="step-cap">③ 输出</div><div class="code"><span class="k">printf</span>(<span class="s">"%.2f\n"</span>, fee);</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>输入 500 → 1707.48</div>
+  </div>
+  <div class="memo mt-m"><b>套路：</b>每一档只对本档<b>超出部分</b>单独计价，前面几档的金额要<b>累加</b>。注意变量是 double、输入用 %lf。</div>
+  <div class="notes">
+    套路 6 分段计费。特征是 if-else 分档，每档只算超出部分，前面几档累加。
+    第一档直接用 x 乘单价；第二档 = 第一档封顶值 + 超出部分；第三档再累加。
+    现场跟着敲：先读入，再 if-else 分档，最后输出。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路7 反序数">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 7 反序数</b></div>
+  <h2 class="h2">套路 7 · 反序数（循环取余拼接）</h2>
+  <p class="sub">真题 #10：输入一个正整数，输出它的反序数（如 5678 → 8765）。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 定义 + 读入</div><div class="code"><span class="k">int</span> n, rev=<span class="n">0</span>;
+<span class="k">scanf</span>(<span class="s">"%d"</span>, &amp;n);</div></div>
+    <div class="step"><div class="step-cap">② 每次取个位接到新数末尾</div><div class="code"><span class="k">while</span>(n&gt;<span class="n">0</span>){
+    rev = rev*<span class="n">10</span> + n%<span class="n">10</span>;  <span class="c">// 取个位接到 rev 末尾</span>
+    n /= <span class="n">10</span>;              <span class="c">// 丢掉个位</span>
+}</div></div>
+    <div class="step"><div class="step-cap">③ 输出</div><div class="code"><span class="k">printf</span>(<span class="s">"%d\n"</span>, rev);</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>输入 5678 → 8765</div>
+  </div>
+  <div class="memo mt-m"><b>套路：</b><code>rev = rev*10 + n%10</code> 是经典逆序累加——每次把个位接到新数末尾，n 除以 10 丢掉个位。与套路 1 的拆位同源（x%10 取位、x/10 丢位）。</div>
+  <div class="notes">
+    套路 7 反序数。特征是 while 循环 + 取余拼接。
+    rev=rev*10+n%10，n 除以 10。5678：先取 8，rev=8；再取 7，rev=87；再 6，rev=876；再 5，rev=8765。
+    它和套路 1 的拆位是同源技巧：x%10 取位、x/10 丢位。
+    现场跟着敲：一个 while，三行。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路8 倒三角">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 8 嵌套循环打印</b></div>
+  <h2 class="h2">套路 8 · 嵌套循环打印倒三角</h2>
+  <p class="sub">真题 #1：打印 4 行倒三角，每行 `*` 之间用空格分隔。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 外循环控制行</div><div class="code"><span class="k">int</span> i, j, n=<span class="n">4</span>;
+<span class="k">for</span>(i=<span class="n">1</span>; i&lt;=n; i++){</div></div>
+    <div class="step"><div class="step-cap">② 先输出 i-1 个空格，再输出 n-i+1 个 *</div><div class="code">    <span class="k">for</span>(j=<span class="n">1</span>; j&lt;=i-<span class="n">1</span>; j++) <span class="k">printf</span>(<span class="s">" "</span>);
+    <span class="k">for</span>(j=<span class="n">1</span>; j&lt;=n-i+<span class="n">1</span>; j++) <span class="k">printf</span>(<span class="s">"* "</span>);
+    <span class="k">printf</span>(<span class="s">"\n"</span>);</div></div>
+    <div class="step"><div class="step-cap">③ 收尾</div><div class="code">}</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>
+* * * *<br>
+&nbsp;* * *<br>
+&nbsp;&nbsp;* *<br>
+&nbsp;&nbsp;&nbsp;*</div>
+  </div>
+  <div class="memo mt-m"><b>套路：</b>行数外循环，行内两个内循环——空格和星号分开输出。<b>第 i 行空格 i-1 个、星号 n-i+1 个。</b></div>
+  <div class="notes">
+    套路 8 嵌套循环打印倒三角。
+    第 i 行先输出 i-1 个空格，再输出 n-i+1 个星号，然后换行。
+    外循环控行，两个内循环分别输出空格和星号。
+    现场跟着敲：for 行，再 for 空格，再 for 星号。
+  </div>
+</section>
+
+<section class="slide kb" data-title="套路9 进制转换">
+  <div class="stag">阶段 3 · <b>编程题 · 套路 9 进制转换</b></div>
+  <h2 class="h2">套路 9 · 进制转换（二进制 → 八进制）</h2>
+  <p class="sub">真题 #6：输入长度不超过 9 的二进制字符串（0/1），转八进制输出。如 "1011010" → 132。含非 0/1 给"输入出错"提示。</p>
+  <div class="steps">
+    <div class="step"><div class="step-cap">① 读入 + 长度检查</div><div class="code"><span class="k">char</span> s[<span class="n">80</span>];
+<span class="k">int</span> i, n=<span class="n">0</span>;
+<span class="t">gets</span>(s);
+<span class="k">if</span>(<span class="t">strlen</span>(s) &gt; <span class="n">9</span>){ <span class="k">printf</span>(<span class="s">"字符串长度&gt;9,退出。\n"</span>); <span class="k">return</span> <span class="n">1</span>; }</div></div>
+    <div class="step"><div class="step-cap">② 合法性检查（注意是 &amp;&amp;，不是 ||）</div><div class="code"><span class="k">for</span>(i=<span class="n">0</span>; s[i]; i++)
+    <span class="k">if</span>(s[i]!=<span class="s">'0'</span> &amp;&amp; s[i]!=<span class="s">'1'</span>){ <span class="k">printf</span>(<span class="s">"输入出错\n"</span>); <span class="k">return</span> <span class="n">1</span>; }</div></div>
+    <div class="step"><div class="step-cap">③ 二进制逐位累加为十进制，%o 输出</div><div class="code"><span class="k">for</span>(i=<span class="n">0</span>; s[i]; i++)
+    n = n*<span class="n">2</span> + s[i]-<span class="s">'0'</span>;   <span class="c">// n*2 左移一位 + 当前位</span>
+<span class="k">printf</span>(<span class="s">"%o\n"</span>, n);</div></div>
+    <button class="step-next" type="button">下一步</button>
+    <div class="steps-out"><span class="out-label">预期输出</span>输入 "1011010" → 132</div>
+  </div>
+  <div class="memo mt-m"><b>常错点：</b>合法性判断必须用 <code>&amp;&amp;</code>（参考答案写成 <code>||</code> 是错的，任何字符都满足）；<code>n=n*2+s[i]-'0'</code> 是二进制累加公式。</div>
+  <div class="notes">
+    套路 9 进制转换。
+    第 1 步：gets 读入，检查长度不超 9。
+    第 2 步：检查每个字符是不是 0 或 1，用 &amp;&amp;。参考答案写成 || 是错的。
+    第 3 步：二进制累加 n=n*2+s[i]-'0'，最后 %o 直接输出八进制。
+    现场跟着敲：读入、检查、累加、输出。
+  </div>
+</section>
+
+<section class="slide kb" data-title="未考算法">
+  <div class="stag">阶段 3 · <b>编程题 · 了解即可</b></div>
+  <h2 class="h2">参考/作业没考过的算法（了解即可）</h2>
+  <p class="sub">每一种理解大致思想即可</p>
+  <table class="ops">
+    <tr><th>算法</th><th>一句话思想</th></tr>
+    <tr><td>冒泡排序</td><td>相邻比较，大的往后冒，n-1 趟</td></tr>
+    <tr><td>选择排序</td><td>每趟找最小的放到前面</td></tr>
+    <tr><td>素数</td><td>试除到 √n：<code>for(j=2;j*j&lt;=n;j++)</code></td></tr>
+    <tr><td>闰年</td><td><code>(y%4==0&amp;&amp;y%100!=0)||y%400==0</code></td></tr>
+    <tr><td>阶乘</td><td><code>s=1; for(i=1;i&lt;=n;i++) s*=i;</code></td></tr>
+    <tr><td>斐波那契</td><td><code>f1=1,f2=1; f3=f1+f2;</code> 递推</td></tr>
+    <tr><td>矩阵操作</td><td>双重循环按行列，转置=行列下标互换</td></tr>
+  </table>
+  <div class="notes">
+    这些算法真题池里没考过，了解思想即可，遇到能写框架就行。
+    冒泡和选择是排序；素数试除到根号 n；闰年判断公式；阶乘累乘；斐波那契递推；矩阵双重循环。
+    不展开讲，防止在没考的内容上花时间。
+  </div>
+</section>
+
+<section class="slide kb" data-title="示例题">
+  <div class="stag">阶段 3 · <b>编程题 · 示例练习</b></div>
+  <h2 class="h2">示例练习题</h2>
+  <p class="sub">先想：这题属于哪个套路？再动手，写完对照参考解和输出。</p>
+  <div class="quiz lg" data-correct="">
+    <p class="quiz-q"><span class="qnum">示例 1</span>输出所有三位"水仙花数"（各位数字的立方和等于本身），如 153。（提示：套路 1 数位拆分）</p>
+    <span class="quiz-cta">查看参考解</span>
+    <div class="quiz-ans"><b>参考解</b>（套路 1 数位拆分）：
+    <div class="code"><span class="k">int</span> num, a, b, c;
+<span class="k">for</span>(num=<span class="n">100</span>; num&lt;=<span class="n">999</span>; num++){
+    a=num/<span class="n">100</span>;  b=num/<span class="n">10</span>%<span class="n">10</span>;  c=num%<span class="n">10</span>;
+    <span class="k">if</span>(num == a*a*a + b*b*b + c*c*c)
+        <span class="k">printf</span>(<span class="s">"%d "</span>, num);
+}</div>
+    <span class="out-label">输出</span>153 370 371 407</div>
+  </div>
+  <div class="quiz lg" data-correct="">
+    <p class="quiz-q"><span class="qnum">示例 2</span>输入三个整数，按从小到大输出。（提示：套路 4 指针 + 交换函数）</p>
+    <span class="quiz-cta">查看参考解</span>
+    <div class="quiz-ans"><b>参考解</b>（套路 4 指针交换）：
+    <div class="code"><span class="k">void</span> <span class="t">exchange</span>(<span class="k">int</span> *px, <span class="k">int</span> *py){
+    <span class="k">int</span> t=*px;  *px=*py;  *py=t;
+}
+<span class="k">int</span> <span class="t">main</span>(){
+    <span class="k">int</span> a,b,c;
+    <span class="k">scanf</span>(<span class="s">"%d%d%d"</span>, &amp;a,&amp;b,&amp;c);
+    <span class="k">if</span>(a&gt;b) <span class="t">exchange</span>(&amp;a,&amp;b);
+    <span class="k">if</span>(a&gt;c) <span class="t">exchange</span>(&amp;a,&amp;c);
+    <span class="k">if</span>(b&gt;c) <span class="t">exchange</span>(&amp;b,&amp;c);
+    <span class="k">printf</span>(<span class="s">"%d %d %d\n"</span>, a,b,c);
+}</div>
+    <span class="out-label">输出</span>输入 3 2 1 → 1 2 3</div>
+  </div>
+  <div class="notes">
+    两道示例题，先让学生自己识别套路再写。
+    示例 1 水仙花数是套路 1 数位拆分，for 100 到 999，拆百十个位，判断立方和。
+    示例 2 三数排序用套路 4 的指针交换函数，三趟 if 交换。
+    点开参考解对照，重点看结构和套路怎么套。
+  </div>
+</section>
+
+<section class="slide kb" data-title="编程自查">
+  <div class="stag">阶段 3 · <b>编程题 · 收尾</b></div>
+  <h2 class="h2">交代码前自查</h2>
+  <div class="grid g2 mt-m">
+    <div class="card card-accent"><h4>输入输出</h4><p class="dim" style="margin-top:6px">scanf 漏 <code>&amp;</code>？格式符和变量对应？<code>%d/%f/%s</code> 用对？输出格式（%.2f、空格、换行）符合题目要求？</p></div>
+    <div class="card card-accent"><h4>语法与边界</h4><p class="dim" style="margin-top:6px">语句分号；<code>==</code> 写成 <code>=</code>；数组越界；中英文符号混用（引号/分号）；函数调用前声明；字符串结尾 <code>'\0'</code>；整除丢小数（<code>(double)</code>）。</p></div>
+  </div>
+  <div class="memo mt-l"><b>识别题型口诀：</b>拆位→套路1 · 极值平均→套路2 · 辗转除→套路3 · 带回多个值→套路4 · 字符串→套路5 · 分档→套路6 · 逆序→套路7 · 图形→套路8 · 进制→套路9。</div>
+  <div class="notes">
+    交代码前按这两张卡自查。
+    输入输出：漏没漏 &amp;、格式符对不对、输出格式符不符合要求。
+    语法边界：分号、== 和 =、数组越界、中英文符号、函数声明、'\0'、整除 double 强转。
+    识别题型口诀过一遍，每道编程题先套套路。
+  </div>
+</section>
+
 </div>
 <script>
 (function(){
@@ -1763,6 +2185,23 @@ fp=<span class="t">fopen</span>(<span class="s">"d1.dat"</span>,<span class="s">
       q.querySelectorAll('.quiz-opt').forEach(function(o){
         if(o.getAttribute('data-k') === letter) o.classList.add('is-correct');
       });
+    });
+  });
+
+  /* 编程题：代码分段逐步展开 */
+  document.querySelectorAll('.steps').forEach(function(s){
+    var steps = Array.prototype.slice.call(s.querySelectorAll('.step'));
+    var btn = s.querySelector('.step-next');
+    var out = s.querySelector('.steps-out');
+    var i = 0;
+    if (steps[0]) steps[0].classList.add('on');
+    if (btn) btn.addEventListener('click', function(){
+      i++;
+      if (steps[i]) steps[i].classList.add('on');
+      if (!steps[i + 1]) {
+        if (out) out.classList.add('on');
+        btn.style.display = 'none';
+      }
     });
   });
 })();

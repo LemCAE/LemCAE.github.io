@@ -83,3 +83,19 @@ table.trace tr:nth-child(even) td{background:var(--surface-2)}
 
 /* 简单一句话题（不占两列选项） */
 .quiz.simple .quiz-opts{grid-template-columns:1fr}
+
+/* 编程题：代码分段逐步展开 */
+.steps{position:relative}
+.steps .step{display:none}
+.steps .step.on{display:block}
+.steps .step .code{margin:0 0 8px}
+.steps .step.on:last-of-type .code{margin:0}
+.steps .step-cap{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-size:13px;font-weight:700;color:var(--accent)}
+.steps .step-cap::before{content:"▸ "}
+.steps-out{display:none;margin-top:10px;font-size:15px;line-height:1.6;color:var(--text-1)}
+.steps-out.on{display:block}
+.out-label{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:#859900;border-radius:6px;padding:1px 8px;margin-right:6px}
+.step-next{display:inline-block;margin-top:8px;padding:6px 18px;border:1px solid var(--border);border-radius:999px;
+  background:var(--surface-2);color:var(--accent);font-size:13px;font-weight:700;cursor:pointer;transition:background .2s var(--ease)}
+.step-next:hover{background:var(--surface)}
+.step-next:focus{outline:none}
