@@ -1,0 +1,17 @@
+# Publish only the site's public paths.
+/*
+!/index.html
+!/404.html
+!/about/
+!/assets/
+!/C-ppt/
+!/data/
+!/img/
+!/knowledge/
+!/lab/
+!/notes/
+
+# Keep development files out of the deployed assets.
+/lab/README.md
+/lab/tests/fixtures/
+/lab/tests/*.mjs
