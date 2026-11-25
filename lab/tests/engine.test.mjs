@@ -15,24 +15,43 @@ const readingTest = prepareTest(reading);
 
 // Each route follows the behavior described in that type's report.
 const routes = {
-  simple: 'bbcaddadabadccabda',
-  cantilever: 'acbbcaaacaaabababc',
-  continuous: 'bbcdabcbabbbdaabaa',
-  frame: 'ccdacaaadaccccccbb',
-  truss: 'bbcdabcabcbcababaa',
-  cable: 'bacdccbbabbbbaddcd',
-  arch: 'cabbbabdababbadaab',
-  column: 'dddbddddddddcdcddd'
+  simple: 'cbdbbacacdcbbbbb',
+  cantilever: 'dbabbacdaabbdbdb',
+  continuous: 'badadaacbbddbaaa',
+  frame: 'cccdccdcccbacbcc',
+  truss: 'bacdcbacdbddcaaa',
+  cable: 'bdbaadbbdbccacaa',
+  arch: 'adbcaabdbbccdddd',
+  column: 'ccabccdbccabbccc'
 };
 
 test('the catalog loads the mechanics test and all its illustrations', async () => {
   assert.deepEqual(validateManifest(manifest), [structures.id]);
-  assert.equal(structures.questions.length, 18);
+  assert.equal(structures.questions.length, 16);
   assert.ok(structures.questions.every(({ options }) => options.length === 4));
   const art = [structures.cover, ...structures.types.map(({ image }) => image)];
   await Promise.all(art.map(({ src }) => access(new URL(`../${src}`, import.meta.url))));
   assert.throws(() => validateManifest({ tests: ['structures', 'structures'] }), /tests/);
   assert.throws(() => validateManifest({ tests: ['../structures'] }), /tests/);
+});
+
+test('uniformly sampled structures answers reach all eight types without a dominant result', () => {
+  const sampleSize = 20000;
+  const counts = new Map(structures.types.map(({ id }) => [id, 0]));
+  // Seeded sampling keeps this coverage check reproducible.
+  let seed = 0x5eed1234;
+  for (let sample = 0; sample < sampleSize; sample += 1) {
+    const answers = structures.questions.map(({ options }) => {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      return options[Math.floor(seed / 2 ** 32 * options.length)].id;
+    });
+    const { type } = scoreTest(structureTest, answers);
+    counts.set(type.id, counts.get(type.id) + 1);
+  }
+  for (const [typeId, count] of counts) {
+    const share = count / sampleSize;
+    assert.ok(share >= 0.05 && share <= 0.22, `${typeId}: ${share}`);
+  }
 });
 
 test('all eight structures have representative routes with reproducible results', () => {
@@ -98,4 +117,14 @@ test('progress retains edited answers and question position across reloads', () 
   assert.deepEqual(restoreProgress(reading, { ...saved, version: 'old' }),
     { answers: [], index: 0, complete: false });
   assert.deepEqual(restoreProgress(reading, null), { answers: [], index: 0, complete: false });
+});
+
+test('the rewritten structures test starts fresh for both kinds of version 1 progress', () => {
+  for (const saved of [
+    { answers: ['a', 'b'], index: 2, complete: false },
+    { answers: Array(18).fill('a'), index: 17, complete: true }
+  ]) {
+    assert.deepEqual(restoreProgress(structures, { ...saved, version: '1.0.0' }),
+      { answers: [], index: 0, complete: false });
+  }
 });
