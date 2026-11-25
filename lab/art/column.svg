@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="300" viewBox="0 0 480 300" role="img" aria-labelledby="title description">
+  <title id="title">临界压杆</title>
+  <desc id="description">细长杆的两端为铰接，顶端承受轴向压力，虚线描绘杆身向一侧的屈曲形状。</desc>
+
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#c5ded1" stroke-width="1" opacity=".75"/>
+    </pattern>
+    <marker id="load" viewBox="0 0 8 8" markerWidth="7" markerHeight="7" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4 0 8 2 4Z" fill="#b9482e"/>
+    </marker>
+    <g id="ground" stroke-width="1.5">
+      <path d="M-23 0H23M-17 0l-5 7M-7 0l-5 7M3 0l-5 7M13 0l-5 7M23 0l-5 7"/>
+    </g>
+    <g id="pin" stroke-width="2">
+      <path d="M0 1l-13 22h26Z" fill="#e7f3ed"/>
+      <use href="#ground" y="23"/>
+      <circle r="4.5" fill="#e7f3ed"/>
+    </g>
+    <style>
+      .structure { fill: none; stroke: #183d34; stroke-linecap: round; stroke-linejoin: round }
+      .member { stroke-width: 5 }
+      .reference { fill: none; stroke: #548273; stroke-width: 2; stroke-dasharray: 6 6 }
+      .force { fill: none; stroke: #b9482e; stroke-width: 2; marker-end: url(#load) }
+      .force-label { fill: #a33b26; font: italic 15px ui-monospace, monospace }
+    </style>
+  </defs>
+
+  <rect width="480" height="300" fill="#e7f3ed"/>
+  <rect x="24" y="24" width="432" height="252" rx="3" fill="url(#grid)" stroke="#b3d3c3"/>
+  <path d="M24 38V24h14M442 24h14v14M456 262v14h-14M38 276H24v-14M234 24h12M240 18v12M234 276h12M240 270v12"
+        fill="none" stroke="#739a8b" stroke-width="1.3"/>
+  <path class="reference" d="M240 91C305 125 305 179 240 213"/>
+  <g class="structure">
+    <path class="member" d="M240 91v122"/>
+    <path d="M219 76v34m42-34v34M219 78l-6 6m6 4l-6 6m6 4l-6 6m48-26l6 6m-6 4l6 6m-6 4l6 6" stroke-width="1.6"/>
+    <rect x="222" y="84" width="36" height="14" rx="2" fill="#cfe7da" stroke-width="1.8"/>
+    <circle cx="240" cy="91" r="5" fill="#e7f3ed" stroke-width="2"/>
+    <use href="#pin" x="240" y="213"/>
+  </g>
+  <path class="force" d="M240 44v35"/>
+  <text class="force-label" x="251" y="55">P</text>
+</svg>

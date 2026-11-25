@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非正常人类研究中心 · LemCAE</title>
+  <meta name="description" content="以严谨的工程技术，研究毫无意义的问题。LemCAE 的趣味人格测试实验室。">
+  <link rel="icon" href="../img/favicon.ico">
+  <script>
+    try {
+      const saved = localStorage.getItem('lemcae-theme');
+      document.documentElement.dataset.theme = saved === 'light' || saved === 'dark'
+        ? saved : (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch {}
+  </script>
+  <link rel="stylesheet" href="../assets/home.css">
+  <link rel="stylesheet" href="./lab.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <div class="page-shell lab-shell">
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="返回 LemCAE 首页"><span class="brand-dot" aria-hidden="true"></span>lemcae.github.io</a>
+      <nav class="topbar-actions" aria-label="研究中心">
+        <a class="icon-btn" href="./">测试大厅</a>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="切换深浅色主题">浅色模式</button>
+      </nav>
+    </header>
+    <main id="lab" aria-busy="true">
+      <p class="card" role="status">正在读取测试档案…</p>
+      <noscript><p>请启用 JavaScript 后使用测试。</p></noscript>
+    </main>
+    <footer class="site-footer lab-footer">
+      <span>© 2026 LemCAE · 非正常人类研究中心</span>
+      <span>答题记录仅存于当前浏览器</span>
+    </footer>
+  </div>
+</body>
+</html>
