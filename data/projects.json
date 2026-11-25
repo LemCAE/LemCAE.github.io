@@ -35,6 +35,18 @@
       "featured": false,
       "accent": "amber",
       "highlights": ["题库练习", "错题本 / 收藏", "速背笔记"]
+    },
+    {
+      "id": "personality-lab",
+      "title": "非正常人类研究中心",
+      "subtitle": "以严谨的工程技术，研究毫无意义的问题",
+      "description": "趣味人格测试实验室。首项实验《测测你是哪种力学结构？》已开放，完成答题即可领取结构人格报告。",
+      "url": "./lab/",
+      "tag": "趣味实验",
+      "year": "2026",
+      "featured": false,
+      "accent": "emerald",
+      "highlights": ["原创力学插图", "PNG 报告"]
     }
   ],
   "notes": [

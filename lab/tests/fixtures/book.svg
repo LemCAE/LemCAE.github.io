@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="150" viewBox="0 0 240 150">
+  <title>打开的书</title>
+  <rect width="240" height="150" fill="#fbefd9"/>
+  <path d="M120 55Q89 32 48 48v62q43-12 72 12 29-24 72-12V48q-41-16-72 7v67" fill="none" stroke="#8e4d18" stroke-width="4" stroke-linejoin="round"/>
+</svg>

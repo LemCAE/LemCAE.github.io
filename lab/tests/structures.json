@@ -1,0 +1,559 @@
+{
+  "id": "structures",
+  "title": "测测你是哪种力学结构？",
+  "description": "从赶作业、临时改计划和小组合作等日常场景，找一找你的行为和哪种力学结构最像。",
+  "version": "1.0.0",
+  "minutes": 4,
+  "intro": [
+    "任务一多，你是找几个支点分担，还是自己伸手把压力接过来？这份问卷借八种力学结构，研究一下我们平时怎么做决定。",
+    "没有力学题。按你平常最可能采取的做法选，答完领取一份结构人格报告。"
+  ],
+  "cover": {
+    "src": "art/cover.svg",
+    "alt": "带载荷与支座标记的桁架图纸，附悬臂梁与拱结构草图"
+  },
+  "theme": {
+    "dark": "#71e0b0",
+    "light": "#0c684e"
+  },
+  "dimensions": [
+    {
+      "id": "independence",
+      "label": "独立程度",
+      "low": "先和别人商量",
+      "high": "先独自推进"
+    },
+    {
+      "id": "constraints",
+      "label": "约束需求",
+      "low": "把做法留给现场",
+      "high": "先有明确规则"
+    },
+    {
+      "id": "distribution",
+      "label": "载荷分散",
+      "low": "集中在一处处理",
+      "high": "分给多个支点"
+    },
+    {
+      "id": "adaptability",
+      "label": "形变适应性",
+      "low": "偏好原有节奏",
+      "high": "愿意调整路线"
+    },
+    {
+      "id": "response",
+      "label": "突发响应",
+      "low": "留出缓冲再处理",
+      "high": "先采取行动"
+    }
+  ],
+  "matching": {
+    "method": "weighted-distance"
+  },
+  "questions": [
+    {
+      "id": "deadline",
+      "prompt": "作业还有三小时截止，你刚发现进度只有一半。你会先做什么？",
+      "options": [
+        {"id": "a", "text": "关掉群聊，估一下剩余工作量，独自连续施工。", "weights": {"independence": 2, "constraints": 1, "distribution": -2, "adaptability": -1, "response": 2}},
+        {"id": "b", "text": "约同样卡住的同学对思路，最后各交各的。", "weights": {"independence": -1, "distribution": 1, "adaptability": 1, "response": 1}},
+        {"id": "c", "text": "翻一遍评分要求，先做分值最高的部分。", "weights": {"independence": 1, "constraints": 1, "distribution": -1, "adaptability": 2, "response": 1}},
+        {"id": "d", "text": "去接杯水，给大脑十分钟接受这个事实。", "weights": {"constraints": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "trip",
+      "prompt": "周末出游当天，原定目的地因为下雨关门了。你的群消息是？",
+      "options": [
+        {"id": "a", "text": "“都到车站了，挑一条还在运行的线，到了再说。”", "weights": {"constraints": -2, "adaptability": 2, "response": 2}},
+        {"id": "b", "text": "“发一下大家的位置，按距离和想吃的东西换个集合点。”", "weights": {"independence": -1, "distribution": 2, "adaptability": 1, "response": 2}},
+        {"id": "c", "text": "“备用清单第二项有室内展。要不按这个走？”", "weights": {"independence": 1, "constraints": 2, "adaptability": -1, "response": 1}},
+        {"id": "d", "text": "“我还没从早起缓过来，过会儿再看去哪。”", "weights": {"distribution": -1, "adaptability": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "slides",
+      "prompt": "第一次见面的组员要合做一份汇报。你通常会怎么开局？",
+      "options": [
+        {"id": "a", "text": "先问谁擅长什么，定好各人交稿的接口。", "weights": {"independence": -1, "constraints": 1, "distribution": 2, "response": 1}},
+        {"id": "b", "text": "先搭完整骨架，自己做一版给大家挑毛病。", "weights": {"independence": 2, "constraints": 1, "distribution": -1, "response": 1}},
+        {"id": "c", "text": "先聊聊大家最想讲哪段，聊出点东西再定框架。", "weights": {"independence": -1, "constraints": -2, "distribution": 1, "adaptability": 2}},
+        {"id": "d", "text": "先约定截止时间和命名规则。上次的“最终版真的最终”还在我电脑里。", "weights": {"constraints": 2, "distribution": 1, "adaptability": -1}}
+      ]
+    },
+    {
+      "id": "evening",
+      "prompt": "难得空出一个晚上，你打算怎么过？",
+      "options": [
+        {"id": "a", "text": "订好一家店，只约一个好沟通的人。", "weights": {"constraints": 1}},
+        {"id": "b", "text": "独处三小时，把搁置很久的爱好捡起来。", "weights": {"independence": 2, "distribution": -1, "adaptability": -1}},
+        {"id": "c", "text": "出去随便走走，哪里还亮着就去哪。", "weights": {"independence": 1, "constraints": -2, "distribution": -1, "adaptability": 2}},
+        {"id": "d", "text": "问熟人都有啥安排，有局就顺路加入。", "weights": {"independence": -2, "constraints": -1, "distribution": 1, "adaptability": 1}}
+      ]
+    },
+    {
+      "id": "projector",
+      "prompt": "上台前五分钟，投影仪吃掉了你的画面。你怎么办？",
+      "options": [
+        {"id": "a", "text": "请同学查接口，另一位发讲义，我先接住现场。", "weights": {"distribution": 2, "adaptability": 1, "response": 2}},
+        {"id": "b", "text": "直接用白板画关键图，让故障成为开场白。", "weights": {"independence": 1, "constraints": -1, "adaptability": 2, "response": 2}},
+        {"id": "c", "text": "拿出提前存好的 PDF 和转接头，依次排查。", "weights": {"independence": 1, "constraints": 2, "distribution": -1, "response": 1}},
+        {"id": "d", "text": "先请主持人交换顺序，争取几分钟把话想清楚。", "weights": {"independence": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "roommate",
+      "prompt": "室友这周连续几次深夜开麦。你会怎么处理？",
+      "options": [
+        {"id": "a", "text": "把自己的作息和底线说清，先一对一谈谈。", "weights": {"independence": 2, "distribution": -1, "response": 1}},
+        {"id": "b", "text": "提议一起约定安静时段，给偶尔的例外留个说法。", "weights": {"constraints": 2, "distribution": 2}},
+        {"id": "c", "text": "看他什么时候结束，先把我自己的安排往旁边挪一挪。", "weights": {"constraints": -2, "distribution": -1, "adaptability": 2, "response": -1}},
+        {"id": "d", "text": "找另一位室友确认情况，想好怎么开口再约时间聊。", "weights": {"independence": -1, "constraints": 1, "distribution": 1, "response": -1}}
+      ]
+    },
+    {
+      "id": "queue",
+      "prompt": "食堂的老窗口排起长队，你还有半小时要回去。怎么选？",
+      "options": [
+        {"id": "a", "text": "今天就想吃这个，算一下时间，够就等。", "weights": {"independence": 1, "constraints": 1, "distribution": -1, "adaptability": -1}},
+        {"id": "b", "text": "逛到哪儿人少就吃哪儿，午饭也可以开盲盒。", "weights": {"constraints": -2, "adaptability": 2, "response": 1}},
+        {"id": "c", "text": "跟同伴兵分两路，在同一区域找合适的窗口。", "weights": {"independence": -1, "distribution": 2, "adaptability": 1, "response": 1}},
+        {"id": "d", "text": "先坐下喝点水，给自己留几分钟，再决定排队或换店。", "weights": {"constraints": -1, "response": -1}}
+      ]
+    },
+    {
+      "id": "free-slot",
+      "prompt": "一场选修课临时取消，白捡的两小时你会怎么用？",
+      "options": [
+        {"id": "a", "text": "把晚上的一项任务提前，晚上按原计划收工。", "weights": {"independence": 1, "constraints": 2, "adaptability": -1, "response": 1}},
+        {"id": "b", "text": "约同样没课的人吃点东西，顺便问问他们最近怎么样。", "weights": {"independence": -1, "constraints": -1, "distribution": 1, "adaptability": 1}},
+        {"id": "c", "text": "把电脑合上，今天终于有一段不用解释用途的时间了。", "weights": {"independence": 1, "constraints": -2, "distribution": -1, "response": -2}},
+        {"id": "d", "text": "挑件最容易被忘掉的小事现场解决，剩下的留白。", "weights": {"independence": 1, "distribution": -1, "adaptability": 2, "response": 1}}
+      ]
+    },
+    {
+      "id": "shift",
+      "prompt": "活动当天有人临时来不了，现场还缺一个岗位。你会怎么安排？",
+      "options": [
+        {"id": "a", "text": "和负责人确认最少要做哪些事，现场调整流程。", "weights": {"constraints": 1, "distribution": 1, "adaptability": 2, "response": 2}},
+        {"id": "b", "text": "把岗位拆成几段，请不同时段有空的人分别顶上。", "weights": {"independence": -1, "constraints": 1, "distribution": 2, "response": 1}},
+        {"id": "c", "text": "自己顶这一个，原来的活挤挤还能做完。", "weights": {"independence": 2, "distribution": -2, "adaptability": -1, "response": 2}},
+        {"id": "d", "text": "先把缺口报上去，等负责人说清优先级再接活。", "weights": {"constraints": 2, "adaptability": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "directions",
+      "prompt": "你带朋友去一家新店，手机导航突然失灵。你会？",
+      "options": [
+        {"id": "a", "text": "沿原路回到认识的地标，再看看下一段怎么走。", "weights": {"independence": 1, "constraints": 1, "distribution": -1, "adaptability": -1}},
+        {"id": "b", "text": "把目的地当作可选项。那条街闻起来挺香，先过去。", "weights": {"constraints": -2, "adaptability": 2, "response": 1}},
+        {"id": "c", "text": "我看路牌，请朋友问一问附近的人，信息对上再走。", "weights": {"independence": -1, "distribution": 2, "adaptability": 1, "response": 1}},
+        {"id": "d", "text": "找个能坐的地方，等手机恢复，也让大家歇一歇。", "weights": {"adaptability": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "critique",
+      "prompt": "你的方案在讨论会上被指出有明显漏洞。散会后你先？",
+      "options": [
+        {"id": "a", "text": "独自复盘，把那个漏洞变成下一版最有说服力的部分。", "weights": {"independence": 2, "distribution": -1, "adaptability": 1, "response": 2}},
+        {"id": "b", "text": "约提意见的人聊十分钟，找找哪一条最值得改。", "weights": {"independence": -1, "distribution": 1, "adaptability": 1, "response": 1}},
+        {"id": "c", "text": "把任务条件、反馈和变更都记下来，划出修改范围。", "weights": {"independence": 1, "constraints": 2}},
+        {"id": "d", "text": "先把文档关了，等过了“我就知道”那一阵再打开。", "weights": {"constraints": -1, "distribution": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "messaging",
+      "prompt": "同一个周六突然出现三个邀约，你最可能怎么回复？",
+      "options": [
+        {"id": "a", "text": "选最想去的一个，剩下两个约改天。", "weights": {"independence": 2, "distribution": -1, "response": 1}},
+        {"id": "b", "text": "看地点和时段，把能顺路的两件接起来。", "weights": {"independence": 1, "adaptability": 2, "response": 1}},
+        {"id": "c", "text": "分别问清谁一定要到、谁随意，再把冲突说开。", "weights": {"constraints": 1, "distribution": 2, "response": 1}},
+        {"id": "d", "text": "先不答应任何一个，给自己留到明天早上再选。", "weights": {"distribution": -1, "adaptability": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "equipment",
+      "prompt": "打算在宿舍添个大家都会用的小电器。你最在意什么？",
+      "options": [
+        {"id": "a", "text": "共用的东西先聊清楚付钱怎么分、坏了怎么处理。", "weights": {"constraints": 2, "distribution": 2, "adaptability": -1}},
+        {"id": "b", "text": "就买最省事的款，用一段时间再看怎么调。", "weights": {"independence": 1, "constraints": -1, "distribution": -1, "adaptability": 2, "response": 1}},
+        {"id": "c", "text": "先借一个试用，记下真正常用的功能。", "weights": {"independence": 1, "constraints": 1, "adaptability": 1}},
+        {"id": "d", "text": "能有一个人负责收拾就行，其他规则边用边说。", "weights": {"independence": -1, "constraints": -1, "adaptability": 1}}
+      ]
+    },
+    {
+      "id": "game",
+      "prompt": "和朋友联机时，原定战术两分钟就被对面打乱了。你会？",
+      "options": [
+        {"id": "a", "text": "边打边换套路，找地图上现在可以利用的东西。", "weights": {"independence": 1, "constraints": -1, "adaptability": 2, "response": 2}},
+        {"id": "b", "text": "重新喊一遍各人的位置，给能推进的人创造机会。", "weights": {"distribution": 2, "response": 2}},
+        {"id": "c", "text": "退到安全点，按照大家熟悉的预备战术重来。", "weights": {"constraints": 2, "distribution": 1, "adaptability": -1}},
+        {"id": "d", "text": "下一把再认真。这一把先看看能不能保住面子。", "weights": {"independence": 1, "constraints": -1, "distribution": -1, "adaptability": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "club",
+      "prompt": "社团临时要办一场小活动，预算只有预期的一半。你会优先做什么？",
+      "options": [
+        {"id": "a", "text": "找能借物料的场地和人，把资源缺口分开补。", "weights": {"independence": -1, "distribution": 2, "adaptability": 1, "response": 1}},
+        {"id": "b", "text": "把活动缩成一个最值得保留的环节，我来先做掉。", "weights": {"independence": 2, "distribution": -1, "adaptability": 1, "response": 1}},
+        {"id": "c", "text": "重做支出表，为现场还有变数留一笔钱。", "weights": {"independence": 1, "constraints": 2}},
+        {"id": "d", "text": "换成不用租场地的小活动，看看现成条件能带来什么玩法。", "weights": {"constraints": -2, "adaptability": 2, "response": 2}}
+      ]
+    },
+    {
+      "id": "move",
+      "prompt": "朋友搬宿舍，五箱东西正好要上下三层楼。你最自然的动作是？",
+      "options": [
+        {"id": "a", "text": "先拎自己拿得动的那箱，动起来再说。", "weights": {"independence": 2, "constraints": -1, "distribution": -1, "response": 2}},
+        {"id": "b", "text": "和楼上楼下的人接个力，让没人反复空跑。", "weights": {"distribution": 2, "adaptability": 1, "response": 1}},
+        {"id": "c", "text": "先分重箱、轻箱和易碎品，规定一下堆放处。", "weights": {"constraints": 2, "distribution": 1, "adaptability": -1}},
+        {"id": "d", "text": "等大家把动线理顺，我再去补那个没人站的位置。", "weights": {"independence": -1, "constraints": 1, "adaptability": 1, "response": -1}}
+      ]
+    },
+    {
+      "id": "stack",
+      "prompt": "你本来只想安静交一份作业，突然又收到两条“能帮一下吗”。你会？",
+      "options": [
+        {"id": "a", "text": "给两个人各介绍一位合适的人，自己把作业交掉。", "weights": {"independence": 1, "distribution": 2, "adaptability": 1, "response": 1}},
+        {"id": "b", "text": "先说好我能帮到哪里，其余时间按自己的表走。", "weights": {"independence": 2, "constraints": 2, "distribution": -1, "response": 1}},
+        {"id": "c", "text": "看哪件事能顺手带过去，只接最容易嵌进来的那个。", "weights": {"independence": 1, "constraints": -1, "adaptability": 2, "response": 1}},
+        {"id": "d", "text": "先给两人报个晚点回复的时间，去找回被打断前的思路。", "weights": {"constraints": 1, "distribution": -1, "adaptability": -1, "response": -2}}
+      ]
+    },
+    {
+      "id": "rain",
+      "prompt": "出门才发现雨比想象中大，鞋袜都湿了。接下来你会？",
+      "options": [
+        {"id": "a", "text": "找地方擦一擦，通知同行的人晚一点见。", "weights": {"distribution": 1, "response": -1}},
+        {"id": "b", "text": "查一下有顶棚的路，把方向稍微改一改。", "weights": {"independence": 1, "adaptability": 2, "response": 1}},
+        {"id": "c", "text": "走原路线赶到，再想办法解决鞋袜的问题。", "weights": {"independence": 2, "distribution": -1, "adaptability": -1, "response": 2}},
+        {"id": "d", "text": "要是没有急事，就把户外计划改成一场宿舍电影。", "weights": {"constraints": -1, "distribution": -1, "adaptability": 1, "response": -1}}
+      ]
+    }
+  ],
+  "types": [
+    {
+      "id": "simple",
+      "name": "简支梁型",
+      "code": "PIN–ROLLER",
+      "target": {
+        "independence": 47,
+        "constraints": 48,
+        "distribution": 50,
+        "adaptability": 51,
+        "response": 51
+      },
+      "summary": "给我两个合适的落脚点，其余空间我自己留着。",
+      "description": "你擅长在少量明确条件下把事情做起来。简支梁一端铰支、一端滚支，支座能提供所需反力，梁端也能转动。你也喜欢有约定但留有余地的合作：有人接应，有地方伸展，事情变了就去调整，不必把彼此钉死在原地。",
+      "image": {
+        "src": "art/simple.svg",
+        "alt": "两端支承、跨中受力并下挠的梁"
+      },
+      "traits": [
+        "好商量",
+        "适度支援",
+        "边界清楚"
+      ],
+      "quote": "给我两个支点吧。第三个可以留给别人。",
+      "sections": {
+        "strengths": [
+          "在规则不多的环境里也容易进入状态。",
+          "知道什么时候需要借力，也愿意让别人保留空间。"
+        ],
+        "risks": "关键支点失约时，原本好商量的事会突然悬空。平时对“应该会有人接住吧”这类承诺可能太乐观。",
+        "case": "和新同桌第一次合作：两分钟说好谁找资料、谁整理，然后各自发挥。",
+        "maintenance": "把最重要的两个约定说清楚，尤其是谁来接、什么时候接。"
+      },
+      "partner": {
+        "typeId": "continuous",
+        "reason": "连续梁很会找额外支点。遇到跨两周的大任务，你们可以一起把接力点安排好。"
+      }
+    },
+    {
+      "id": "cantilever",
+      "name": "悬臂梁型",
+      "code": "CANTILEVER",
+      "target": {
+        "independence": 70,
+        "constraints": 50,
+        "distribution": 36,
+        "adaptability": 45,
+        "response": 69
+      },
+      "summary": "只要有一个可靠的固定端，就敢把手伸到大家够不着的地方。",
+      "description": "你乐于从自己能掌控的部分开始，常常伸手接过别人一时接不住的事。悬臂梁靠固定端约束住平移和转动，自由端有发挥空间；端部受横向载荷时，固定端要承担最大的弯矩。久而久之，大家记得你伸出去有多远，却很少问你固定端今天还好吗。",
+      "image": {
+        "src": "art/cantilever.svg",
+        "alt": "左端固定、自由端受力的悬臂梁"
+      },
+      "traits": [
+        "独立推进",
+        "主动接手",
+        "责任感强"
+      ],
+      "quote": "所有载荷，由我一人承担。……这句话先别发到群里。",
+      "sections": {
+        "strengths": [
+          "没人拍板时也能迈出第一步。",
+          "责任到了手上，就知道下一步往哪推进。"
+        ],
+        "risks": "自由端接得越多，固定端的弯矩就越大。再加一个“顺手”的活，最先提醒你的可能是周日的闹钟。",
+        "case": "组员失联后的团队作业。群里最后一条“收到”来自三天前。",
+        "maintenance": "定期把待办摊开给别人看。能借外部支撑时，给自己留一个。"
+      },
+      "partner": {
+        "typeId": "truss",
+        "reason": "桁架会先问任务能拆成几段。你负责发车，桁架负责提醒大家一起上车。"
+      }
+    },
+    {
+      "id": "continuous",
+      "name": "连续梁型",
+      "code": "MULTI-SPAN",
+      "target": {
+        "independence": 48,
+        "constraints": 46,
+        "distribution": 71,
+        "adaptability": 61,
+        "response": 63
+      },
+      "summary": "压力过来时，你会看看下一跨还有谁能接一下。",
+      "description": "你擅长把不同人的时间、资源和能力串起来。连续梁跨过多个支座，载荷会通过连续的梁体在各支座间分配。你常做的就是把一件原本压在同一个人身上的事分几站送到终点，还顺手确认上一站有没有收到回执。",
+      "image": {
+        "src": "art/continuous.svg",
+        "alt": "连续跨过三个支座的双跨梁"
+      },
+      "traits": [
+        "善于串联",
+        "调配资源",
+        "兼顾多方"
+      ],
+      "quote": "你先撑这一段，下一段我已经和人说好了。",
+      "sections": {
+        "strengths": [
+          "能看见好几方手边的资源，并安排合理的交接。",
+          "情况变化时，知道可以换哪个支援点。"
+        ],
+        "risks": "一个支座下沉，其他位置的内力也会跟着变。你可能为了照顾所有人，默默替每一段补上差额。",
+        "case": "演出后台三件事同时掉线，最后发现调设备、借场地和找人的消息都经你转发。",
+        "maintenance": "每次分派任务时，把自己也当作一个有承载上限的支点。"
+      },
+      "partner": {
+        "typeId": "simple",
+        "reason": "简支梁善于把约定说得简单，你负责把多个约定连成一条能走通的路。"
+      }
+    },
+    {
+      "id": "frame",
+      "name": "超静定刚架型",
+      "code": "REDUNDANT FRAME",
+      "target": {
+        "independence": 58,
+        "constraints": 69,
+        "distribution": 57,
+        "adaptability": 41,
+        "response": 55
+      },
+      "summary": "你的备用计划也有自己的备用计划。",
+      "description": "明确的接口、余量和备份会让你放心。刚架的刚接节点可以传递弯矩；有冗余约束的刚架仅靠静力平衡方程还算不全，还要考虑各部分如何一起变形。你的计划也擅长把彼此牵连的事放在一张表里，防止某个小意外一路影响到周五。",
+      "image": {
+        "src": "art/frame.svg",
+        "alt": "柱脚固定、承受水平和竖向载荷的两跨刚架"
+      },
+      "traits": [
+        "规则清晰",
+        "常备预案",
+        "重视余量"
+      ],
+      "quote": "都带了。两种接头、三份备份，还有纸质签到表。",
+      "sections": {
+        "strengths": [
+          "提前说清规则和职责，减少临场猜测。",
+          "遇到常见故障时，有经过考虑的备选路径。"
+        ],
+        "risks": "约束多时，支座沉降或温度变化也可能引出内力。生活里的版本是：换了一个时间，整张表都得重排。",
+        "case": "小组展示前一天就有人问能不能另约，你已经知道哪天同时有空。",
+        "maintenance": "给不影响交付的小事留一个可变区间。备份够用以后，可以先吃饭。"
+      },
+      "partner": {
+        "typeId": "cable",
+        "reason": "你确定两端必须守住的条件，柔索负责在中间找还能走的路线。"
+      }
+    },
+    {
+      "id": "truss",
+      "name": "铰接桁架型",
+      "code": "PIN-JOINT TRUSS",
+      "target": {
+        "independence": 44,
+        "constraints": 58,
+        "distribution": 73,
+        "adaptability": 48,
+        "response": 64
+      },
+      "summary": "先把合作的接口对齐，再一起把大跨度跨过去。",
+      "description": "理想铰接桁架的载荷作用在节点时，杆件主要承受轴向拉力或压力。你的团队习惯也很像这样：任务拆得清楚，每个人都能找到自己能发挥的一段，交界处再互相照应。一个人加班当然也能救场，你更愿意问，下次有没有办法让四个人都按时睡觉。",
+      "image": {
+        "src": "art/truss.svg",
+        "alt": "由三角形和铰接节点组成的桁架"
+      },
+      "traits": [
+        "善于分工",
+        "重视交接",
+        "团队意识强"
+      ],
+      "quote": "别先问谁来扛，先画一画任务交给谁。",
+      "sections": {
+        "strengths": [
+          "能把大任务拆成可交付的小件。",
+          "在意交接标准，让别人的成果真的能拼起来。"
+        ],
+        "risks": "节点没接牢，杆件各自很努力也搭不成整体。遇到大量职责不清的杂事，分工会比干活本身更耗时。",
+        "case": "小组报告里，每人负责一节，另留一轮互看。交稿那天终于没有五种页码。",
+        "maintenance": "留一段大家都能沟通的时间，专门处理交界处的意外。"
+      },
+      "partner": {
+        "typeId": "cantilever",
+        "reason": "悬臂梁能在一片混乱里开工，你能及时把后来的人接进同一套分工。"
+      }
+    },
+    {
+      "id": "cable",
+      "name": "柔索型",
+      "code": "FLEXIBLE CABLE",
+      "target": {
+        "independence": 46,
+        "constraints": 32,
+        "distribution": 47,
+        "adaptability": 71,
+        "response": 55
+      },
+      "summary": "路线可以弯，到了就行。",
+      "description": "柔索能受拉，几乎不提供抗弯刚度，形状会跟着锚点和载荷变。你的长处也在于顺着条件找解法：一间店关门可以换第二间，聚会改时间可以改成散步。你通常需要的只是几条真正重要的约定，以及让中间那段自由调整的空间。",
+      "image": {
+        "src": "art/cable.svg",
+        "alt": "两端锚固、承受点载荷的下垂柔索"
+      },
+      "traits": [
+        "灵活随和",
+        "就地取材",
+        "适应新条件"
+      ],
+      "quote": "原路线没了，那先闻闻哪条街有饭吃。",
+      "sections": {
+        "strengths": [
+          "擅长用手边现有的东西把局面接住。",
+          "能接受计划的小幅变形，减少无谓的内耗。"
+        ],
+        "risks": "拉住两端才有稳定的工作形状。如果边界一直模糊，迁就过几轮后，你可能忘了自己原本想去哪。",
+        "case": "朋友临时改了三次集合地点。你已经在第四个地点找到一家比原计划好吃的店。",
+        "maintenance": "先说清自己必须保住的时间和条件，再让其他细节自由变形。"
+      },
+      "partner": {
+        "typeId": "frame",
+        "reason": "刚架会守住不能动的几项约定，你也能替它找出原计划以外的选择。"
+      }
+    },
+    {
+      "id": "arch",
+      "name": "拱结构型",
+      "code": "THRUST ARCH",
+      "target": {
+        "independence": 63,
+        "constraints": 41,
+        "distribution": 51,
+        "adaptability": 68,
+        "response": 71
+      },
+      "summary": "先改一改压力经过的位置，事情往往就顺了。",
+      "description": "当拱的形状和载荷配合得当，它可以主要靠轴向压力把载荷送到拱脚，拱脚也得接住水平推力。你擅长先问“目标究竟是什么”，再找省力的路线。投影坏了就换成白板讲解，预算缩水就留下最重要的体验，你常把困难变成判断重点的机会。",
+      "image": {
+        "src": "art/arch.svg",
+        "alt": "拱顶受力、支座提供水平反力的拱"
+      },
+      "traits": [
+        "善于换思路",
+        "抓住重点",
+        "临场调整"
+      ],
+      "quote": "这个压力绕一下路，会有地方接住它。",
+      "sections": {
+        "strengths": [
+          "能快速发现目标与原方案之间的区别。",
+          "会利用已有条件设计更省力的做法。"
+        ],
+        "risks": "支座兜不住水平推力，拱脚就可能向两边推开。新点子来得快时，记得照顾实际负责落地的人。",
+        "case": "没有教室可用，你把长篇展示改成操场旁的三站式讲解，每一站只聊一个问题。",
+        "maintenance": "方案改形之前，先问接手的人有没有时间、权限和工具。"
+      },
+      "partner": {
+        "typeId": "continuous",
+        "reason": "你擅长改变压力走向，连续梁擅长安排到站后的交接。"
+      }
+    },
+    {
+      "id": "column",
+      "name": "临界压杆型",
+      "code": "CRITICAL COLUMN",
+      "target": {
+        "independence": 52,
+        "constraints": 51,
+        "distribution": 45,
+        "adaptability": 40,
+        "response": 35
+      },
+      "summary": "常态下很稳。额外一条消息到了，请给系统一点缓冲。",
+      "description": "细长受压杆在临界载荷附近容易发生侧向屈曲，初始弯曲或偏心也会放大变形。你对日常节奏有自己的承载方式，按计划做事时很稳；事情连续叠上来，可能需要先退一步，让思路恢复，再决定哪件事值得接住。",
+      "image": {
+        "src": "art/column.svg",
+        "alt": "轴向受压的细长杆，虚线显示侧向屈曲"
+      },
+      "traits": [
+        "节奏稳定",
+        "对负荷敏感",
+        "会给自己缓冲"
+      ],
+      "quote": "我还挺稳定的。你先别加需求，咱们就能继续稳定。",
+      "sections": {
+        "strengths": [
+          "熟悉的节奏里能保持稳定输出。",
+          "能察觉忙乱积累，知道停一下有时能省很多返工。"
+        ],
+        "risks": "几个小请求接连到达时，表面仍然风平浪静，计划已经悄悄向旁边弯过去了。",
+        "case": "原本要准点交作业，群里一条“最好补下格式”之后，你开始给桌面文件夹分类。",
+        "maintenance": "把零碎任务收进一张表，给回复留一个时间窗口，先卸掉最容易转交的一件。"
+      },
+      "partner": {
+        "typeId": "simple",
+        "reason": "简支梁只要把几个约定讲清楚就能启动，你可以借它的边界稳住自己的节奏。"
+      }
+    }
+  ],
+  "report": {
+    "labels": {
+      "certificate": "结构人格鉴定报告",
+      "profile": "结构解析",
+      "partner": "最佳搭档结构"
+    },
+    "sections": [
+      {
+        "id": "strengths",
+        "label": "结构优势"
+      },
+      {
+        "id": "risks",
+        "label": "潜在失效模式"
+      },
+      {
+        "id": "case",
+        "label": "典型受力工况"
+      },
+      {
+        "id": "maintenance",
+        "label": "维护建议"
+      }
+    ]
+  }
+}

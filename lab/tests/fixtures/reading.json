@@ -1,0 +1,56 @@
+{
+  "id": "reading",
+  "title": "你喜欢坐在哪儿读书？",
+  "description": "试着找一个适合自己的阅读角落。",
+  "version": "1.0.0",
+  "minutes": 1,
+  "intro": ["想想你空闲的时候最爱怎样读书。"],
+  "cover": {"src": "tests/fixtures/book.svg", "alt": "打开的书"},
+  "theme": {"dark": "#f4be79", "light": "#8e4d18"},
+  "dimensions": [
+    {"id": "quiet", "label": "安静程度", "low": "喜欢人声", "high": "喜欢安静", "weight": 2},
+    {"id": "light", "label": "采光偏好", "low": "偏爱柔光", "high": "偏爱日光"},
+    {"id": "sharing", "label": "分享意愿", "low": "独享", "high": "想交流"}
+  ],
+  "matching": {"method": "weighted-distance"},
+  "questions": [
+    {
+      "id": "seat",
+      "prompt": "手边有一本喜欢的书，你坐哪儿？",
+      "options": [
+        {"id": "window", "text": "安静明亮的窗边", "weights": {"quiet": 2, "light": 2}},
+        {"id": "cafe", "text": "朋友旁边的咖啡桌", "weights": {"quiet": -2, "sharing": 2}}
+      ]
+    },
+    {
+      "id": "find",
+      "prompt": "读到有意思的句子，你会？",
+      "options": [
+        {"id": "keep", "text": "夹一张书签", "weights": {"quiet": 1, "sharing": -1}},
+        {"id": "send", "text": "读给朋友听", "weights": {"sharing": 1}}
+      ]
+    }
+  ],
+  "types": [
+    {
+      "id": "window",
+      "name": "窗边读者",
+      "code": "WINDOW READER",
+      "target": {"quiet": 100, "light": 100, "sharing": 0},
+      "summary": "在落下来的光里多读一页。",
+      "description": "安静和自然光是你喜欢的两种阅读装备。",
+      "image": {"src": "tests/fixtures/book.svg", "alt": "打开的书"},
+      "traits": ["独处", "日光"]
+    },
+    {
+      "id": "cafe",
+      "name": "角桌读者",
+      "code": "CAFE READER",
+      "target": {"quiet": 0, "light": 0, "sharing": 100},
+      "summary": "读到好东西就想喊身边的人。",
+      "description": "咖啡馆里的人声让阅读更有滋味。",
+      "image": {"src": "tests/fixtures/book.svg", "alt": "打开的书"},
+      "traits": ["分享", "人声"]
+    }
+  ]
+}
