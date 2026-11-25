@@ -1,486 +1,176 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
-
-
-
+<html lang="zh-CN" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.png">
-  <link rel="icon" href="/img/favicon.ico">
-  
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于 · LemCAE</title>
+  <meta name="description" content="关于 LemCAE：个人简介、站点演进记录与常做的小网页方向。">
   <meta name="author" content="LemCAE">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="欢迎来到我的博客！ 本人在读学生，对信息技术颇感兴趣，然而未接受过系统教学，于是只好进行一些有的没的的整活。 ps:如果你可以完整的加载出整个网页，那么恭喜你，你的网络连接应该非常良好（笑）毕竟你都连得上GitHub不是 部分图片来源于网络，如有侵权，请联系删除">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://example.com/about/index.html">
-<meta property="og:site_name" content="LemCAE&#39;s Blogs">
-<meta property="og:description" content="欢迎来到我的博客！ 本人在读学生，对信息技术颇感兴趣，然而未接受过系统教学，于是只好进行一些有的没的的整活。 ps:如果你可以完整的加载出整个网页，那么恭喜你，你的网络连接应该非常良好（笑）毕竟你都连得上GitHub不是 部分图片来源于网络，如有侵权，请联系删除">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-11T08:30:00.956Z">
-<meta property="article:modified_time" content="2024-08-11T08:30:00.956Z">
-<meta property="article:author" content="LemCAE">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
-  
-  
-  <title>关于 - LemCAE&#39;s Blogs</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="关于 · LemCAE">
+  <meta property="og:url" content="https://lemcae.github.io/about/">
+  <link rel="icon" href="/img/favicon.ico">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('lemcae-theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-  
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-
+  <link rel="stylesheet" href="/assets/home.css">
+  <script src="/assets/home.js" defer></script>
+</head>
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 60vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>LemCAE&#39;s blogs</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/webpage/" target="_self">
-                <i class="iconfont icon-link-fill"></i>
-                <span>其它网页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="关于"></span>
-          
-        </div>
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/img/avater.jpg" srcset="/img/loading.gif" lazyload class="img-fluid" alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">LemCAE</div>
-    <div class="about-intro">于漫漫长夜中提灯前行</div>
-    <div class="about-icons">
-      
-        
-        
-        
-        <a href=https://github.com/LemCAE class="
-           hint--bottom hint--rounded"
-           aria-label="GitHub"
-           target="_blank"
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>lemcae.github.io / about</span>
+      </a>
+      <div class="topbar-actions">
+        <a class="icon-btn" href="/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+          <span>返回首页</span>
         </a>
-      
-    </div>
-  </div>
-</div>
+        <a class="icon-btn" href="/notes/">
+          <span>笔记专栏</span>
+        </a>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="切换深浅色主题">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+          <span id="theme-label">浅色模式</span>
+        </button>
+      </div>
+    </header>
 
-<article class="about-content page-content mt-5">
-  <div class="markdown-body">
-    <p>欢迎来到我的博客！</p>
-<p>本人在读学生，对信息技术颇感兴趣，然而未接受过系统教学，于是只好进行一些有的没的的整活。</p>
-<p>ps:如果你可以完整的加载出整个网页，那么恭喜你，你的网络连接应该非常良好（笑）<em>毕竟你都连得上GitHub不是</em></p>
-<p><em>部分图片来源于网络，如有侵权，请<a href="mailto:lemcae@outlook.com">联系删除</a></em></p>
+    <main class="bento-grid">
+      <!-- 1. 个人简介 -->
+      <section class="card profile-card span-2" aria-label="关于我">
+        <div class="profile-top">
+          <img class="avatar" src="/img/avater.jpg" alt="LemCAE 头像" width="68" height="68">
+          <div class="profile-heading">
+            <h1>关于 LemCAE</h1>
+            <p class="profile-motto">于漫漫长夜中提灯前行</p>
+          </div>
+        </div>
+        <p class="profile-bio">
+          对编程和各种有意思的小网页很感兴趣。相比长篇大论地写文章，更喜欢顺手把脑子里的点子、学到的知识或者小需求做成能直接点开玩的网页。
+        </p>
+        <p class="profile-bio">
+          这个站点就是我的线上桌面和实验田——不依赖复杂框架，也不用外部 CDN，用来存放做过的小网页和日常笔记。
+        </p>
+        <div class="profile-footer">
+          <span class="status-pill">持续更新小网页中</span>
+          <div class="link-row">
+            <a class="chip-link" href="https://github.com/LemCAE" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.9 10.9 0 0 1 5.76 0c2.19-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.66.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a class="chip-link" href="mailto:lemcae@outlook.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <span>lemcae@outlook.com</span>
+            </a>
+          </div>
+        </div>
+      </section>
 
-  </div>
-
-  
-</article>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-              </div>
+      <!-- 2. 站点演进时间线 -->
+      <section class="card notes-card span-2" aria-label="站点演进">
+        <div class="card-label">
+          <span>TIMELINE</span>
+          <span>站点足迹</span>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-date">2026.11</span>
+            <div class="timeline-body">
+              <strong>重构为 Bento 主页与笔记专栏</strong>
+              <p>去掉旧 Hexo 模板与早期粗糙页面，统一成纯静态 Bento 界面，并新增可直接放 Markdown 的笔记专栏。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2026.08</span>
+            <div class="timeline-body">
+              <strong>上线 C 语言复习交互课件</strong>
+              <p>整理了一套 55 页的 Web Slide（C-ppt），把知识点和单选自测直接放进浏览器。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2024.08</span>
+            <div class="timeline-body">
+              <strong>搭建最初的 GitHub Pages</strong>
+              <p>用 Hexo + Fluid 记下了最初的 HTML、GitHub Actions 笔记，迈出折腾个人网页的第一步。</p>
             </div>
           </div>
         </div>
-      </div>
-    
+      </section>
 
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+      <!-- 3. 在折腾什么 -->
+      <section class="card about-card span-2" aria-label="兴趣与方向">
+        <div class="card-label">
+          <span>FOCUS</span>
+          <span>平时在玩什么</span>
         </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
+        <div>
+          <h2>轻量化与可交互</h2>
+          <p>
+            目前偏爱“打开即用、不用配置环境”的原生前端小网页——比如交互式复习课件、桌面小工具、可视化小实验，也偶尔用 Python 和 GitHub Actions 做些自动化脚本。
+          </p>
+        </div>
+        <div class="stack-list">
+          <span class="mini-pill">HTML / CSS / JS</span>
+          <span class="mini-pill">交互式 Web 课件</span>
+          <span class="mini-pill">浏览器小工具</span>
+          <span class="mini-pill">C 语言</span>
+          <span class="mini-pill">Python / GitHub Actions</span>
+        </div>
+      </section>
+
+      <!-- 4. 站内直达 -->
+      <section class="card notes-card span-2" aria-label="站内直达">
+        <div class="card-label">
+          <span>EXPLORE</span>
+          <span>站内直达</span>
+        </div>
+        <div class="quick-grid">
+          <a class="quick-tile" href="/C-ppt/">
+            <strong>C 语言复习课件</strong>
+            <span>55 页交互式 Web Slide →</span>
+          </a>
+          <a class="quick-tile" href="/notes/">
+            <strong>笔记专栏</strong>
+            <span>纯 Markdown 笔记与备忘 →</span>
+          </a>
+          <a class="quick-tile" href="/notes/view.html?id=github-actions">
+            <strong>GitHub Action 笔记</strong>
+            <span>工作流与 Release 自动发布 →</span>
+          </a>
+          <a class="quick-tile" href="/">
+            <strong>返回 Bento 首页</strong>
+            <span>浏览全部小网页与实验 →</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2024–2026 LemCAE</span>
+      <span>如有素材版权或页面问题，欢迎邮件联系 lemcae@outlook.com</span>
+    </footer>
   </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>

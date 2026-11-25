@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172c44">
+  <link rel="icon" href="data:,">
+  <title>中国近现代史纲要复习台</title>
+  <style>:root {
+  color-scheme: light;
+  --page: #eef3f7;
+  --paper: #fff;
+  --ink: #172a3d;
+  --navy: #172c44;
+  --blue: #244e78;
+  --muted: #526779;
+  --line: #dce5ed;
+  --rule: #eaf0f4;
+  --tint: #eff5fa;
+  --pink: #f6d8e5;
+  --green: #17644e;
+  --sans: "Microsoft YaHei UI", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  --serif: "Songti SC", "SimSun", "Noto Serif CJK SC", serif;
+  font: 100%/1.55 var(--sans);
+  color: var(--ink);
+  background: var(--page);
+}
+
+* { box-sizing: border-box; }
+body, h1, h2, h3, p { margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: default; opacity: .48; }
+a { color: var(--blue); text-underline-offset: .22em; }
+:focus-visible { outline: 2px solid #327aba; outline-offset: 3px; }
+[hidden] { display: none !important; }
+.sr-only, .skip-link:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip-link:focus {
+  z-index: 2;
+  position: absolute;
+  padding: .5rem .8rem;
+  background: var(--paper);
+}
+.shell { width: min(94rem, calc(100% - 3.6rem)); margin-inline: auto; }
+.muted { color: var(--muted); font-size: .85rem; }
+
+.masthead { background: var(--navy); color: white; }
+.masthead-inner {
+  display: flex;
+  min-height: 5.8rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.brand { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+.brand-name { font: 700 clamp(1.48rem, 2.2vw, 2rem)/1.25 var(--serif); letter-spacing: .04em; }
+.brand-detail { margin-top: .2rem; color: #c9d9ea; font-size: .86rem; }
+.book-symbol {
+  display: block;
+  flex: 0 0 auto;
+  position: relative;
+  width: 2.12rem;
+  height: 2.35rem;
+  border-radius: 4px 7px 7px 4px;
+  border: 1px solid #98b0c8;
+}
+.book-symbol::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 .4rem;
+  border-left: 1px solid #98b0c8;
+}
+.book-symbol::after {
+  content: "";
+  position: absolute;
+  inset: .54rem .27rem auto auto;
+  width: .9rem;
+  border: 2px solid #e9aec9;
+  border-radius: 2px;
+  transform: rotate(-5deg);
+}
+.textbook {
+  padding: .5rem .82rem;
+  white-space: nowrap;
+  border: 1px solid #7290ae;
+  border-radius: 6px;
+  font-size: .88rem;
+  color: #f2f7fc;
+  text-decoration: none;
+}
+.textbook:hover { background: #25415c; }
+
+.toolbar { background: var(--paper); border-bottom: 1px solid var(--line); }
+.toolbar-inner { display: flex; justify-content: space-between; align-items: center; gap: 1.25rem; }
+.tabs { display: flex; align-self: stretch; gap: 1.5rem; }
+.tabs button {
+  min-height: 3.6rem;
+  padding: .1rem .12rem 0;
+  border: 0;
+  box-shadow: inset 0 -3px transparent;
+  background: none;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tabs button:hover { color: var(--blue); }
+.tabs button[aria-pressed="true"] { color: var(--blue); box-shadow: inset 0 -3px var(--blue); }
+
+.search {
+  flex: 0 1 25rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+}
+.search-symbol {
+  position: absolute;
+  left: .9rem;
+  width: .8rem;
+  height: .8rem;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.search-symbol::after {
+  content: "";
+  position: absolute;
+  bottom: -.19rem;
+  right: -.25rem;
+  width: .36rem;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(47deg);
+}
+.search input {
+  width: 100%;
+  min-height: 2.65rem;
+  padding: .5rem 2.6rem .5rem 2.3rem;
+  border: 1px solid #c8d6e2;
+  border-radius: 6px;
+  background: #f9fbfd;
+  color: var(--ink);
+  font-size: .92rem;
+}
+.search input::-webkit-search-cancel-button { appearance: none; }
+.search input::placeholder { color: #587085; }
+.clear-search {
+  position: absolute;
+  right: .31rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.25rem;
+}
+.clear-search:hover { background: var(--tint); }
+
+.workbench {
+  display: grid;
+  grid-template-columns: minmax(13.25rem, 265px) minmax(0, 1fr) minmax(12rem, 229px);
+  gap: 1.1rem;
+  align-items: start;
+  padding-block: 1.4rem 2.5rem;
+}
+.pane { min-width: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 9px; }
+.pane-head {
+  min-height: 3.35rem;
+  padding: .9rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .6rem;
+  border-bottom: 1px solid var(--rule);
+}
+.pane-head h2 { font-size: .95rem; }
+.chapter-desktop nav { padding: .33rem 0; }
+.chapter-item {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr) auto;
+  align-items: start;
+  gap: .58rem;
+  width: 100%;
+  min-height: 3.05rem;
+  padding: .7rem .77rem .7rem .75rem;
+  text-align: left;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+}
+.chapter-item:last-child { border-bottom: 0; }
+.chapter-item:hover { background: #f7fafc; }
+.chapter-item[aria-current="true"] { background: var(--tint); border-left-color: var(--blue); }
+.chapter-item:focus-visible { outline-offset: -3px; }
+.chapter-no {
+  width: 1.5rem;
+  padding-block: .08rem;
+  text-align: center;
+  border-radius: 4px;
+  background: #f1f5f8;
+  color: var(--blue);
+  font-size: .78rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.chapter-item[aria-current="true"] .chapter-no { background: var(--pink); color: #64304e; }
+.chapter-name { font-size: .88rem; line-height: 1.5; overflow-wrap: anywhere; }
+.chapter-item[aria-current="true"] .chapter-name { font-weight: 700; color: var(--blue); }
+.chapter-progress { color: var(--muted); font: 500 .77rem/1.75 var(--sans); }
+.chapter-mobile, .saved-mobile { display: none; }
+.workbench[data-view="saved"] :is(.chapter-desktop, .chapter-mobile),
+.workbench[data-view="exam"] :is(.chapters, .study) { display: none; }
+.workbench[data-view="exam"] { grid-template-columns: minmax(0, 1fr); }
+.workbench[data-view="exam"] .reader {
+  grid-area: 1 / 1;
+  width: min(100%, 56rem);
+  justify-self: center;
+}
+
+.reader { overflow: clip; scroll-margin-top: 1rem; }
+.reader:focus { outline: none; }
+.reader-head {
+  background: #f9fbfd;
+  border-bottom: 1px solid var(--line);
+  padding: 1.55rem clamp(1.25rem, 3.4vw, 3rem) 1.1rem;
+}
+.chapter-kicker { font-size: .85rem; color: var(--blue); margin-bottom: .55rem; }
+.reader h1 { font: 700 clamp(1.62rem, 3.1vw, 2.42rem)/1.32 var(--serif); overflow-wrap: anywhere; }
+.reader-actions { display: flex; gap: .55rem; flex-wrap: wrap; margin-top: .95rem; }
+.button {
+  min-height: 2.5rem;
+  padding: .42rem .75rem;
+  border: 1px solid #c5d3e0;
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--blue);
+  font-size: .88rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.button:hover:not(:disabled) { background: var(--tint); }
+.button[aria-pressed="true"] { background: #ecf6f2; border-color: #b5d6c8; color: var(--green); }
+.button[data-action="save"][aria-pressed="true"] { background: #f8eaf1; border-color: #e8bccf; color: #69334e; }
+.button.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+.button.primary:hover { background: var(--navy); }
+.button.quiet { background: transparent; border-color: transparent; }
+
+.reader-body { padding: 1.25rem clamp(1.25rem, 3.4vw, 3rem) 1.8rem; }
+.markdown { font-size: 1rem; line-height: 1.89; overflow-wrap: anywhere; }
+.markdown > * + * { margin-top: 1rem; }
+.markdown h2 { font: 700 1.27rem/1.45 var(--sans); margin-top: 1.7rem; color: var(--navy); }
+.markdown h3 {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  border-left: 3px solid #e3a3c1;
+  padding-left: .65rem;
+  margin-top: 1.5rem;
+}
+.markdown h2:first-child, .markdown h3:first-child { margin-top: 0; }
+.markdown h2, .markdown h3 { scroll-margin-top: 1.35rem; }
+.markdown h2 + p, .markdown h3 + p { margin-top: .53rem; }
+.markdown blockquote {
+  margin-inline: 0;
+  padding: .63rem .84rem;
+  background: var(--tint);
+  border-left: 3px solid #a5bbcf;
+  color: #415972;
+  font-size: .88rem;
+  line-height: 1.7;
+}
+.markdown ul, .markdown ol { margin-bottom: 0; padding-left: 1.65rem; }
+.markdown li + li { margin-top: .35rem; }
+.markdown strong { color: #172e48; }
+.markdown table { width: 100%; table-layout: auto; border-collapse: collapse; font-size: .91rem; line-height: 1.55; }
+.markdown th, .markdown td { border: 1px solid var(--line); padding: .55rem .65rem; text-align: left; }
+.markdown th { background: var(--tint); }
+.markdown tr:nth-child(even) { background: #fbfcfd; }
+.markdown td:nth-child(-n+3), .markdown th { white-space: nowrap; }
+
+.recall {
+  border: 1px solid #e9c9d8;
+  border-left: 3px solid #de9cba;
+  border-radius: 5px;
+  background: #fcf5f8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  flex-wrap: wrap;
+  padding: .85rem 1rem;
+}
+.recall + .markdown { margin-top: 1.1rem; }
+.reader-footer {
+  display: flex;
+  gap: .6rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: .85rem clamp(1rem, 3.4vw, 3rem);
+  border-top: 1px solid var(--rule);
+}
+.reader-footer > div { display: flex; gap: .5rem; }
+
+.study { display: grid; gap: 1.1rem; }
+.progress-body { padding: .72rem 1rem .95rem; }
+.progress-numbers { display: flex; align-items: baseline; gap: .3rem; color: var(--muted); font-size: .88rem; }
+.progress-numbers strong { font: 700 2.1rem/1.12 var(--sans); color: var(--navy); font-variant-numeric: tabular-nums; }
+.progress-track { height: 5px; margin-block: .65rem .75rem; border-radius: 4px; background: #e7eef4; overflow: hidden; }
+.progress-track span { display: block; height: 100%; border-radius: 4px; background: #426789; }
+.progress-details { display: flex; justify-content: space-between; gap: .4rem; color: var(--muted); font-size: .8rem; }
+.outline-list { padding: .35rem .5rem; }
+.outline-list a {
+  display: flex;
+  align-items: baseline;
+  gap: .45rem;
+  padding: .63rem .47rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: .87rem;
+  line-height: 1.45;
+}
+.outline-list a:hover { background: #f4f7fa; }
+.outline-list a[aria-current] { background: var(--tint); color: var(--blue); font-weight: 700; }
+.saved-group { padding: .65rem .47rem .1rem; color: var(--muted); font-size: .8rem; }
+.outline-no { min-width: .85rem; color: #586f85; font-size: .77rem; font-variant-numeric: tabular-nums; }
+.check { margin-left: auto; color: var(--green); font-weight: 700; }
+
+.result-head { display: flex; justify-content: space-between; align-items: baseline; gap: .65rem; flex-wrap: wrap; }
+.result { display: block; padding: 1rem clamp(1.25rem, 3.4vw, 3rem); border-bottom: 1px solid var(--rule); text-decoration: none; }
+.result:last-child { border-bottom: 0; }
+.result:hover { background: #f9fbfd; }
+.result:focus-visible { outline-offset: -3px; }
+.result strong { display: block; margin: .2rem 0 .27rem; font-size: 1.06rem; }
+.result-chapter, .result-copy, .empty { color: var(--muted); }
+.result-chapter { font-size: .8rem; }
+.result-copy { display: block; font-size: .92rem; line-height: 1.65; }
+mark { background: var(--pink); border-radius: 2px; color: var(--ink); }
+.empty { padding: 1.25rem clamp(1.25rem, 3.4vw, 3rem); }
+.storage-note { grid-column: 1 / -1; color: #812f47; }
+
+@media (max-width: 1100px) {
+  .workbench { grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr); }
+  .reader { grid-column: 2; grid-row: 1 / span 2; }
+  .study { grid-column: 1; }
+}
+@media (max-width: 760px) {
+  .shell { width: calc(100% - 1.4rem); }
+  .masthead-inner { min-height: 4.75rem; }
+  .brand { gap: .55rem; }
+  .brand-name { font-size: 1.36rem; }
+  .brand-detail { font-size: .78rem; }
+  .book-symbol { display: none; }
+  .textbook { font-size: .78rem; padding-inline: .45rem; }
+  .toolbar-inner { display: block; padding-bottom: .65rem; }
+  .tabs { justify-content: space-between; gap: .45rem; }
+  .tabs button { min-height: 2.85rem; font-size: .9rem; }
+  .search { margin-top: .55rem; }
+  .workbench { grid-template-columns: minmax(0, 1fr); gap: .7rem; padding-block: .75rem 1.6rem; }
+  .reader, .study { grid-column: 1; grid-row: auto; }
+  .chapter-desktop { display: none; }
+  .chapter-mobile { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .42rem .55rem; padding: .55rem .7rem; }
+  .chapter-mobile label { color: var(--muted); font-size: .84rem; }
+  .chapter-mobile select, .saved-mobile select { min-width: 0; width: 100%; min-height: 2.5rem; padding: .28rem .35rem; border: 1px solid #c8d6e2; border-radius: 5px; background: #f9fbfd; font-size: .9rem; }
+  .saved-mobile { display: block; padding: .55rem .7rem; }
+  #saved-list { display: none; }
+  .reader-head { padding-top: 1.15rem; }
+  .reader-body { padding-inline: 1.05rem; }
+  .reader-head, .reader-footer { padding-inline: 1.05rem; }
+  .study { gap: .7rem; }
+}
+@media (max-width: 385px) {
+  .brand-name { font-size: 1.2rem; }
+  .markdown table { font-size: .84rem; }
+  .markdown th, .markdown td { padding: .4rem; white-space: normal; }
+}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#reading">跳到正文</a>
+  <header class="masthead">
+    <div class="shell masthead-inner">
+      <div class="brand">
+        <span class="book-symbol" aria-hidden="true"></span>
+        <div><p class="brand-name">中国近现代史纲要</p><p class="brand-detail">2023 年版 · 复习台</p></div>
+      </div>
+      <a id="textbook" class="textbook" href="#" target="_blank" rel="noopener">打开教材 PDF</a>
+    </div>
+  </header>
+  <div class="toolbar">
+    <div class="shell toolbar-inner">
+      <nav class="tabs" aria-label="复习方式">
+        <button type="button" data-mode="topic" aria-pressed="true">知识点</button>
+        <button type="button" data-mode="practice" aria-pressed="false">背诵自测</button>
+        <button type="button" data-mode="saved" aria-pressed="false">收藏</button>
+        <button type="button" data-mode="exam" aria-pressed="false">考试要求</button>
+      </nav>
+      <div class="search">
+        <label class="sr-only" for="search">搜索全部知识点</label>
+        <span class="search-symbol" aria-hidden="true"></span>
+        <input type="search" id="search" placeholder="搜索知识点，如 洋务运动" autocomplete="off" maxlength="80">
+        <button id="clear-search" class="clear-search" type="button" aria-label="清空搜索" hidden>×</button>
+      </div>
+    </div>
+  </div>
+  <div class="shell workbench">
+    <aside class="chapters pane" aria-label="章节目录">
+      <div class="chapter-desktop">
+        <div class="pane-head"><h2>章节目录</h2><span id="chapter-count" class="muted"></span></div>
+        <nav id="chapter-list" aria-label="按章浏览"></nav>
+      </div>
+      <div class="chapter-mobile">
+        <label for="mobile-chapter">章节</label>
+        <select id="mobile-chapter"></select>
+        <label for="mobile-topic">知识点</label>
+        <select id="mobile-topic"></select>
+      </div>
+      <div id="saved-directory" hidden>
+        <div class="pane-head"><h2>收藏目录</h2><span id="saved-count" class="muted"></span></div>
+        <nav id="saved-list" class="outline-list" aria-label="按章查看收藏"></nav>
+        <div class="saved-mobile">
+          <label class="sr-only" for="saved-topic">跳转到已收藏知识点</label>
+          <select id="saved-topic"></select>
+        </div>
+      </div>
+    </aside>
+    <main id="reading" class="reader pane" tabindex="-1" aria-label="复习内容"></main>
+    <aside class="study" aria-label="进度与本章知识点">
+      <section id="progress" class="pane progress" aria-label="复习进度"></section>
+      <section id="outline" class="pane outline" aria-label="本章知识点"></section>
+    </aside>
+    <p id="storage-note" class="storage-note" hidden>此浏览器限制本地存储，关闭页面后本次进度将丢失。</p>
+  </div>
+  <p id="announcement" class="sr-only" aria-live="polite"></p>
+  <noscript><p class="shell">请启用 JavaScript 后打开复习台。</p></noscript>
+  <script type="application/json" id="study-data">{"chapters": [{"id": "01", "label": "第一章", "name": "进入近代后中华民族的磨难与抗争", "topics": [{"id": "01-中华文明的五个突出特性", "title": "中华文明的五个突出特性", "chapter": "01", "headings": ["中华文明的五个突出特性"], "html": "\u003cblockquote>\n\u003cp>手写批注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=27\" target=\"_blank\" rel=\"noopener\">课本第 13 页（PDF 第 27 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>章首批注以“侵略”和“反侵略”串起全章。从中国古代长期延续、曾在经济和科技等方面走在世界前列，讲到近代主权受损，再讲到人民抗争和民族意识觉醒。其中“帝国主义侵华”和“民族意识觉醒”都被加了三角和勾。\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>连续性\u003c/strong>体现在中华文明历经历史变迁，始终保持传承。\u003c/li>\n\u003cli>\u003cstrong>创新性\u003c/strong>体现在继承自身传统的基础上回应时代变化、不断发展。\u003c/li>\n\u003cli>\u003cstrong>统一性\u003c/strong>体现在不同地区、民族在长期交往交流交融中形成多元一体格局。\u003c/li>\n\u003cli>\u003cstrong>包容性\u003c/strong>体现在容纳内部差异，也在同其他文明的交流中吸收有益成果。\u003c/li>\n\u003cli>\u003cstrong>和平性\u003c/strong>体现在重视和睦共处，以交流互鉴处理文明间的关系。\u003c/li>\n\u003c/ul>\n"}, {"id": "01-鸦片战争与中国社会性质的变化", "title": "鸦片战争与中国社会性质的变化", "chapter": "01", "headings": ["鸦片战争与中国社会性质的变化", "一、国家主权遭到破坏，逐步变为半殖民地", "二、自然经济逐步解体，封建关系仍占重要地位"], "html": "\u003cblockquote>\n\u003cp>对应章首手写梳理中的“近代沉沦”。相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=33\" target=\"_blank\" rel=\"noopener\">课本第 19—20 页（PDF 第 33—34 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>1840 年鸦片战争是中国近代史的起点。战争改变了中国的发展进程，此后中国由独立的封建国家逐步变为半殖民地半封建社会。\u003c/p>\n\u003ch3 id=\"一-国家主权遭到破坏-逐步变为半殖民地\">一、国家主权遭到破坏，逐步变为半殖民地\u003c/h3>\n\u003cp>列强通过战争和不平等条约，侵害中国的领土、关税、司法等主权，并干涉中国的内政外交。中国仍保有国家和政府的名义及部分主权，但逐步丧失了完整的独立地位。\u003c/p>\n\u003ch3 id=\"二-自然经济逐步解体-封建关系仍占重要地位\">二、自然经济逐步解体，封建关系仍占重要地位\u003c/h3>\n\u003cp>外国商品输入冲击了农业与家庭手工业相结合的自然经济，也为中国近代资本主义的产生提供了某些客观条件。新的生产关系出现后，封建土地关系和剥削制度仍广泛存在，民族资本主义发展又受到列强和国内封建势力制约。\u003c/p>\n"}, {"id": "01-资本-帝国主义侵略中国的主要方式", "title": "资本—帝国主义侵略中国的主要方式", "chapter": "01", "headings": ["资本—帝国主义侵略中国的主要方式", "一、军事侵略", "二、政治控制", "三、经济掠夺", "四、文化渗透"], "html": "\u003cblockquote>\n\u003cp>对应章首手写梳理中的“帝国主义侵华”。相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=37\" target=\"_blank\" rel=\"noopener\">课本第 23—35 页（PDF 第 37—49 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-军事侵略\">一、军事侵略\u003c/h3>\n\u003cp>列强以战争和武力威胁打开中国国门，割占领土，勒索赔款，抢掠和破坏财物。第二次鸦片战争中的圆明园被劫掠、焚毁，是典型例子。\u003c/p>\n\u003ch3 id=\"二-政治控制\">二、政治控制\u003c/h3>\n\u003cp>列强凭借不平等条约、在华外交机构和特权干涉内政外交，并扶植有利于其利益的政治代理人。如清末列强支持袁世凯夺取辛亥革命果实。\u003c/p>\n\u003ch3 id=\"三-经济掠夺\">三、经济掠夺\u003c/h3>\n\u003cp>列强控制通商口岸和部分关税权，扩大商品倾销和资本输出，争夺铁路、矿山等权益。通商口岸逐步成为列强在华经济活动和扩张的基地。\u003c/p>\n\u003ch3 id=\"四-文化渗透\">四、文化渗透\u003c/h3>\n\u003cp>部分侵略者借传教等名义获取特权、干涉地方事务，也借助舆论宣扬殖民主义思想，为侵略辩护。\u003c/p>\n"}, {"id": "01-中国人民的反侵略斗争及其意义", "title": "中国人民的反侵略斗争及其意义", "chapter": "01", "headings": ["中国人民的反侵略斗争及其意义", "一、群众和爱国官兵持续抵抗", "二、反侵略斗争挫败了列强瓜分中国的图谋"], "html": "\u003cblockquote>\n\u003cp>对应章首手写梳理中的“不屈的抗争”。相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=49\" target=\"_blank\" rel=\"noopener\">课本第 35—41 页（PDF 第 49—55 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-群众和爱国官兵持续抵抗\">一、群众和爱国官兵持续抵抗\u003c/h3>\n\u003cp>1841 年三元里人民抗英是近代中国人民第一次大规模反侵略武装斗争。此后，群众和爱国官兵在不同地区继续抵抗外来侵略，义和团反帝爱国运动是列强掀起瓜分狂潮时的重要例子。\u003c/p>\n\u003ch3 id=\"二-反侵略斗争挫败了列强瓜分中国的图谋\">二、反侵略斗争挫败了列强瓜分中国的图谋\u003c/h3>\n\u003cp>列强之间的矛盾和妥协也影响了瓜分计划。课本强调，中国人民前赴后继的反侵略斗争是瓜分图谋破产的根本原因。这些斗争表现出的爱国主义也推动了民族觉醒。\u003c/p>\n"}, {"id": "01-近代中国反侵略战争失败的原因", "title": "近代中国反侵略战争失败的原因", "chapter": "01", "headings": ["近代中国反侵略战争失败的原因", "一、社会制度的腐败是根本原因", "二、经济技术的落后是重要原因"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=56\" target=\"_blank\" rel=\"noopener\">课本第 42—43 页（PDF 第 56—57 页）\u003c/a>，段末总结见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=58\" target=\"_blank\" rel=\"noopener\">课本第 44 页（PDF 第 58 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-社会制度的腐败是根本原因\">一、社会制度的腐败是根本原因\u003c/h3>\n\u003cp>清朝政治腐败、军事指挥失当。统治者担心人民动员危及自身统治，往往压制群众和爱国官兵的抗争，对外则急于妥协。中法战争中，清军在镇南关等地取胜后，清政府仍接受法国条件、下令停战撤兵，说明战场胜利可以被腐朽的政治决策抵消。\u003c/p>\n\u003ch3 id=\"二-经济技术的落后是重要原因\">二、经济技术的落后是重要原因\u003c/h3>\n\u003cp>西方列强经过工业革命，工业制造、装备和作战能力发展较快。中国工业技术和军事装备相对落后，清军虽然人数较多，武器、训练和综合实力仍与对手有差距。腐败的制度长期阻碍经济技术落后状况的改变。\u003c/p>\n"}, {"id": "01-近代民族意识的觉醒", "title": "近代民族意识的觉醒", "chapter": "01", "headings": ["近代民族意识的觉醒", "一、鸦片战争后，少数先进人士开始睁眼看世界", "二、甲午战败后，民族意识开始普遍觉醒"], "html": "\u003cblockquote>\n\u003cp>对应章首页边标出的“民族意识觉醒”。相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=58\" target=\"_blank\" rel=\"noopener\">课本第 44—46 页（PDF 第 58—60 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-鸦片战争后-少数先进人士开始睁眼看世界\">一、鸦片战争后，少数先进人士开始睁眼看世界\u003c/h3>\n\u003cp>林则徐组织译介外国资料。魏源编成《海国图志》，提出“师夷长技以制夷”，主张学习外国先进的军事和科学技术以抵御侵略。早期维新思想家又把学习范围扩展到经济和政治。\u003c/p>\n\u003ch3 id=\"二-甲午战败后-民族意识开始普遍觉醒\">二、甲午战败后，民族意识开始普遍觉醒\u003c/h3>\n\u003cp>战败、割地赔款和列强瓜分危机使救亡图存成为广泛关切。严复以《救亡决论》和译著《天演论》唤起危机意识，孙中山在 1894 年创办兴中会并提出“振兴中华”。从少数人探索到各阶层普遍关注民族存亡，是这一阶段的变化。\u003c/p>\n"}]}, {"id": "02", "label": "第二章", "name": "不同社会力量对国家出路的早期探索", "topics": [{"id": "02-洋务运动失败的原因", "title": "洋务运动失败的原因", "chapter": "02", "headings": ["洋务运动失败的原因", "一、洋务运动具有封建性", "二、洋务运动对列强具有依赖性", "三、洋务企业的管理具有腐朽性"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=72\" target=\"_blank\" rel=\"noopener\">课本第 58 页（PDF 第 72 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>洋务派以“自强”“求富”为目标，兴办了近代企业，也建立了新式海军。甲午中日战争中北洋海军全军覆没，标志着洋务运动失败。原因可以从运动目的、对外关系和企业管理三个方面展开。\u003c/p>\n\u003ch3 id=\"一-洋务运动具有封建性\">一、洋务运动具有封建性\u003c/h3>\n\u003cp>洋务派主张“中学为体，西学为用”，想借助西方近代技术维护清朝的封建统治。新的生产力受到旧的生产关系和政治制度束缚。比如兴办近代企业时采用垄断经营、侵吞商股等手段压制民族资本，培养洋务人才时又保留旧科举制度。\u003c/p>\n\u003ch3 id=\"二-洋务运动对列强具有依赖性\">二、洋务运动对列强具有依赖性\u003c/h3>\n\u003cp>列强凭借不平等条约取得的特权，从政治和经济等方面加强对中国的控制。洋务派却主张对外“和戎”，所办企业在技术、设备等方面依赖外国，试图借助列强实现自强求富。这种依赖削弱了独立发展的能力。\u003c/p>\n\u003ch3 id=\"三-洋务企业的管理具有腐朽性\">三、洋务企业的管理具有腐朽性\u003c/h3>\n\u003cp>军事工业由官府控制，经营缺乏效益，产品质量往往不高。民用企业即使采取官商合办或官督商办，官员仍把持用人和财务，商人发言权有限，还要承担亏损。官场的徇私、贪污和浪费也进入企业管理，例如福州船政局采办环节出现过侵吞公款的问题。\u003c/p>\n"}, {"id": "02-戊戌维新运动失败的原因和教训", "title": "戊戌维新运动失败的原因和教训", "chapter": "02", "headings": ["戊戌维新运动失败的原因和教训", "一、不敢否定封建主义", "二、对帝国主义抱有幻想", "三、惧怕人民群众", "教训"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=78\" target=\"_blank\" rel=\"noopener\">课本第 64—65 页（PDF 第 78—79 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>民族资本主义力量弱小，维新派组织松散、缺少实权和军队，也没有发动群众，主要寄希望于没有实权的光绪帝。面对以慈禧太后为首的强大守旧势力，维新派难以维持变法。维新派自身的局限集中在三个方面。\u003c/p>\n\u003ch3 id=\"一-不敢否定封建主义\">一、不敢否定封建主义\u003c/h3>\n\u003cp>政治上寄希望于依靠皇权，自上而下实行君主立宪。经济上主张发展民族资本主义，却没有触动封建土地所有制。思想上提倡学习西学，也借助孔子等古代圣贤的权威为改革辩护。\u003c/p>\n\u003ch3 id=\"二-对帝国主义抱有幻想\">二、对帝国主义抱有幻想\u003c/h3>\n\u003cp>维新派揭露了俄国侵华，却幻想依靠英国、日本等列强支持变法和抵制俄国。列强的政策由各自在华利益决定，维新派在政变前向英、美、日公使寻求的支持最终落空。\u003c/p>\n\u003ch3 id=\"三-惧怕人民群众\">三、惧怕人民群众\u003c/h3>\n\u003cp>活动主要局限于官僚士大夫和知识分子的小圈子，缺少群众支持。守旧派准备政变时，维新派转而寄希望于掌兵的袁世凯，结果被出卖，也无力抵抗守旧派的反击。\u003c/p>\n\u003ch3 id=\"教训\">教训\u003c/h3>\n\u003cp>在半殖民地半封建的旧中国，依靠统治者进行自上而下的改良无法从根本上改变旧制度。戊戌政变及戊戌六君子遇害，促使一部分人放弃改良主张，转向革命。\u003c/p>\n"}]}, {"id": "03", "label": "第三章", "name": "辛亥革命与君主专制制度的终结", "topics": [{"id": "03-辛亥革命爆发的历史条件", "title": "辛亥革命爆发的历史条件", "chapter": "03", "headings": ["辛亥革命爆发的历史条件", "一、民族危机加深，社会矛盾激化", "二、清末“新政”及预备立宪未能挽救清朝", "三、资产阶级革命派已经形成"], "html": "\u003cblockquote>\n\u003cp>手写批注和相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=82\" target=\"_blank\" rel=\"noopener\">课本第 68—71 页（PDF 第 82—85 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>页边笔记抓住了两个关键词，即近代中国的\u003cstrong>社会矛盾激化\u003c/strong>和中国人民的\u003cstrong>顽强抵抗\u003c/strong>。可以从以下三个方面说明革命为什么在清末爆发。\u003c/p>\n\u003ch3 id=\"一-民族危机加深-社会矛盾激化\">一、民族危机加深，社会矛盾激化\u003c/h3>\n\u003cp>《辛丑条约》签订后，列强加强对清政府的政治控制，扩大在华经济势力，抢夺铁路和矿山等权益。赔款和财政压力经由加税、摊派转嫁给百姓。各地抗租抗税、罢工罢市、收回利权和保路等斗争相继兴起。\u003c/p>\n\u003ch3 id=\"二-清末-新政-及预备立宪未能挽救清朝\">二、清末“新政”及预备立宪未能挽救清朝\u003c/h3>\n\u003cp>清政府推行新政、编练新军并宣布预备立宪，试图缓解统治危机。1911 年成立的内阁中皇族占据显要地位，进一步暴露了清廷维护皇权的意图，使立宪派大失所望，也加剧了清朝统治集团内部的矛盾。\u003c/p>\n\u003ch3 id=\"三-资产阶级革命派已经形成\">三、资产阶级革命派已经形成\u003c/h3>\n\u003cp>民族资本主义有了一定发展，壮大的民族资产阶级构成革命派的阶级基础。一批资产阶级、小资产阶级知识分子成为骨干，其中包括接触了近代西方政治思想的青年学生。以孙中山为代表的革命派走上历史舞台。\u003c/p>\n"}, {"id": "03-辛亥革命的历史意义", "title": "辛亥革命的历史意义", "chapter": "03", "headings": ["辛亥革命的历史意义", "一、推翻清王朝，打击中外反动势力", "二、结束君主专制，建立资产阶级共和国", "三、推动思想解放", "四、推动社会变革", "五、打击帝国主义侵略势力，影响亚洲民族解放运动"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=95\" target=\"_blank\" rel=\"noopener\">课本第 81—82 页（PDF 第 95—96 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>辛亥革命是近代中国人民为救亡图存、振兴中华而进行的一场资产阶级民主革命。页边所记的“阶段性成效”，可以结合其历史功绩和未完成的革命任务来理解。\u003c/p>\n\u003ch3 id=\"一-推翻清王朝-打击中外反动势力\">一、推翻清王朝，打击中外反动势力\u003c/h3>\n\u003cp>清朝是当时封建势力的政治代表。推翻清朝统治，打乱了帝国主义和国内封建势力的统治秩序，为人民斗争继续发展开辟了道路。\u003c/p>\n\u003ch3 id=\"二-结束君主专制-建立资产阶级共和国\">二、结束君主专制，建立资产阶级共和国\u003c/h3>\n\u003cp>结束了延续两千多年的封建君主专制制度，建立了中国历史上第一个资产阶级共和政府。民主共和观念开始深入人心，后来的复辟受到舆论和人民抵抗。\u003c/p>\n\u003ch3 id=\"三-推动思想解放\">三、推动思想解放\u003c/h3>\n\u003cp>皇权的绝对权威被打破，旧思想和旧秩序受到更广泛的怀疑。革命激发了爱国热情和民族觉醒。\u003c/p>\n\u003ch3 id=\"四-推动社会变革\">四、推动社会变革\u003c/h3>\n\u003cp>南京临时政府采取措施振兴实业、促进工商业发展。改用公历、剪辫、放足以及礼节称谓的变化，也带动了社会习惯和风俗的革新。\u003c/p>\n\u003ch3 id=\"五-打击帝国主义侵略势力-影响亚洲民族解放运动\">五、打击帝国主义侵略势力，影响亚洲民族解放运动\u003c/h3>\n\u003cp>革命在一定程度上打击了列强的侵略势力，也鼓舞了亚洲其他国家人民争取民族解放的斗争。\u003c/p>\n"}, {"id": "03-辛亥革命失败的原因和教训", "title": "辛亥革命失败的原因和教训", "chapter": "03", "headings": ["辛亥革命失败的原因和教训", "一、根本原因是资产阶级共和国方案在当时中国行不通", "二、没有提出彻底的反帝反封建纲领", "三、未能充分发动和依靠人民群众", "四、未能建立坚强的革命政党", "教训"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=101\" target=\"_blank\" rel=\"noopener\">课本第 87—88 页（PDF 第 101—102 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>辛亥革命推翻了清朝并建立共和政体。革命果实后来被袁世凯夺取，反帝反封建任务未完成，中国半殖民地半封建的社会性质也未改变。\u003c/p>\n\u003ch3 id=\"一-根本原因是资产阶级共和国方案在当时中国行不通\">一、根本原因是资产阶级共和国方案在当时中国行不通\u003c/h3>\n\u003cp>帝国主义列强要维护在华利益，干涉革命并扶植袁世凯。列强与国内大地主大买办、旧官僚等力量相互勾连，从内外两方面压迫革命。\u003c/p>\n\u003ch3 id=\"二-没有提出彻底的反帝反封建纲领\">二、没有提出彻底的反帝反封建纲领\u003c/h3>\n\u003cp>革命派没有明确提出反帝口号，一度希望以妥协换取列强承认。政治主张集中在反清和建立共和，未能把斗争指向整个封建统治阶级，最终向袁世凯让出了政权。\u003c/p>\n\u003ch3 id=\"三-未能充分发动和依靠人民群众\">三、未能充分发动和依靠人民群众\u003c/h3>\n\u003cp>革命派曾依靠部分新军和会党，也在一定程度上动员了群众。清政府被推翻后，革命派没有进一步领导广大农民开展反封建斗争，革命的社会基础因而薄弱。\u003c/p>\n\u003ch3 id=\"四-未能建立坚强的革命政党\">四、未能建立坚强的革命政党\u003c/h3>\n\u003cp>同盟会组织松懈、派系复杂，缺少统一稳定的领导核心，难以把各方面的革命力量团结起来并坚持斗争。\u003c/p>\n\u003ch3 id=\"教训\">教训\u003c/h3>\n\u003cp>民族资产阶级的软弱性和妥协性限制了革命的深度。资产阶级共和国方案未能完成救国任务，中国需要进一步探索新的领导力量和革命道路。\u003c/p>\n"}]}, {"id": "04", "label": "第四章", "name": "中国共产党成立和中国革命新局面", "topics": [{"id": "04-新文化运动与十月革命给中国带来的思想变化", "title": "新文化运动与十月革命给中国带来的思想变化", "chapter": "04", "headings": ["新文化运动与十月革命给中国带来的思想变化", "一、新文化运动推动思想解放", "二、十月革命为救国探索提供新方向", "三、李大钊推动马克思主义在中国传播"], "html": "\u003cblockquote>\n\u003cp>页边批注为“中国人民在精神上由被动转向主动”。相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=105\" target=\"_blank\" rel=\"noopener\">课本第 91—95 页（PDF 第 105—109 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-新文化运动推动思想解放\">一、新文化运动推动思想解放\u003c/h3>\n\u003cp>1915 年陈独秀创办《青年杂志》，后改名《新青年》。它与北京大学成为新文化运动的主要阵地。运动倡导民主和科学，批判封建专制、旧礼教和迷信，提倡包括白话文在内的新文学。五四之前，这场运动主要依靠知识分子的思想批判，社会实践和思想方法仍有局限。\u003c/p>\n\u003ch3 id=\"二-十月革命为救国探索提供新方向\">二、十月革命为救国探索提供新方向\u003c/h3>\n\u003cp>1917 年俄国十月革命使社会主义由理论变为现实。俄国同当时中国有封建压迫深重、经济文化相对落后等相近处境，革命取得成功使中国先进分子看到新的可能。苏维埃俄国倡导反对帝国主义、平等对待中国，工农兵群众广泛动员的经验也提供了新的启发。\u003c/p>\n\u003ch3 id=\"三-李大钊推动马克思主义在中国传播\">三、李大钊推动马克思主义在中国传播\u003c/h3>\n\u003cp>李大钊率先在中国举起马克思主义旗帜，发表文章介绍和评价十月革命。五四运动后，他的《我的马克思主义观》较系统地介绍马克思主义理论。中国先进分子经由对不同思想和道路的比较，逐步选择马克思主义。\u003c/p>\n"}, {"id": "04-五四运动的性质和历史意义", "title": "五四运动的性质和历史意义", "chapter": "04", "headings": ["五四运动的性质和历史意义", "一、开启新民主主义革命", "二、孕育五四精神", "三、激发追求真理、追求进步的觉醒", "四、培育永久奋斗的传统"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=111\" target=\"_blank\" rel=\"noopener\">课本第 97 页（PDF 第 111 页）\u003c/a>，运动经过见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=109\" target=\"_blank\" rel=\"noopener\">课本第 95—96 页（PDF 第 109—110 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>1919 年巴黎和会上中国外交失败是直接导火线。5 月 4 日北京学生首先行动，6 月起以上海工人为代表的工人阶级以独立姿态登上政治舞台，斗争扩展到全国。五四运动是先进青年知识分子为先锋、广大人民群众参加的彻底反帝反封建的爱国革命运动，同时具有社会革命和思想启蒙的性质。\u003c/p>\n\u003ch3 id=\"一-开启新民主主义革命\">一、开启新民主主义革命\u003c/h3>\n\u003cp>运动以更彻底的反帝反封建立场和广泛的群众参与推动社会进步，促进了马克思主义传播及其同中国工人运动的结合，为中国共产党成立作了思想和干部上的准备。\u003c/p>\n\u003ch3 id=\"二-孕育五四精神\">二、孕育五四精神\u003c/h3>\n\u003cp>五四精神的主要内容是\u003cstrong>爱国、进步、民主、科学\u003c/strong>，核心是爱国主义。知识青年率先行动，各地群众广泛参与，爱国主义由此成为动员全民族行动的旗帜。\u003c/p>\n\u003ch3 id=\"三-激发追求真理-追求进步的觉醒\">三、激发追求真理、追求进步的觉醒\u003c/h3>\n\u003cp>运动使越来越多人从旁观者变为主动参与者，推动鸦片战争以来中国人民和中华民族的第一次全面觉醒。更多先进分子在比较和实践中走向马克思主义。\u003c/p>\n\u003ch3 id=\"四-培育永久奋斗的传统\">四、培育永久奋斗的传统\u003c/h3>\n\u003cp>青年和人民群众在实践中认识到自己的力量，也认识到民族振兴和人民幸福需要依靠自身奋斗。\u003c/p>\n"}, {"id": "04-中国共产党成立的历史意义", "title": "中国共产党成立的历史意义", "chapter": "04", "headings": ["中国共产党成立的历史意义"], "html": "\u003cblockquote>\n\u003cp>相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=123\" target=\"_blank\" rel=\"noopener\">课本第 109 页（PDF 第 123 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>中国共产党成立使反帝反封建的斗争有了先进、坚强的领导核心。党把实现共产主义作为最高理想和最终目标，承担实现中华民族伟大复兴的历史使命。成立后的革命实践深刻改变了中华民族发展的方向和进程、中国人民和中华民族的前途命运，也影响了世界发展格局。\u003c/p>\n"}, {"id": "04-伟大建党精神", "title": "伟大建党精神", "chapter": "04", "headings": ["伟大建党精神"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=123\" target=\"_blank\" rel=\"noopener\">课本第 109 页（PDF 第 123 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>伟大建党精神形成于中国共产党的创建过程，是中国共产党的精神之源，也是理解中国共产党人精神谱系的起点。\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>坚持真理、坚守理想\u003c/strong>，体现理论信仰和理想追求。\u003c/li>\n\u003cli>\u003cstrong>践行初心、担当使命\u003c/strong>，把为人民谋幸福、为民族谋复兴落到行动上。\u003c/li>\n\u003cli>\u003cstrong>不怕牺牲、英勇斗争\u003c/strong>，体现面对艰难险阻的斗争精神。\u003c/li>\n\u003cli>\u003cstrong>对党忠诚、不负人民\u003c/strong>，体现政治品格和人民立场。\u003c/li>\n\u003c/ul>\n"}]}, {"id": "05", "label": "第五章", "name": "中国革命的新道路", "topics": [{"id": "05-中国革命新道路是怎样开辟的", "title": "中国革命新道路是怎样开辟的", "chapter": "05", "headings": ["中国革命新道路是怎样开辟的", "一、大革命失败后，坚持独立领导革命", "二、从攻打中心城市转向开辟农村根据地", "三、以中国实际检验和修正革命方针"], "html": "\u003cblockquote>\n\u003cp>“投降与反抗、城市与农村、教条与实事求是”的对照见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=136\" target=\"_blank\" rel=\"noopener\">课本第 122 页（PDF 第 136 页）\u003c/a>。道路探索见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=137\" target=\"_blank\" rel=\"noopener\">课本第 123—127 页（PDF 第 137—141 页）\u003c/a>和\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=146\" target=\"_blank\" rel=\"noopener\">课本第 132—133 页（PDF 第 146—147 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-大革命失败后-坚持独立领导革命\">一、大革命失败后，坚持独立领导革命\u003c/h3>\n\u003cp>1927 年大革命失败，国民党建立的统治依靠军队、特务系统、保甲制度和文化专制压制革命与群众活动。中国共产党在白色恐怖下选择继续斗争，独立领导武装斗争和土地革命。\u003c/p>\n\u003ch3 id=\"二-从攻打中心城市转向开辟农村根据地\">二、从攻打中心城市转向开辟农村根据地\u003c/h3>\n\u003cp>国民党在中心城市集中了较强力量，以夺取城市为目标的起义连续受挫。部分起义力量转入农村，发动农民、开展土地革命并建立工农政权。井冈山根据地的实践，为农村包围城市、武装夺取政权的道路提供了经验。\u003c/p>\n\u003ch3 id=\"三-以中国实际检验和修正革命方针\">三、以中国实际检验和修正革命方针\u003c/h3>\n\u003cp>农村革命根据地的开辟说明，革命道路要从中国的社会条件和斗争实践中寻找。长征中的遵义会议集中解决军事和组织问题，开始确立正确路线在党中央的领导地位，开启党独立自主解决中国革命实际问题的新阶段。\u003c/p>\n"}, {"id": "05-红军长征胜利的历史意义", "title": "红军长征胜利的历史意义", "chapter": "05", "headings": ["红军长征胜利的历史意义", "一、促进中国共产党在政治和思想上成熟", "二、使中国革命转危为安", "三、完成北上抗日的战略转移，开创革命新局面"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=148\" target=\"_blank\" rel=\"noopener\">课本第 134—135 页（PDF 第 148—149 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>1934 年 10 月，中央红军主力开始战略转移。1935 年中央红军到达陕北，1936 年 10 月红军三大主力先后会师，长征胜利结束。课本用四个方面概括长征，即坚守理想信念、检验真理、唤醒民众、开创新局。\u003c/p>\n\u003ch3 id=\"一-促进中国共产党在政治和思想上成熟\">一、促进中国共产党在政治和思想上成熟\u003c/h3>\n\u003cp>长征中的教训和实践，使党进一步认识到要把马克思主义基本原理同中国革命具体实际结合起来，独立自主解决重大问题。\u003c/p>\n\u003ch3 id=\"二-使中国革命转危为安\">二、使中国革命转危为安\u003c/h3>\n\u003cp>国民党反动派企图消灭中国共产党和红军的计划失败。红军保存了革命骨干力量，并在陕北获得新的落脚点和战略基地。\u003c/p>\n\u003ch3 id=\"三-完成北上抗日的战略转移-开创革命新局面\">三、完成北上抗日的战略转移，开创革命新局面\u003c/h3>\n\u003cp>党和红军把战略转移同民族救亡联系起来。长征也在沿途宣传革命主张、唤醒民众，为此后团结抗日和推进革命创造了条件。\u003c/p>\n"}, {"id": "05-伟大长征精神的内涵", "title": "伟大长征精神的内涵", "chapter": "05", "headings": ["伟大长征精神的内涵"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注和青年主题的手写追问见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=149\" target=\"_blank\" rel=\"noopener\">课本第 135 页（PDF 第 149 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003col>\n\u003cli>把全国人民和中华民族的根本利益放在首位，坚定革命理想和必胜信念。\u003c/li>\n\u003cli>为了救国救民勇于面对艰险，敢于付出牺牲。\u003c/li>\n\u003cli>坚持独立自主、实事求是，从实际出发解决问题。\u003c/li>\n\u003cli>顾全大局、严守纪律、紧密团结。\u003c/li>\n\u003cli>紧紧依靠人民群众，与人民同甘共苦、艰苦奋斗。\u003c/li>\n\u003c/ol>\n\u003cp>关于当代青年的应用题，可查看\u003ca href=\"#exam/%E6%89%B9%E6%B3%A8%E9%87%8C%E5%8F%AF%E4%BB%A5%E6%8B%BF%E6%9D%A5%E7%BB%83%E4%B9%A0%E7%9A%84%E8%B7%A8%E4%B8%BB%E9%A2%98%E9%97%AE%E9%A2%98\">考试要求中的跨主题练习\u003c/a>。\u003c/p>\n"}]}, {"id": "06", "label": "第六章", "name": "中华民族的抗日战争", "topics": [{"id": "06-一二-九运动与抗日民族统一战线的形成", "title": "一二·九运动与抗日民族统一战线的形成", "chapter": "06", "headings": ["一二·九运动与抗日民族统一战线的形成", "一、一二·九运动掀起抗日救亡新高潮", "二、由停止内战的呼吁走向第二次国共合作"], "html": "\u003cblockquote>\n\u003cp>一二·九运动段落的荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=156\" target=\"_blank\" rel=\"noopener\">课本第 142 页（PDF 第 156 页）\u003c/a>。统一战线的后续发展见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=157\" target=\"_blank\" rel=\"noopener\">课本第 143—144 页（PDF 第 157—158 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-一二-九运动掀起抗日救亡新高潮\">一、一二·九运动掀起抗日救亡新高潮\u003c/h3>\n\u003cp>华北事变后，中日民族矛盾进一步激化。1935 年 12 月 9 日，在中国共产党救亡号召和北平地下党组织领导下，北平学生举行抗日游行，提出反对华北自治、停止内战和一致对外等要求。12 月 16 日，学生和市民举行更大规模示威，运动迅速波及全国，推动民族觉醒，标志着抗日救亡运动新高潮的到来。\u003c/p>\n\u003ch3 id=\"二-由停止内战的呼吁走向第二次国共合作\">二、由停止内战的呼吁走向第二次国共合作\u003c/h3>\n\u003cp>《八一宣言》呼吁停止内战、共同抗日，1935 年底瓦窑堡会议提出建立广泛的抗日民族统一战线。1936 年西安事变和平解决后，十年内战基本结束。1937 年七七事变后，全民族抗战开始。同年 9 月国共合作宣言公开发表，蒋介石发表实际上承认中共合法地位的谈话，以第二次国共合作为基础的抗日民族统一战线正式形成。\u003c/p>\n"}, {"id": "06-抗日战争胜利的原因", "title": "抗日战争胜利的原因", "chapter": "06", "headings": ["抗日战争胜利的原因", "一、以爱国主义为核心的民族精神是决定因素", "二、中国共产党的中流砥柱作用是关键", "三、全民族抗战是重要法宝", "四、国际反法西斯力量给予支持"], "html": "\u003cblockquote>\n\u003cp>四条荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=178\" target=\"_blank\" rel=\"noopener\">课本第 164—165 页（PDF 第 178—179 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-以爱国主义为核心的民族精神是决定因素\">一、以爱国主义为核心的民族精神是决定因素\u003c/h3>\n\u003cp>民族危机使爱国主义和民族凝聚力达到新的高度。不同地区、阶层的中华儿女把保卫民族生存和国家独立作为共同目标，同仇敌忾、共御外侮。\u003c/p>\n\u003ch3 id=\"二-中国共产党的中流砥柱作用是关键\">二、中国共产党的中流砥柱作用是关键\u003c/h3>\n\u003cp>中国共产党率先举起武装抗日旗帜，推动西安事变和平解决和国共再次合作。全民族抗战开始后，党坚持全面抗战，提出并实行持久战方针，开辟敌后战场和抗日根据地，动员人民持续抗战。\u003c/p>\n\u003ch3 id=\"三-全民族抗战是重要法宝\">三、全民族抗战是重要法宝\u003c/h3>\n\u003cp>各党派、各民族、各阶层和团体广泛参与。国民党指挥的正面战场和中国共产党领导的敌后战场协力合作，多种形式的群众动员则为长期抗战提供了广泛支撑。\u003c/p>\n\u003ch3 id=\"四-国际反法西斯力量给予支持\">四、国际反法西斯力量给予支持\u003c/h3>\n\u003cp>爱好和平与正义的国家、人民、国际组织和反法西斯力量提供了物资、医疗、军事等支持。中国人民抗战同世界反法西斯斗争相互支持。\u003c/p>\n"}, {"id": "06-抗日战争胜利的历史意义", "title": "抗日战争胜利的历史意义", "chapter": "06", "headings": ["抗日战争胜利的历史意义"], "html": "\u003cblockquote>\n\u003cp>与上述原因相邻的正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=179\" target=\"_blank\" rel=\"noopener\">课本第 165—166 页（PDF 第 179—180 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>这是近代以来中国人民反抗外敌入侵第一次取得完全胜利的民族解放斗争，也是中华民族由深重危机走向复兴的历史转折点。\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>捍卫国家主权和领土完整\u003c/strong>，粉碎了日本军国主义殖民奴役中国的图谋。\u003c/li>\n\u003cli>\u003cstrong>推动中华民族团结\u003c/strong>，形成伟大抗战精神，坚定争取独立、自由和解放的意志。\u003c/li>\n\u003cli>\u003cstrong>为世界反法西斯胜利作出贡献\u003c/strong>，中国的国际地位显著提高。\u003c/li>\n\u003cli>\u003cstrong>为新民主主义革命胜利打下重要基础\u003c/strong>，为此后争取民族独立和人民解放创造了条件。\u003c/li>\n\u003c/ul>\n"}]}, {"id": "07", "label": "第七章", "name": "为建立新中国而奋斗", "topics": [{"id": "07-中国土地法大纲-与解放区土地改革", "title": "《中国土地法大纲》与解放区土地改革", "chapter": "07", "headings": ["《中国土地法大纲》与解放区土地改革", "一、出台背景", "二、时间、地点和核心内容", "三、作用"], "html": "\u003cblockquote>\n\u003cp>《中国土地法大纲》的荧光笔标注和土改后续见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=189\" target=\"_blank\" rel=\"noopener\">课本第 175—176 页（PDF 第 189—190 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-出台背景\">一、出台背景\u003c/h3>\n\u003cp>1946 年 5 月 4 日，中共中央发布关于土地问题的“五四指示”。到 1947 年下半年，解放区不少地方已基本实现耕者有其田，仍有一些地方没有开展土改，部分已经开展的地方也不够彻底。\u003c/p>\n\u003ch3 id=\"二-时间-地点和核心内容\">二、时间、地点和核心内容\u003c/h3>\n\u003cp>1947 年 7—9 月，中国共产党在西柏坡召开全国土地会议，制定并通过《中国土地法大纲》。大纲规定废除封建性及半封建性剥削的土地制度，实行耕者有其田，是一个彻底反封建的土地革命纲领。\u003c/p>\n\u003ch3 id=\"三-作用\">三、作用\u003c/h3>\n\u003cp>土改使广大农民获得土地、提高了政治觉悟和组织程度。农民参军、运输物资并承担其他支前工作，为解放战争提供了持续的人力、物力支持，为建立新中国奠定了深厚的群众基础。\u003c/p>\n"}, {"id": "07-中国革命胜利的基本经验", "title": "中国革命胜利的基本经验", "chapter": "07", "headings": ["中国革命胜利的基本经验", "一、坚持中国共产党的坚强领导", "二、把马克思主义基本原理同中国具体实际相结合", "三、运用统一战线、武装斗争和党的建设三个法宝"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=205\" target=\"_blank\" rel=\"noopener\">课本第 191 页（PDF 第 205 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-坚持中国共产党的坚强领导\">一、坚持中国共产党的坚强领导\u003c/h3>\n\u003cp>无产阶级及其政党的领导为革命提供了凝聚不同社会力量的核心，是新民主主义革命取得胜利的根本保障。\u003c/p>\n\u003ch3 id=\"二-把马克思主义基本原理同中国具体实际相结合\">二、把马克思主义基本原理同中国具体实际相结合\u003c/h3>\n\u003cp>中国共产党在毛泽东思想指导下，从中国国情出发制定纲领、路线、方针和政策，找到适合本国实际的革命道路。不断推进马克思主义中国化，是引导革命走向胜利的重要经验。\u003c/p>\n\u003ch3 id=\"三-运用统一战线-武装斗争和党的建设三个法宝\">三、运用统一战线、武装斗争和党的建设三个法宝\u003c/h3>\n\u003cul>\n\u003cli>\u003cstrong>统一战线\u003c/strong>扩大团结范围，联合能够共同奋斗的力量。\u003c/li>\n\u003cli>\u003cstrong>武装斗争\u003c/strong>是在当时中国争取革命胜利的重要形式。\u003c/li>\n\u003cli>\u003cstrong>党的建设\u003c/strong>使党在组织、纪律、思想和群众联系上经受锻炼，能够领导并运用前两个法宝。\u003c/li>\n\u003c/ul>\n\u003cp>课本将胜利的政权成果集中概括为建立工人阶级经共产党领导、以工农联盟为基础的人民民主专政，为实现中华民族伟大复兴创造了根本社会条件。\u003c/p>\n"}]}, {"id": "08", "label": "第八章", "name": "中华人民共和国的成立与中国社会主义建设道路的探索", "topics": [{"id": "08-抗美援朝战争胜利的历史意义", "title": "抗美援朝战争胜利的历史意义", "chapter": "08", "headings": ["抗美援朝战争胜利的历史意义", "一、捍卫新中国安全", "二、促进国防和军队现代化", "三、提升新中国国际地位，维护世界和平", "四、彰显人民的精神力量"], "html": "\u003cblockquote>\n\u003cp>荧光笔标注及相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=214\" target=\"_blank\" rel=\"noopener\">课本第 199—200 页（PDF 第 213—214 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>1953 年 7 月 27 日，朝鲜停战协定签署。抗美援朝战争的胜利是新中国成立初期巩固新生人民政权的重要成果，也是中华民族走向伟大复兴的重要里程碑。\u003c/p>\n\u003ch3 id=\"一-捍卫新中国安全\">一、捍卫新中国安全\u003c/h3>\n\u003cp>胜利维护了国家独立与安全，使新中国在复杂的国内国际环境中站稳脚跟，为国内建设争取了条件。\u003c/p>\n\u003ch3 id=\"二-促进国防和军队现代化\">二、促进国防和军队现代化\u003c/h3>\n\u003cp>中国人民志愿军经受了现代战争的严峻考验，胜利提高了人民军队的声望，也推动了国防和军队现代化。\u003c/p>\n\u003ch3 id=\"三-提升新中国国际地位-维护世界和平\">三、提升新中国国际地位，维护世界和平\u003c/h3>\n\u003cp>战争胜利使世界重新认识中国人民维护自身独立与安全的决心和能力，对世界和平与人类进步事业产生了积极影响。\u003c/p>\n\u003ch3 id=\"四-彰显人民的精神力量\">四、彰显人民的精神力量\u003c/h3>\n\u003cp>战场斗争和国内群众支援体现了万众一心、不畏强暴的品格。教材还概括了伟大抗美援朝精神的五个方面，即爱国主义、革命英雄主义、革命乐观主义、革命忠诚和国际主义。\u003c/p>\n"}, {"id": "08-第一个五年计划", "title": "第一个五年计划", "chapter": "08", "headings": ["第一个五年计划", "一、制定和起止时间", "二、主要任务", "三、实施成果和意义", "名词解释示例"], "html": "\u003cblockquote>\n\u003cp>“一五”计划的制定和实施均有荧光笔标注，实施段旁手写“名解”。见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=220\" target=\"_blank\" rel=\"noopener\">课本第 206—207 页（PDF 第 220—221 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-制定和起止时间\">一、制定和起止时间\u003c/h3>\n\u003cp>我国于 1951 年着手编制第一个五年计划，1953 年开始实施，计划期为 1953—1957 年。1955 年 7 月，一届全国人大二次会议正式通过该计划。编制、开始实施和正式通过是三个不同的时间节点。\u003c/p>\n\u003ch3 id=\"二-主要任务\">二、主要任务\u003c/h3>\n\u003cp>集中主要力量发展重工业，建立国家工业化和国防现代化的初步基础。同时统筹交通运输、轻工业、农业和商业的发展，培养建设人才，并逐步改善人民生活。\u003c/p>\n\u003ch3 id=\"三-实施成果和意义\">三、实施成果和意义\u003c/h3>\n\u003cp>以苏联援助的 156 项工程为中心开展工业建设。鞍钢大型轧钢厂、无缝钢管厂、七号炼铁炉等工程投产，包头、武汉等地的钢铁项目启动，一批此前没有的基础工业部门陆续建立，一批工矿企业在内地兴办。这使我国工业生产能力和技术水平明显提高，改善了原有的工业布局，为建立独立完整的工业体系打下基础。\u003c/p>\n\u003ch3 id=\"名词解释示例\">名词解释示例\u003c/h3>\n\u003cp>第一个五年计划是新中国于 1953—1957 年实施的第一个国民经济发展五年计划，1951 年着手编制，1955 年 7 月由一届全国人大二次会议通过。计划以优先发展重工业为重点，以苏联援助的 156 项工程为工业建设中心，为我国工业化和建立独立完整的工业体系奠定了基础。\u003c/p>\n"}]}, {"id": "09", "label": "第九章", "name": "改革开放与中国特色社会主义的开创和发展", "topics": [{"id": "09-党的十一届三中全会与历史性转折", "title": "党的十一届三中全会与历史性转折", "chapter": "09", "headings": ["党的十一届三中全会与历史性转折", "一、会议背景", "二、主要决定", "三、历史意义"], "html": "\u003cblockquote>\n\u003cp>标题的荧光笔标注及后续正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=259\" target=\"_blank\" rel=\"noopener\">课本第 245—247 页（PDF 第 259—261 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ch3 id=\"一-会议背景\">一、会议背景\u003c/h3>\n\u003cp>1978 年，关于真理标准问题的讨论推动了思想解放。全会前召开的中央工作会议讨论了党和国家工作重点转移、纠正历史错案等问题。邓小平所作《解放思想，实事求是，团结一致向前看》的讲话，为全会作出历史性转折奠定了思想基础。\u003c/p>\n\u003ch3 id=\"二-主要决定\">二、主要决定\u003c/h3>\n\u003cp>1978 年 12 月 18—22 日，党的十一届三中全会在北京召开。全会否定“两个凡是”的错误方针，高度评价真理标准问题讨论，停止使用“以阶级斗争为纲”的口号，决定把全党工作重心转到社会主义现代化建设上来，提出改革开放的任务。全会还强调发展民主、健全法制与党规党法，恢复成立中央纪律检查委员会。\u003c/p>\n\u003ch3 id=\"三-历史意义\">三、历史意义\u003c/h3>\n\u003cp>全会结束了粉碎“四人帮”后党和国家工作徘徊前进的局面，重新确立了马克思主义的思想路线、政治路线和组织路线，开启了改革开放和社会主义现代化建设新时期，拉开了开创中国特色社会主义的序幕。\u003c/p>\n"}, {"id": "09-邓小平南方谈话", "title": "邓小平南方谈话", "chapter": "09", "headings": ["邓小平南方谈话", "一、坚持基本路线，大胆推进改革开放", "二、以“三个有利于”判断改革成效", "三、明确计划和市场都是经济手段", "四、抓住机遇，加快发展", "五、历史意义"], "html": "\u003cblockquote>\n\u003cp>标题的荧光笔标注和谈话内容见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=283\" target=\"_blank\" rel=\"noopener\">课本第 269—270 页（PDF 第 283—284 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>1992 年 1 月 18 日至 2 月 21 日，邓小平先后视察武昌、深圳、珠海、上海等地并发表重要谈话。当时国际格局发生剧变，国内改革发展面临如何破除思想束缚、抓住机遇的一系列问题。\u003c/p>\n\u003ch3 id=\"一-坚持基本路线-大胆推进改革开放\">一、坚持基本路线，大胆推进改革开放\u003c/h3>\n\u003cp>改革同样能解放生产力。坚持党的基本路线不动摇，对看准的改革敢于试验。既要警惕右，主要是防止“左”。\u003c/p>\n\u003ch3 id=\"二-以-三个有利于-判断改革成效\">二、以“三个有利于”判断改革成效\u003c/h3>\n\u003cp>主要看是否有利于发展社会主义社会的生产力、增强社会主义国家的综合国力、提高人民的生活水平。\u003c/p>\n\u003ch3 id=\"三-明确计划和市场都是经济手段\">三、明确计划和市场都是经济手段\u003c/h3>\n\u003cp>计划和市场的比重不能用来划分社会主义与资本主义。社会主义的本质是解放和发展生产力，消灭剥削、消除两极分化，最终达到共同富裕。\u003c/p>\n\u003ch3 id=\"四-抓住机遇-加快发展\">四、抓住机遇，加快发展\u003c/h3>\n\u003cp>发展是硬道理，科学技术是第一生产力。谈话也强调改革开放和打击犯罪两手都要抓，在改革开放过程中坚持反对腐败。\u003c/p>\n\u003ch3 id=\"五-历史意义\">五、历史意义\u003c/h3>\n\u003cp>谈话回答了长期束缚思想的重大理论和实践问题，推动改革开放和现代化建设进入新阶段，并对党的十四大具有重要指导作用。\u003c/p>\n"}]}, {"id": "10", "label": "第十章", "name": "中国特色社会主义进入新时代", "topics": [{"id": "10-五位一体-总体布局", "title": "“五位一体”总体布局", "chapter": "10", "headings": ["“五位一体”总体布局", "一、经济建设", "二、政治建设", "三、文化建设", "四、社会建设", "五、生态文明建设"], "html": "\u003cblockquote>\n\u003cp>手写提示记在\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=285\" target=\"_blank\" rel=\"noopener\">课本第 271 页（PDF 第 285 页）\u003c/a>。按教材内容归入第十章，相关正文见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=332\" target=\"_blank\" rel=\"noopener\">课本第 318—327 页（PDF 第 332—341 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>“五位一体”回答中国特色社会主义事业\u003cstrong>要统筹推进哪些领域的建设\u003c/strong>。五个方面相互联系，贯穿发展、治理、民生和生态保护。\u003c/p>\n\u003ch3 id=\"一-经济建设\">一、经济建设\u003c/h3>\n\u003cp>以经济建设为中心，贯彻创新、协调、绿色、开放、共享的新发展理念。通过供给侧结构性改革等举措提高发展质量和效率。\u003c/p>\n\u003ch3 id=\"二-政治建设\">二、政治建设\u003c/h3>\n\u003cp>坚持党的领导、人民当家作主和依法治国有机统一。完善人民代表大会制度、协商民主制度和基层群众自治制度等，保障人民依法参与国家和社会事务。\u003c/p>\n\u003ch3 id=\"三-文化建设\">三、文化建设\u003c/h3>\n\u003cp>培育和践行社会主义核心价值观，推动中华优秀传统文化创造性转化和创新性发展，发展文化事业、文化产业和公共文化服务。\u003c/p>\n\u003ch3 id=\"四-社会建设\">四、社会建设\u003c/h3>\n\u003cp>以保障和改善民生、加强和创新社会治理为重点，推进就业、教育、社保、医疗、住房等方面工作，使改革发展成果更多更公平惠及群众。\u003c/p>\n\u003ch3 id=\"五-生态文明建设\">五、生态文明建设\u003c/h3>\n\u003cp>坚持绿水青山就是金山银山的理念，推动绿色发展方式和生活方式，加强污染防治、生态保护和修复。\u003c/p>\n"}, {"id": "10-四个全面-战略布局", "title": "“四个全面”战略布局", "chapter": "10", "headings": ["“四个全面”战略布局", "一、战略目标随发展阶段推进", "二、全面深化改革", "三、全面依法治国", "四、全面从严治党"], "html": "\u003cblockquote>\n\u003cp>手写提示记在\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=285\" target=\"_blank\" rel=\"noopener\">课本第 271 页（PDF 第 285 页）\u003c/a>。早期表述和形成过程见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=341\" target=\"_blank\" rel=\"noopener\">课本第 327—332 页（PDF 第 341—346 页）\u003c/a>，开启新征程后的表述见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=406\" target=\"_blank\" rel=\"noopener\">课本第 392 页（PDF 第 406 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>“四个全面”把一个战略目标和三个战略举措结合起来。答题时根据题目所指的历史阶段写全第一项。\u003c/p>\n\u003ch3 id=\"一-战略目标随发展阶段推进\">一、战略目标随发展阶段推进\u003c/h3>\n\u003cul>\n\u003cli>\u003cstrong>形成之初\u003c/strong>的第一项是\u003cstrong>全面建成小康社会\u003c/strong>，脱贫攻坚是补齐发展短板的重要任务。\u003c/li>\n\u003cli>\u003cstrong>开启全面建设社会主义现代化国家新征程后\u003c/strong>，第一项是\u003cstrong>全面建设社会主义现代化国家\u003c/strong>。教材在“十四五”发展指导思想中使用了这一表述。\u003c/li>\n\u003c/ul>\n\u003ch3 id=\"二-全面深化改革\">二、全面深化改革\u003c/h3>\n\u003cp>完善和发展中国特色社会主义制度，推进国家治理体系和治理能力现代化。党的十八届三中全会对此作出系统部署。\u003c/p>\n\u003ch3 id=\"三-全面依法治国\">三、全面依法治国\u003c/h3>\n\u003cp>建设中国特色社会主义法治体系和社会主义法治国家，为党和国家事业发展提供法治保障。党的十八届四中全会作出战略部署。\u003c/p>\n\u003ch3 id=\"四-全面从严治党\">四、全面从严治党\u003c/h3>\n\u003cp>加强党的领导和党的建设，严明纪律和规矩，为各项事业提供根本保证。\u003c/p>\n\u003cp>“五位一体”侧重回答建设的领域，“四个全面”侧重回答阶段目标和实现目标的战略举措。\u003c/p>\n"}]}], "exam": {"title": "考试题型与答题要求", "html": "\u003ch2 id=\"题型-题量和分值\">题型、题量和分值\u003c/h2>\n\u003cblockquote>\n\u003cp>题型与分值来自导言页手写批注。括号内数字按该题型小计理解。见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=15\" target=\"_blank\" rel=\"noopener\">课本第 1 页（PDF 第 15 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003ctable>\n\u003cthead>\n\u003ctr>\n\u003cth>题型\u003c/th>\n\u003cth>题量\u003c/th>\n\u003cth>分值\u003c/th>\n\u003cth>手写要求\u003c/th>\n\u003c/tr>\n\u003c/thead>\n\u003ctbody>\n\u003ctr>\n\u003ctd>单选题\u003c/td>\n\u003ctd>10 题\u003c/td>\n\u003ctd>10 分\u003c/td>\n\u003ctd>基于学习通\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>名词解释\u003c/td>\n\u003ctd>2 题\u003c/td>\n\u003ctd>10 分\u003c/td>\n\u003ctd>写清人物或主体、时间、主要内容和价值\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>简答题\u003c/td>\n\u003ctd>2 题\u003c/td>\n\u003ctd>20 分\u003c/td>\n\u003ctd>页边只记了题量与分值\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>论述题\u003c/td>\n\u003ctd>未写明\u003c/td>\n\u003ctd>20 分\u003c/td>\n\u003ctd>页边只记了分值\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>写作题\u003c/td>\n\u003ctd>未写明\u003c/td>\n\u003ctd>未写明\u003c/td>\n\u003ctd>手写为“500 字+”\u003c/td>\n\u003c/tr>\n\u003c/tbody>\n\u003c/table>\n\u003ch2 id=\"名词解释怎么答\">名词解释怎么答\u003c/h2>\n\u003cp>页边模板的意思是交代“谁在什么时期做了什么，有什么价值”。遇到政策、文件或会议时，把“谁”换成发起者、制定者或通过机构。若题目涉及思想主张、局限或历史地位，可以再据题意补一句。\u003c/p>\n\u003cp>可按\u003cstrong>时间与主体 → 主要内容 → 历史作用\u003c/strong>组织两三句话。课本第 207 页的“一五”计划实施段旁写有“名解”，可以用它练习这种答法。见\u003ca href=\"#topic/08-%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%BA%94%E5%B9%B4%E8%AE%A1%E5%88%92/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A%E7%A4%BA%E4%BE%8B\">“一五”计划名词解释示例\u003c/a>。\u003c/p>\n\u003ch2 id=\"简答-论述和写作的复习用答题框架\">简答、论述和写作的复习用答题框架\u003c/h2>\n\u003cul>\n\u003cli>\u003cstrong>简答题\u003c/strong>可先给出总判断，再逐条写“关键词 + 原因或表现”。例如洋务运动失败的三个原因，每一点都可以用一个具体例子说明。\u003c/li>\n\u003cli>\u003cstrong>论述题\u003c/strong>可先交代背景和观点，再用史实说明原因、机制或意义，最后回到题目。要分析“历史意义”时，可以按政治、社会和国际影响展开，并按题意交代历史局限。\u003c/li>\n\u003cli>\u003cstrong>写作题\u003c/strong>可用一段史实立论，再联系自己的学习、实践或社会观察，把可执行的行动写具体。篇幅按手写提示练习到 500 字以上。\u003c/li>\n\u003c/ul>\n\u003ch2 id=\"批注里可以拿来练习的跨主题问题\">批注里可以拿来练习的跨主题问题\u003c/h2>\n\u003ch3 id=\"作为当代青年-如何弘扬伟大长征精神\">作为当代青年，如何弘扬伟大长征精神？\u003c/h3>\n\u003cblockquote>\n\u003cp>原题意来自长征精神段落旁的手写批注。见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=149\" target=\"_blank\" rel=\"noopener\">课本第 135 页（PDF 第 149 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>可从长征史实引出理想信念、实事求是、团结纪律和依靠人民，再结合现实展开。例如，讨论如何在科研或学习受挫时根据证据调整方案，如何在集体实践中承担责任，如何通过志愿服务了解实际需求。知识点见\u003ca href=\"#topic/05-%E4%B8%AD%E5%9B%BD%E9%9D%A9%E5%91%BD%E6%96%B0%E9%81%93%E8%B7%AF%E6%98%AF%E6%80%8E%E6%A0%B7%E5%BC%80%E8%BE%9F%E7%9A%84\">第五章\u003c/a>。\u003c/p>\n\u003ch3 id=\"如何跑好历史接力棒\">如何跑好历史接力棒？\u003c/h3>\n\u003cblockquote>\n\u003cp>原题意来自贴入课本的课堂投影片照片及其手写圈注。见\u003ca href=\"%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf#page=285\" target=\"_blank\" rel=\"noopener\">课本第 271 页（PDF 第 285 页）\u003c/a>。\u003c/p>\n\u003c/blockquote>\n\u003cp>投影片引自 2022 年 4 月 25 日在中国人民大学考察时的讲话，重点是青年立志民族复兴，在青春中把责任和奋斗落实到行动。可以先说明自己如何理解历史接力，再结合专业学习、志愿服务或社会实践，写出这一代青年要承担的具体责任。批注未注明这两道练习题的正式题型或是否会出现在试卷上。\u003c/p>\n"}, "pdf": "%E4%B8%AD%E5%9B%BD%E8%BF%91%E7%8E%B0%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%20%202023%E5%B9%B4%E7%89%88.pdf"}</script>
+  <script>"use strict";
+
+const data = JSON.parse(document.querySelector("#study-data").textContent);
+const chapters = data.chapters;
+const topics = chapters.flatMap(chapter => chapter.topics);
+const chapterById = new Map(chapters.map(chapter => [chapter.id, chapter]));
+const topicById = new Map(topics.map(topic => [topic.id, topic]));
+const workbench = document.querySelector(".workbench");
+const chapterPane = document.querySelector(".chapters");
+const reader = document.querySelector("#reading");
+const chapterList = document.querySelector("#chapter-list");
+const mobileChapter = document.querySelector("#mobile-chapter");
+const mobileTopic = document.querySelector("#mobile-topic");
+const savedDirectory = document.querySelector("#saved-directory");
+const savedList = document.querySelector("#saved-list");
+const savedCount = document.querySelector("#saved-count");
+const savedTopic = document.querySelector("#saved-topic");
+const outline = document.querySelector("#outline");
+const progress = document.querySelector("#progress");
+const search = document.querySelector("#search");
+const clearSearch = document.querySelector("#clear-search");
+const announcement = document.querySelector("#announcement");
+const storageNote = document.querySelector("#storage-note");
+const storageKey = "modern-china-review:1";
+const modes = new Set(["topic", "practice", "saved", "exam"]);
+
+const escapeMap = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+const escapeHTML = text => String(text).replace(/[&<>"']/g, char => escapeMap[char]);
+const normalize = text => text.normalize("NFKC").toLocaleLowerCase("zh-CN");
+const searchable = text => normalize(text).replace(/[^\p{L}\p{N}]+/gu, "");
+const template = document.createElement("template");
+
+for (const topic of topics) {
+  template.innerHTML = topic.html;
+  topic.text = template.content.textContent.trim().replace(/\s+/gu, " ");
+  topic.index = searchable(topic.title + " " + topic.text);
+}
+function readProgress() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(storageKey) ?? "{}") ?? {};
+    const ids = list => new Set(Array.isArray(list) ? list.filter(id => topicById.has(id)) : []);
+    return { saved: ids(stored.saved), mastered: ids(stored.mastered), last: stored.last };
+  } catch {
+    storageNote.hidden = false;
+    return { saved: new Set(), mastered: new Set() };
+  }
+}
+
+const record = readProgress();
+const state = {
+  mode: "topic",
+  topic: topicById.get(record.last) ?? topics[0],
+  revealed: false,
+  anchor: "",
+  savedOpen: false,
+};
+
+function saveProgress() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify({
+      saved: [...record.saved],
+      mastered: [...record.mastered],
+      last: state.topic.id,
+    }));
+  } catch {
+    storageNote.hidden = false;
+  }
+}
+
+function route(mode, id = "", anchor = "") {
+  return "#" + [mode, id, anchor].filter(Boolean).map(encodeURIComponent).join("/");
+}
+
+function readRoute() {
+  let parts;
+  try {
+    parts = location.hash.slice(1).split("/").map(decodeURIComponent);
+  } catch {
+    parts = [];
+  }
+  const [mode, id, anchor] = parts;
+  return { mode: modes.has(mode) ? mode : "topic", id, anchor };
+}
+
+function applyRoute(moveFocus = false) {
+  const next = readRoute();
+  state.mode = next.mode;
+  state.anchor = next.mode === "exam" ? next.id : next.anchor;
+  state.savedOpen = next.mode === "saved" && record.saved.has(next.id);
+  if ((next.mode === "topic" || next.mode === "practice" || state.savedOpen) && topicById.has(next.id)) {
+    state.topic = topicById.get(next.id);
+  }
+  state.revealed = false;
+  saveProgress();
+  render();
+  if (moveFocus) {
+    const destination = state.anchor && document.getElementById(state.anchor);
+    if (destination) {
+      destination.tabIndex = -1;
+      destination.focus({ preventScroll: true });
+      destination.scrollIntoView({ block: "start" });
+    } else {
+      reader.focus({ preventScroll: true });
+      if (matchMedia("(max-width: 760px)").matches) reader.scrollIntoView({ block: "start" });
+      else window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }
+}
+
+function openRoute(href) {
+  search.value = "";
+  if (location.hash === href) applyRoute(true);
+  else location.hash = href;
+}
+
+function openTopic(topic, mode = "topic") {
+  openRoute(route(mode, topic.id));
+}
+
+function currentChapter() {
+  return chapterById.get(state.topic.chapter);
+}
+
+function reviewSequence() {
+  if (state.mode === "practice") return currentChapter().topics;
+  if (state.mode === "saved") return topics.filter(topic => record.saved.has(topic.id));
+  return topics;
+}
+
+function button(title, action, options = {}) {
+  const { style = "", pressed, disabled = false } = options;
+  return '<button type="button" class="button ' + style + '" data-action="' + action + '"' +
+    (pressed === undefined ? "" : ' aria-pressed="' + pressed + '"') +
+    (disabled ? " disabled" : "") + ">" + escapeHTML(title) + "</button>";
+}
+
+function progressBar(count, total) {
+  const percentage = Math.round(count / total * 100);
+  return '<div class="progress-track" role="progressbar" aria-label="掌握进度" aria-valuenow="' + count +
+    '" aria-valuemax="' + total + '"><span style="width:' + percentage + '%"></span></div>';
+}
+
+function renderChapterList(active) {
+  chapterList.innerHTML = chapters.map(chapter => {
+    const count = chapter.topics.filter(topic => record.mastered.has(topic.id)).length;
+    return '<button type="button" class="chapter-item" data-chapter="' + chapter.id + '"' +
+      (chapter.id === active.id ? ' aria-current="true"' : "") + '><span class="chapter-no">' +
+      chapter.id + '</span><span class="chapter-name">' + escapeHTML(chapter.name) +
+      '</span><span class="chapter-progress" aria-label="已掌握 ' + count + ' 个，共 ' +
+      chapter.topics.length + ' 个">' + count + "/" + chapter.topics.length + "</span></button>";
+  }).join("");
+  mobileChapter.value = active.id;
+  mobileTopic.innerHTML = active.topics.map(topic => '<option value="' + escapeHTML(topic.id) + '">' +
+    escapeHTML(topic.title) + "</option>").join("");
+  mobileTopic.value = state.topic.id;
+}
+
+function renderProgress(chapter) {
+  const count = record.mastered.size;
+  const chapterCount = chapter.topics.filter(topic => record.mastered.has(topic.id)).length;
+  progress.innerHTML = '<div class="pane-head"><h2>复习进度</h2></div><div class="progress-body">' +
+    '<p class="progress-numbers"><strong>' + count + '</strong><span> / ' + topics.length +
+    ' 已掌握</span></p>' + progressBar(count, topics.length) +
+    '<div class="progress-details"><span>本章 ' + chapterCount + "/" + chapter.topics.length +
+    "</span><span>已收藏 " + record.saved.size + "</span></div></div>";
+}
+
+function renderSavedDirectory() {
+  const groups = chapters.map(chapter => ({
+    label: chapter.label,
+    topics: chapter.topics.filter(topic => record.saved.has(topic.id)),
+  })).filter(group => group.topics.length);
+  const activeId = state.savedOpen ? state.topic.id : "";
+  savedCount.textContent = record.saved.size + " 个";
+  savedList.innerHTML = '<a href="#saved"' + (activeId ? "" : ' aria-current="page"') +
+    ">全部收藏</a>" + groups.map(group => '<p class="saved-group">' + escapeHTML(group.label) + "</p>" +
+    group.topics.map(topic => '<a href="' + route("saved", topic.id) + '"' +
+      (topic.id === activeId ? ' aria-current="page"' : "") + ">" + escapeHTML(topic.title) + "</a>").join("")
+  ).join("");
+  savedTopic.innerHTML = '<option value="">全部收藏</option>' + groups.map(group =>
+    '<optgroup label="' + escapeHTML(group.label) + '">' + group.topics.map(topic =>
+      '<option value="' + escapeHTML(topic.id) + '">' + escapeHTML(topic.title) + "</option>"
+    ).join("") + "</optgroup>"
+  ).join("");
+  savedTopic.value = activeId;
+}
+
+function renderOutline(chapter) {
+  outline.innerHTML = '<div class="pane-head"><h2>本章知识点</h2><span class="muted">' +
+    chapter.topics.length + '</span></div><div class="outline-list">' +
+    chapter.topics.map((topic, index) => '<a data-route href="' +
+      route(state.mode === "practice" ? "practice" : "topic", topic.id) + '"' +
+      (topic.id === state.topic.id ? ' aria-current="page"' : "") + '><span class="outline-no">' +
+      (index + 1) + '</span><span>' + escapeHTML(topic.title) + "</span>" +
+      (record.mastered.has(topic.id) ? '<span class="check" aria-label="已掌握">✓</span>' : "") + "</a>").join("") + "</div>";
+}
+
+function renderTopic() {
+  const topic = state.topic;
+  const chapter = currentChapter();
+  const studying = state.mode === "practice";
+  const mastered = record.mastered.has(topic.id);
+  const saved = record.saved.has(topic.id);
+  const sequence = reviewSequence();
+  const index = sequence.indexOf(topic);
+  const showAnswer = !studying || state.revealed;
+
+  const heading = '<div class="reader-head"><p class="chapter-kicker">' +
+    escapeHTML(chapter.label + " " + chapter.name) + '</p><h1>' + escapeHTML(topic.title) +
+    '</h1><div class="reader-actions">' +
+    button(saved ? "已收藏" : "收藏", "save", { pressed: saved }) +
+    button(mastered ? "已掌握" : "标为已掌握", "master", { pressed: mastered }) + "</div></div>";
+  const challenge = studying ? '<div class="recall"><p>' +
+    (state.revealed ? "对照要点检查刚才的回忆。" : "先试着复述要点，再展开核对。") + "</p>" +
+    button(state.revealed ? "收起要点" : "查看要点", "reveal", { style: "primary" }) + "</div>" : "";
+  const body = showAnswer ? '<article class="markdown">' + topic.html + "</article>" : "";
+  const previous = button("上一个", "prev", { disabled: index === 0 });
+  const next = button("下一个", "next", { disabled: index === sequence.length - 1 });
+  const extra = studying
+    ? button("随机抽背", "random", { disabled: sequence.length < 2 })
+    : button("背诵此知识点", "practice", { style: "quiet" });
+
+  reader.innerHTML = heading + '<div class="reader-body">' + challenge + body +
+    '</div><div class="reader-footer"><div>' + previous + next + "</div>" + extra + "</div>";
+}
+
+function renderExam() {
+  reader.innerHTML = '<div class="reader-head"><h1>' + escapeHTML(data.exam.title) +
+    '</h1></div><div class="reader-body"><article class="markdown">' + data.exam.html + "</article></div>";
+}
+
+function excerpt(topic, terms) {
+  if (!terms.length) return escapeHTML(topic.text.slice(0, 92)) + (topic.text.length > 92 ? "…" : "");
+  const text = normalize(topic.text);
+  const pattern = terms.map(term => [...term].join("[^\\p{L}\\p{N}]*")).join("|");
+  const regex = new RegExp("(" + pattern + ")", "gu");
+  const index = text.search(regex);
+  const start = Math.max(0, index - 22);
+  const end = Math.min(text.length, start + 108);
+  const fragment = text.slice(start, end);
+  return (start ? "…" : "") + fragment.split(regex).map((part, index) =>
+    index % 2 ? "<mark>" + escapeHTML(part) + "</mark>" : escapeHTML(part)).join("") +
+    (end < text.length ? "…" : "");
+}
+
+function renderResults(results, terms) {
+  const searching = terms.length > 0;
+  const title = searching ? "搜索结果" : "收藏";
+  const empty = searching ? "没有找到相关知识点。试试更短的关键词。" : "你还没有收藏知识点。";
+  reader.innerHTML = '<div class="reader-head result-head"><h1>' + title + '</h1><p class="muted">' +
+    results.length + ' 个知识点</p></div><div class="results">' +
+    (results.length ? results.map(topic => {
+      const chapter = chapterById.get(topic.chapter);
+      return '<a class="result" href="' + route(searching ? "topic" : "saved", topic.id) + '"><span class="result-chapter">' +
+        escapeHTML(chapter.label) + "</span><strong>" + escapeHTML(topic.title) +
+        '</strong><span class="result-copy">' + excerpt(topic, terms) + "</span></a>";
+    }).join("") : '<p class="empty">' + empty + "</p>") + "</div>";
+}
+
+function render() {
+  const chapter = currentChapter();
+  const terms = [...new Set(search.value.trim().split(/\s+/u).map(searchable).filter(Boolean))];
+  const view = terms.length ? "search" : state.mode;
+  const favorites = view === "saved";
+  workbench.dataset.view = view;
+  chapterPane.setAttribute("aria-label", favorites ? "收藏目录" : "章节目录");
+  savedDirectory.hidden = !favorites;
+  outline.hidden = favorites;
+  clearSearch.hidden = !search.value;
+  document.querySelectorAll("[data-mode]").forEach(tab => {
+    tab.setAttribute("aria-pressed", String(!terms.length && tab.dataset.mode === state.mode));
+  });
+  if (favorites) renderSavedDirectory();
+  else if (view !== "exam") {
+    renderChapterList(chapter);
+    renderOutline(chapter);
+  }
+  if (view !== "exam") renderProgress(chapter);
+
+  if (terms.length) {
+    const results = topics.filter(topic => terms.every(term => topic.index.includes(term)));
+    renderResults(results, terms);
+    announcement.textContent = "找到 " + results.length + " 个知识点";
+  } else if (state.mode === "exam") renderExam();
+  else if (favorites && !state.savedOpen) renderResults(reviewSequence(), []);
+  else renderTopic();
+}
+
+function selectChapter(id) {
+  const chapter = chapterById.get(id);
+  const practicing = state.mode === "practice";
+  const firstUnmastered = chapter.topics.find(topic => !record.mastered.has(topic.id));
+  const topic = practicing ? firstUnmastered ?? chapter.topics[0] : chapter.topics[0];
+  openTopic(topic, practicing ? "practice" : "topic");
+}
+
+function updateTopicStatus(action) {
+  const collection = action === "save" ? record.saved : record.mastered;
+  const id = state.topic.id;
+  const removed = collection.delete(id);
+  if (!removed) collection.add(id);
+  saveProgress();
+  if (removed && action === "save" && state.savedOpen) openRoute("#saved");
+  else {
+    render();
+    reader.querySelector('[data-action="' + action + '"]').focus({ preventScroll: true });
+  }
+  announcement.textContent = action === "save"
+    ? (removed ? "已取消收藏" : "已收藏")
+    : (removed ? "已取消掌握" : "已标为掌握");
+}
+
+function handleAction(action) {
+  if (action === "save" || action === "master") {
+    updateTopicStatus(action);
+    return;
+  }
+  if (action === "practice") {
+    openTopic(state.topic, "practice");
+    return;
+  }
+  if (action === "reveal") {
+    state.revealed = !state.revealed;
+    renderTopic();
+    reader.querySelector('[data-action="reveal"]').focus({ preventScroll: true });
+    announcement.textContent = state.revealed ? "已展开知识点" : "已收起知识点";
+    return;
+  }
+  const sequence = reviewSequence();
+  const index = sequence.indexOf(state.topic);
+  if (action === "random") {
+    const rest = sequence.filter(topic => topic !== state.topic);
+    const unfinished = rest.filter(topic => !record.mastered.has(topic.id));
+    const choice = unfinished.length ? unfinished : rest;
+    if (choice.length) openTopic(choice[Math.floor(Math.random() * choice.length)], state.mode);
+  } else {
+    const candidate = sequence[index + (action === "prev" ? -1 : 1)];
+    if (candidate) openTopic(candidate, state.mode);
+  }
+}
+
+document.querySelector("#textbook").href = data.pdf;
+document.querySelector("#chapter-count").textContent = chapters.length + " 章";
+mobileChapter.innerHTML = chapters.map(chapter => '<option value="' + chapter.id + '">' +
+  escapeHTML(chapter.label + " " + chapter.name) + "</option>").join("");
+
+document.addEventListener("click", event => {
+  const tab = event.target.closest("[data-mode]");
+  if (tab) {
+    const mode = tab.dataset.mode;
+    openRoute(route(mode, mode === "topic" || mode === "practice" ? state.topic.id : ""));
+    return;
+  }
+  const chapter = event.target.closest("[data-chapter]");
+  if (chapter) return selectChapter(chapter.dataset.chapter);
+  const control = event.target.closest("[data-action]");
+  if (control) return handleAction(control.dataset.action);
+
+  const link = event.target.closest('a[href^="#"]');
+  if (link?.classList.contains("skip-link")) {
+    event.preventDefault();
+    reader.focus();
+  } else if (link && !event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey) {
+    event.preventDefault();
+    openRoute(link.getAttribute("href"));
+  }
+});
+
+mobileChapter.addEventListener("change", () => selectChapter(mobileChapter.value));
+mobileTopic.addEventListener("change", () => {
+  openTopic(topicById.get(mobileTopic.value), state.mode === "practice" ? "practice" : "topic");
+});
+savedTopic.addEventListener("change", () => openRoute(route("saved", savedTopic.value)));
+search.addEventListener("input", render);
+search.addEventListener("keydown", event => {
+  if (event.key === "Escape" && search.value) clearSearch.click();
+});
+clearSearch.addEventListener("click", () => {
+  search.value = "";
+  render();
+  search.focus();
+});
+window.addEventListener("hashchange", () => {
+  search.value = "";
+  applyRoute(true);
+});
+applyRoute();
+</script>
+</body>
+</html>

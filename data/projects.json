@@ -1,0 +1,60 @@
+{
+  "projects": [
+    {
+      "id": "c-ppt",
+      "title": "C 语言知识点复习",
+      "subtitle": "2 小时速通交互式 Web 课件",
+      "description": "面向考试梳理的 55 页浏览器幻灯片，涵盖概念规则、列表法读程序与编程模板，内置单选自测与解析。",
+      "url": "./C-ppt/",
+      "tag": "交互课件",
+      "year": "2026",
+      "featured": true,
+      "accent": "emerald",
+      "highlights": ["55 页 Slide", "内置刷题自测", "键盘翻页 / 讲稿"]
+    },
+    {
+      "id": "china-modern-history",
+      "title": "中国近现代史纲要复习台",
+      "subtitle": "分章节梳理与检索复习工具",
+      "description": "按章节整理《中国近现代史纲要》核心考点，支持全文关键词检索、重点收藏、进度追踪与自测视图。",
+      "url": "./knowledge/china-modern-history.html",
+      "tag": "复习台",
+      "year": "2026",
+      "featured": false,
+      "accent": "cyan",
+      "highlights": ["章节梳理", "全文检索", "进度记录"]
+    },
+    {
+      "id": "party-study",
+      "title": "党课题库复习台",
+      "subtitle": "刷题查题 · 考点 · 错题本",
+      "description": "集查题练习、考点目录、知识点速览、错题本、收藏夹与速背笔记于一体的单文件交互式题库工作台。",
+      "url": "./knowledge/party-study.html",
+      "tag": "复习台",
+      "year": "2026",
+      "featured": false,
+      "accent": "amber",
+      "highlights": ["题库练习", "错题本 / 收藏", "速背笔记"]
+    }
+  ],
+  "notes": [
+    {
+      "id": "github-actions",
+      "title": "GitHub Action 笔记",
+      "date": "2024-08-17",
+      "category": "自动化",
+      "summary": "记录 GitHub Actions workflow 的基本格式、触发事件、构建 exe 与自动发布 Release。",
+      "url": "./notes/view.html?id=github-actions",
+      "file": "./posts/github-actions.md"
+    },
+    {
+      "id": "html-basics",
+      "title": "HTML 基本笔记",
+      "date": "2024-08-11",
+      "category": "前端",
+      "summary": "整理背景铺满、Flex 居中排序、键盘鼠标事件监听（含 keyCode 表）与 JS 倒计时逻辑。",
+      "url": "./notes/view.html?id=html-basics",
+      "file": "./posts/html-basics.md"
+    }
+  ]
+}
