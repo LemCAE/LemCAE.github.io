@@ -101,6 +101,7 @@ button {
 /* Top bar */
 .topbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -118,6 +119,7 @@ button {
 }
 
 .brand-dot {
+  flex-shrink: 0;
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -127,6 +129,7 @@ button {
 
 .topbar-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
@@ -141,6 +144,7 @@ button {
   background: var(--surface);
   border: 1px solid var(--border);
   font-size: 0.85rem;
+  white-space: nowrap;
   color: var(--text-secondary);
   transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
 }
@@ -788,6 +792,17 @@ button {
 @media (max-width: 600px) {
   .page-shell {
     padding: 20px 14px 36px;
+  }
+  .topbar {
+    row-gap: 10px;
+    margin-bottom: 16px;
+  }
+  .topbar-actions {
+    gap: 8px;
+  }
+  .icon-btn {
+    min-height: 44px;
+    padding-inline: 9px;
   }
   .bento-grid {
     grid-template-columns: 1fr;

@@ -293,6 +293,16 @@
 }
 
 @media (max-width: 600px) {
+  .notes-hero,
+  .note-card {
+    padding: 18px;
+  }
+  .notes-hero {
+    align-items: flex-start;
+  }
+  .notes-hero .filter-pill {
+    min-height: 44px;
+  }
   .article-card {
     padding: 20px 18px;
   }
