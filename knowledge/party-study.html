@@ -22,6 +22,8 @@ main.shell{padding-block:1.4rem 2rem}.toolbar{display:flex;flex-wrap:wrap;gap:.6
 .toolbar input,.toolbar select,.fill{min-height:43px;width:100%;border:1px solid #aebecf;border-radius:6px;background:white;padding:.53rem .66rem;color:var(--ink)}
 .toolbar .check{display:flex;align-items:center;gap:.4rem;min-height:43px;white-space:nowrap;font-weight:500}
 .toolbar .check input{width:1rem;min-height:auto;accent-color:var(--blue)}
+.advanced-filters{display:contents}
+.toolbar .filter-toggle,.pane-title .list-toggle{display:none}
 .layout{display:grid;grid-template-columns:minmax(12rem,.92fr) minmax(24rem,2.12fr) minmax(15rem,1.05fr);gap:1rem;align-items:start}
 .pane{min-width:0;border:1px solid var(--line);border-radius:8px;background:white;overflow:clip}
 .pane-title{padding:.85rem 1rem;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:.4rem}
@@ -87,8 +89,47 @@ article h2{font-size:1.19rem;border-bottom:1px solid var(--line);padding-bottom:
 article h2:first-child{margin-top:0}article h3{scroll-margin-top:4.5rem;margin:.85rem 0 .45rem;font-size:1.06rem}article p{margin-top:.46rem}.note-item{padding-left:.8rem;border-left:2px solid var(--line)}
 #storage-alert{margin-top:1rem;color:var(--red)}
 @media(max-width:1100px){.layout{grid-template-columns:minmax(12rem,.8fr) minmax(20rem,1.7fr)}.context{grid-column:2}.list{max-height:49vh}}
-@media(max-width:680px){.shell{width:calc(100% - 1.2rem)}header .shell{padding-block:.8rem}.brand-mark{display:none}h1{font-family:inherit;font-size:1.33rem}.navigation nav{gap:0 .85rem;flex-wrap:wrap}.navigation button{font-size:.91rem}main.shell{padding-top:.8rem}.layout{display:flex;flex-direction:column;gap:.7rem}.pane{width:100%}.question{min-height:unset;order:1}.context{order:2}.index{order:3}.list{max-height:19rem;min-height:3rem}.toolbar{gap:.48rem;margin-bottom:.7rem}.toolbar label{flex:1 1 26%}.toolbar .search{flex:1 0 100%}.toolbar .check{flex:0 0 auto}.knowledge-layout{grid-template-columns:minmax(0,1fr);gap:.7rem}.knowledge-side{position:static;padding:.85rem}.knowledge-nav ul{display:flex;flex-wrap:wrap;gap:.12rem .6rem}.knowledge-nav a{padding:.18rem .12rem;font-size:.87rem}.knowledge-chapter{padding-block:1.15rem}}
-@media(max-width:430px){.navigation nav{justify-content:space-between;gap:0 .28rem}.navigation button{font-size:.86rem}.study-count{flex-basis:100%;margin:0;padding:.25rem 0 .45rem}}
+@media(max-width:680px){
+  .shell{width:calc(100% - 1.25rem)}
+  header .shell{padding-block:.65rem;gap:.65rem}
+  header .outline{flex-shrink:0}
+  .brand-mark{display:none}
+  h1{font-family:inherit;font-size:clamp(1.17rem,4.8vw,1.45rem)}
+  .navigation nav{display:grid;grid-template-columns:repeat(5,auto);gap:0 .15rem}
+  .navigation button{display:block;min-width:0;min-height:2.75rem;padding:.4rem .12rem;font-size:.85rem;line-height:1.25;white-space:normal}
+  .study-count{grid-column:1/-1;margin:0;padding:.15rem 0 .4rem;text-align:right;line-height:1.2}
+  main.shell{padding-top:.75rem}
+  .toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem .55rem;margin-bottom:.7rem}
+  .toolbar .search,#topic-chapter{grid-column:1/-1}
+  .toolbar .filter-toggle,.pane-title .list-toggle{display:inline-flex;align-items:center;justify-content:center}
+  #random{grid-row:2;grid-column:2}
+  .advanced-filters{display:grid;grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem .55rem;align-items:end;padding:.2rem 0}
+  .filter-toggle[aria-expanded=false] ~ .advanced-filters{display:none}
+  .toolbar select{min-width:0;text-overflow:ellipsis}
+  .toolbar input,.toolbar select,#knowledge-search{min-height:2.75rem;font-size:1rem}
+  .toolbar .check{min-height:2.75rem}
+  .layout,.knowledge-layout{grid-template-columns:minmax(0,1fr);gap:.7rem}
+  .context{grid-column:auto}
+  .pane-title{align-items:center;padding:.35rem .65rem .35rem .85rem}
+  .list-toggle{margin-left:auto}
+  .index:has(.list-toggle[aria-expanded=false]) .list-body{display:none}
+  .index:has(.list-toggle[aria-expanded=false]) .pane-title{border-bottom:0}
+  .list{max-height:min(19rem,45vh);max-height:min(19rem,45dvh);min-height:3rem}
+  .question{min-height:0;padding:.9rem;scroll-margin-top:.5rem}
+  .question h2{margin:.55rem 0 .8rem}
+  .outline,.primary,.tag{min-height:2.75rem}
+  .option{grid-template-columns:1.5rem minmax(0,1fr);gap:.5rem;overflow-wrap:anywhere}
+  .source button,.source summary,.knowledge-practice a{display:inline-flex;align-items:center;min-height:2.75rem}
+  .knowledge-side{position:static;padding:.85rem}
+  .knowledge-nav ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:.12rem .5rem}
+  .knowledge-nav a{display:flex;align-items:center;min-height:2.75rem;padding:.25rem .3rem;font-size:.87rem}
+  .knowledge-chapter{padding-block:1.15rem}
+  dialog{max-height:88dvh}
+}
+@media(max-width:680px) and (min-height:500px){
+  html{scroll-padding-top:4.5rem}
+  .navigation{position:sticky;top:0;z-index:2}
+}
 </style>
 <header><div class="shell"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><h1>党课题库复习台</h1></div><button class="outline" id="open-notes">速背笔记</button></div></header>
 <div class="navigation"><nav class="shell" aria-label="复习方式">
@@ -102,15 +143,21 @@ article h2:first-child{margin-top:0}article h3{scroll-margin-top:4.5rem;margin:.
 <div class="toolbar">
 <label class="search"><span id="search-label">搜索题干或考点</span><input id="search" type="search" autocomplete="off" placeholder="例如 七届二中、科学发展观"></label>
 <label id="topic-chapter" hidden>专题<select id="chapter"></select></label>
-<label class="question-filter">来源<select id="source"><option value="">全部文件</option></select></label>
-<label class="question-filter">题型<select id="kind"><option value="">全部题型</option><option>单选题</option><option>多选题</option><option>判断题</option><option>填空题</option></select></label>
-<label class="question-filter">排序<select id="sort"><option value="">按题库顺序</option><option value="rate">易错率从高到低</option></select></label>
-<label class="check question-filter"><input id="merge" type="checkbox" checked>合并同题</label>
+<button class="outline filter-toggle question-filter" id="filter-toggle" type="button" aria-controls="advanced-filters" aria-expanded="false">筛选与排序</button>
+<div class="advanced-filters question-filter" id="advanced-filters">
+<label>来源<select id="source"><option value="">全部文件</option></select></label>
+<label>题型<select id="kind"><option value="">全部题型</option><option>单选题</option><option>多选题</option><option>判断题</option><option>填空题</option></select></label>
+<label>排序<select id="sort"><option value="">按题库顺序</option><option value="rate">易错率从高到低</option></select></label>
+<label class="check"><input id="merge" type="checkbox" checked>合并同题</label>
+</div>
 <button class="outline question-filter" id="random">随机抽题</button>
 </div>
 <div id="active-filter" hidden></div>
 <div class="layout">
-<section class="pane index" aria-labelledby="list-title"><div class="pane-title"><h2 id="list-title">题目列表</h2><span class="meta" id="result-count" aria-live="polite"></span></div><div id="results" class="list"></div><div id="pagination" class="pages"></div></section>
+<section class="pane index" aria-labelledby="list-title">
+<div class="pane-title"><h2 id="list-title">题目列表</h2><span class="meta" id="result-count" aria-live="polite"></span><button class="outline list-toggle" id="list-toggle" type="button" aria-controls="list-body" aria-expanded="false">展开列表</button></div>
+<div class="list-body" id="list-body"><div id="results" class="list"></div><div id="pagination" class="pages"></div></div>
+</section>
 <section id="question-pane" class="pane question" aria-label="题目或考点" tabindex="-1"></section>
 <aside id="context-pane" class="pane context" aria-label="知识点和题目出处"></aside>
 </div>
@@ -439,6 +486,8 @@ const $ = selector => document.querySelector(selector);
 const search = $("#search"), source = $("#source"), kind = $("#kind"), sort = $("#sort"), merge = $("#merge"), chapter = $("#chapter");
 const results = $("#results"), question = $("#question-pane"), context = $("#context-pane"), notes = $("#notes");
 const practiceView = $("#practice-view"), knowledgeView = $("#knowledge-view"), knowledgeSearch = $("#knowledge-search");
+const filterToggle = $("#filter-toggle"), listToggle = $("#list-toggle");
+const mobileLayout = matchMedia("(max-width: 680px)");
 const records = new Map(data.records.map(record => [record.id, record]));
 const topics = new Map(data.topics.map(topic => [topic.name, topic]));
 const groups = new Map();
@@ -584,6 +633,8 @@ function render() {
   document.querySelectorAll(".question-filter").forEach(element => element.hidden = isTopics);
   $("#topic-chapter").hidden = !isTopics;
   $("#list-title").textContent = isTopics ? "考点列表" : "题目列表";
+  const filterCount = [source, kind, sort].filter(control => control.value).length + Number(!merge.checked);
+  filterToggle.textContent = filterCount ? "筛选与排序（" + filterCount + "）" : "筛选与排序";
   $("#random").disabled = isTopics || !state.items.some(id => id !== state.selected && records.get(id).key);
   $("#search-label").textContent = isTopics ? "搜索考点" : "搜索题干或考点";
   search.placeholder = isTopics ? "例如 民主集中制" : "例如 七届二中、科学发展观";
@@ -607,20 +658,27 @@ function renderList() {
       (key && progress.done[key] ? '　<b class="done">已做</b>' : '') +
       (key && progress.wrong[key] ? '<b class="wrong-mark">错题</b>' : '') + '</small></button>';
   }).join("") : '<p class="empty">当前筛选没有结果。</p>';
-  const selected = results.querySelector('[aria-current="true"]');
-  if (selected) {
-    const viewport = results.getBoundingClientRect();
-    const row = selected.getBoundingClientRect();
-    if (row.top < viewport.top || row.bottom > viewport.bottom) {
-      results.scrollTop += row.top - viewport.top - (viewport.height - row.height) / 2;
-    }
-  }
+  scrollSelectedIntoList();
   const pages = Math.ceil(state.items.length / pageSize);
   $("#pagination").innerHTML = pages > 1
     ? '<button class="outline" data-page="-1"' + (state.page === 0 ? " disabled" : "") +
       '>上页</button><span class="meta">' + (state.page + 1) + ' / ' + pages +
       '</span><button class="outline" data-page="1"' + (state.page + 1 === pages ? " disabled" : "") + '>下页</button>'
     : "";
+}
+function scrollSelectedIntoList() {
+  const selected = results.querySelector('[aria-current="true"]');
+  if (!selected || !results.clientHeight) return;
+  const viewport = results.getBoundingClientRect();
+  const row = selected.getBoundingClientRect();
+  if (row.top < viewport.top || row.bottom > viewport.bottom) {
+    results.scrollTop += row.top - viewport.top - (viewport.height - row.height) / 2;
+  }
+}
+function setListExpanded(expanded) {
+  listToggle.setAttribute("aria-expanded", expanded);
+  listToggle.textContent = expanded ? "收起列表" : "展开列表";
+  if (expanded) scrollSelectedIntoList();
 }
 function renderContent() {
   context.hidden = !state.selected;
@@ -735,6 +793,11 @@ function renderContext(record) {
     '</ul></details>' : '') + '</div>';
 }
 
+function focusQuestionPane() {
+  question.focus({ preventScroll: true });
+  question.scrollIntoView({ block: mobileLayout.matches ? "start" : "nearest" });
+}
+
 function select(id, focusQuestion = false) {
   if (id !== state.selected) {
     clearQuestionLink();
@@ -743,11 +806,9 @@ function select(id, focusQuestion = false) {
   }
   state.page = Math.floor(state.items.indexOf(id) / pageSize);
   rememberPosition();
+  if (mobileLayout.matches) setListExpanded(false);
   render();
-  if (focusQuestion || matchMedia("(max-width: 680px)").matches) {
-    question.focus({ preventScroll: true });
-    question.scrollIntoView({ block: "nearest" });
-  }
+  if (focusQuestion || mobileLayout.matches) focusQuestionPane();
 }
 
 function updateNavigation() {
@@ -808,10 +869,12 @@ function activate(mode, tag = "", id = "") {
   state.selected = "";
   resetAnswer();
   for (const input of [search, source, kind, sort, chapter]) input.value = "";
+  setListExpanded(false);
   results.scrollTop = 0;
   filter(id);
   $("#random").disabled = state.items.length <= 1;
-  if (leavingKnowledge) window.scrollTo(0, 0);
+  if (mobileLayout.matches && (tag || id)) focusQuestionPane();
+  else if (leavingKnowledge || mobileLayout.matches) window.scrollTo(0, 0);
 }
 
 function goToTag(tag) {
@@ -926,7 +989,8 @@ function action(name) {
     const nearby = state.items.slice(index + 1).find(stillWrong)
       ?? state.items.slice(0, index).findLast(stillWrong);
     filter(nearby);
-    question.focus({ preventScroll: true });
+    if (mobileLayout.matches) focusQuestionPane();
+    else question.focus({ preventScroll: true });
   }
   if (name === "retry" || name === "reveal") {
     if (name === "retry") resetAnswer();
@@ -950,9 +1014,16 @@ function changeFilter() {
   filter();
   $("#random").disabled = state.items.length <= 1;
 }
-search.addEventListener("input", changeFilter);
+search.addEventListener("input", () => {
+  changeFilter();
+  if (mobileLayout.matches) setListExpanded(Boolean(search.value.trim()));
+});
 knowledgeSearch.addEventListener("input", filterKnowledge);
 for (const control of [source, kind, sort, merge, chapter]) control.addEventListener("change", changeFilter);
+filterToggle.addEventListener("click", () => {
+  filterToggle.setAttribute("aria-expanded", filterToggle.getAttribute("aria-expanded") === "false");
+});
+listToggle.addEventListener("click", () => setListExpanded(listToggle.getAttribute("aria-expanded") === "false"));
 $("#open-notes").addEventListener("click", () => openNotes());
 $("#random").addEventListener("click", () => {
   const eligible = state.items.filter(id => id !== state.selected && records.get(id).key);

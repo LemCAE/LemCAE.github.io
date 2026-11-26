@@ -353,34 +353,57 @@ mark { background: var(--pink); border-radius: 2px; color: var(--ink); }
   .study { grid-column: 1; }
 }
 @media (max-width: 760px) {
-  .shell { width: calc(100% - 1.4rem); }
-  .masthead-inner { min-height: 4.75rem; }
+  .shell { width: calc(100% - 1.25rem); }
+  .masthead-inner { min-height: 4.6rem; gap: .65rem; }
   .brand { gap: .55rem; }
-  .brand-name { font-size: 1.36rem; }
+  .brand-name { font-size: clamp(1.18rem, 5.4vw, 1.45rem); }
   .brand-detail { font-size: .78rem; }
   .book-symbol { display: none; }
-  .textbook { font-size: .78rem; padding-inline: .45rem; }
-  .toolbar-inner { display: block; padding-bottom: .65rem; }
-  .tabs { justify-content: space-between; gap: .45rem; }
-  .tabs button { min-height: 2.85rem; font-size: .9rem; }
-  .search { margin-top: .55rem; }
+  .textbook { display: grid; place-items: center; min-height: 2.75rem; font-size: .8rem; padding-inline: .55rem; }
+  .toolbar-inner { display: grid; gap: .45rem; padding-bottom: .55rem; }
+  .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .25rem; }
+  .tabs button { min-height: 2.75rem; font-size: .9rem; white-space: normal; }
+  .search input { min-height: 2.75rem; padding-right: .8rem; font-size: 1rem; }
+  .search input:has(+ .clear-search:not([hidden])) { padding-right: 3rem; }
+  .clear-search { right: 0; width: 2.75rem; height: 2.75rem; }
+  .clear-search:focus-visible { outline-offset: -3px; }
   .workbench { grid-template-columns: minmax(0, 1fr); gap: .7rem; padding-block: .75rem 1.6rem; }
   .reader, .study { grid-column: 1; grid-row: auto; }
-  .chapter-desktop { display: none; }
-  .chapter-mobile { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .42rem .55rem; padding: .55rem .7rem; }
+  .chapter-desktop, .workbench[data-view="search"] :is(.chapters, .study) { display: none; }
+  .chapter-mobile { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .45rem .7rem; padding: .55rem .7rem; }
   .chapter-mobile label { color: var(--muted); font-size: .84rem; }
-  .chapter-mobile select, .saved-mobile select { min-width: 0; width: 100%; min-height: 2.5rem; padding: .28rem .35rem; border: 1px solid #c8d6e2; border-radius: 5px; background: #f9fbfd; font-size: .9rem; }
+  .chapter-mobile select, .saved-mobile select {
+    min-width: 0;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: .3rem .45rem;
+    border: 1px solid #c8d6e2;
+    border-radius: 5px;
+    background: #f9fbfd;
+    font-size: 1rem;
+    text-overflow: ellipsis;
+  }
   .saved-mobile { display: block; padding: .55rem .7rem; }
   #saved-list { display: none; }
-  .reader-head { padding-top: 1.15rem; }
-  .reader-body { padding-inline: 1.05rem; }
-  .reader-head, .reader-footer { padding-inline: 1.05rem; }
+  .reader-head { padding-block: 1rem .9rem; }
+  .reader h1 { font-size: clamp(1.35rem, 5.5vw, 1.85rem); }
+  .reader-head, .reader-body, .reader-footer, .result, .empty { padding-inline: clamp(.75rem, 3.6vw, 1.3rem); }
+  .reader-actions { margin-top: .7rem; }
+  .button, .outline-list a { min-height: 2.75rem; }
+  .outline-list a { align-items: center; }
+  .reader-footer, .reader-footer > div { gap: .4rem; }
   .study { gap: .7rem; }
 }
-@media (max-width: 385px) {
-  .brand-name { font-size: 1.2rem; }
-  .markdown table { font-size: .84rem; }
-  .markdown th, .markdown td { padding: .4rem; white-space: normal; }
+@media (max-width: 460px) {
+  .markdown table { table-layout: fixed; font-size: .875rem; }
+  .markdown th, .markdown td { padding: .4rem .25rem; }
+  .markdown th:first-child { width: 5em; }
+  .markdown th:nth-child(2), .markdown th:nth-child(3) { width: 3.75em; }
+  .markdown td:nth-child(-n+3), .markdown th { white-space: normal; }
+}
+@media (max-width: 760px) and (min-height: 500px) {
+  html { scroll-padding-top: 6.6rem; }
+  .toolbar { position: sticky; z-index: 1; top: 0; }
 }
 </style>
 </head>
@@ -461,10 +484,12 @@ const savedCount = document.querySelector("#saved-count");
 const savedTopic = document.querySelector("#saved-topic");
 const outline = document.querySelector("#outline");
 const progress = document.querySelector("#progress");
+const toolbar = document.querySelector(".toolbar");
 const search = document.querySelector("#search");
 const clearSearch = document.querySelector("#clear-search");
 const announcement = document.querySelector("#announcement");
 const storageNote = document.querySelector("#storage-note");
+const mobileLayout = matchMedia("(max-width: 760px)");
 const storageKey = "modern-china-review:1";
 const modes = new Set(["topic", "practice", "saved", "exam"]);
 
@@ -545,15 +570,18 @@ function applyRoute(moveFocus = false) {
       destination.scrollIntoView({ block: "start" });
     } else {
       reader.focus({ preventScroll: true });
-      if (matchMedia("(max-width: 760px)").matches) reader.scrollIntoView({ block: "start" });
+      if (mobileLayout.matches) reader.scrollIntoView({ block: "start" });
       else window.scrollTo({ top: 0, behavior: "instant" });
     }
   }
 }
 
-function openRoute(href) {
+function openRoute(href, moveFocus = true) {
   search.value = "";
-  if (location.hash === href) applyRoute(true);
+  if (!moveFocus) {
+    if (location.hash !== href) history.pushState(null, "", href);
+    applyRoute();
+  } else if (location.hash === href) applyRoute(true);
   else location.hash = href;
 }
 
@@ -730,12 +758,19 @@ function render() {
   else renderTopic();
 }
 
-function selectChapter(id) {
+function renderSearch() {
+  render();
+  if (mobileLayout.matches && reader.getBoundingClientRect().top < toolbar.getBoundingClientRect().bottom) {
+    reader.scrollIntoView({ block: "start" });
+  }
+}
+
+function selectChapter(id, moveFocus = true) {
   const chapter = chapterById.get(id);
   const practicing = state.mode === "practice";
   const firstUnmastered = chapter.topics.find(topic => !record.mastered.has(topic.id));
   const topic = practicing ? firstUnmastered ?? chapter.topics[0] : chapter.topics[0];
-  openTopic(topic, practicing ? "practice" : "topic");
+  openRoute(route(practicing ? "practice" : "topic", topic.id), moveFocus);
 }
 
 function updateTopicStatus(action) {
@@ -810,18 +845,18 @@ document.addEventListener("click", event => {
   }
 });
 
-mobileChapter.addEventListener("change", () => selectChapter(mobileChapter.value));
+mobileChapter.addEventListener("change", () => selectChapter(mobileChapter.value, false));
 mobileTopic.addEventListener("change", () => {
   openTopic(topicById.get(mobileTopic.value), state.mode === "practice" ? "practice" : "topic");
 });
 savedTopic.addEventListener("change", () => openRoute(route("saved", savedTopic.value)));
-search.addEventListener("input", render);
+search.addEventListener("input", renderSearch);
 search.addEventListener("keydown", event => {
   if (event.key === "Escape" && search.value) clearSearch.click();
 });
 clearSearch.addEventListener("click", () => {
   search.value = "";
-  render();
+  renderSearch();
   search.focus();
 });
 window.addEventListener("hashchange", () => {
