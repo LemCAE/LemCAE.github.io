@@ -9,8 +9,10 @@ async function readJson(path) {
 
 const manifest = await readJson('../catalog.json');
 const structures = await readJson('./structures.json');
+const yellow = await readJson('./yellow.json');
 const reading = await readJson('./fixtures/reading.json');
 const structureTest = prepareTest(structures);
+const yellowTest = prepareTest(yellow);
 const readingTest = prepareTest(reading);
 
 // Each route follows the behavior described in that type's report.
@@ -25,47 +27,67 @@ const routes = {
   column: 'dadadddabddaddbc'
 };
 
-test('the catalog loads the mechanics test and all its illustrations', async () => {
-  assert.deepEqual(validateManifest(manifest), [structures.id]);
-  assert.equal(structures.questions.length, 16);
-  assert.ok(structures.questions.every(({ options }) => options.length === 4));
-  const art = [structures.cover, ...structures.types.map(({ image }) => image)];
-  await Promise.all(art.map(({ src }) => access(new URL(`../${src}`, import.meta.url))));
+const yellowRoutes = {
+  nailong: 'babadcccbdddaabb',
+  naifrog: 'cbabccbaacbaabac',
+  naidann: 'dbdaadaabdcccbcc',
+  niulai: 'ccacddbaacbaacdd',
+  kangaroo: 'adacaaadadddaabd'
+};
+
+test('the catalog loads all published tests and their illustrations', async () => {
+  assert.deepEqual(validateManifest(manifest), [structures.id, yellow.id]);
+  for (const config of [structures, yellow]) {
+    assert.equal(config.questions.length, 16);
+    assert.ok(config.questions.every(({ options }) => options.length === 4));
+    const art = [config.cover, ...config.types.map(({ image }) => image)];
+    await Promise.all(art.map(({ src }) => access(new URL(`../${src}`, import.meta.url))));
+  }
   assert.throws(() => validateManifest({ tests: ['structures', 'structures'] }), /tests/);
   assert.throws(() => validateManifest({ tests: ['../structures'] }), /tests/);
 });
 
-test('uniformly sampled structures answers reach all eight types without a dominant result', () => {
+test('uniformly sampled answers reach all types without a dominant result', () => {
   const sampleSize = 20000;
-  const counts = new Map(structures.types.map(({ id }) => [id, 0]));
-  // Seeded sampling keeps this coverage check reproducible.
-  let seed = 0x5eed1234;
-  for (let sample = 0; sample < sampleSize; sample += 1) {
-    const answers = structures.questions.map(({ options }) => {
-      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      return options[Math.floor(seed / 2 ** 32 * options.length)].id;
-    });
-    const { type } = scoreTest(structureTest, answers);
-    counts.set(type.id, counts.get(type.id) + 1);
-  }
-  for (const [typeId, count] of counts) {
-    const share = count / sampleSize;
-    assert.ok(share >= 0.05 && share <= 0.22, `${typeId}: ${share}`);
+  for (const [config, compiled, minShare, maxShare] of [
+    [structures, structureTest, 0.05, 0.22],
+    [yellow, yellowTest, 0.12, 0.30]
+  ]) {
+    const counts = new Map(config.types.map(({ id }) => [id, 0]));
+    // Seeded sampling keeps this coverage check reproducible.
+    let seed = 0x5eed1234;
+    for (let sample = 0; sample < sampleSize; sample += 1) {
+      const answers = config.questions.map(({ options }) => {
+        seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+        return options[Math.floor(seed / 2 ** 32 * options.length)].id;
+      });
+      const { type } = scoreTest(compiled, answers);
+      counts.set(type.id, counts.get(type.id) + 1);
+    }
+    for (const [typeId, count] of counts) {
+      const share = count / sampleSize;
+      assert.ok(share >= minShare && share <= maxShare, `${config.id}.${typeId}: ${share}`);
+    }
   }
 });
 
-test('all eight structures have representative routes with reproducible results', () => {
-  assert.deepEqual(Object.keys(routes), structures.types.map(({ id }) => id));
-  for (const [typeId, route] of Object.entries(routes)) {
-    const result = scoreTest(structureTest, [...route]);
-    assert.equal(result.type.id, typeId);
-    assert.ok(Number.isInteger(result.matchPercent) && result.matchPercent >= 0 && result.matchPercent <= 100);
-    assert.ok(result.runnerUp && result.runnerUp.type.id !== typeId);
-    assert.ok(result.runnerUp.matchPercent <= result.matchPercent);
-    assert.deepEqual(scoreTest(structureTest, [...route]), result);
-    for (const dimension of result.dimensions) {
-      assert.ok(dimension.normalized >= 0 && dimension.normalized <= 10000);
-      assert.ok(dimension.level >= 1 && dimension.level <= 5);
+test('all published types have representative routes with reproducible results', () => {
+  for (const [config, compiled, expectedRoutes] of [
+    [structures, structureTest, routes],
+    [yellow, yellowTest, yellowRoutes]
+  ]) {
+    assert.deepEqual(Object.keys(expectedRoutes), config.types.map(({ id }) => id));
+    for (const [typeId, route] of Object.entries(expectedRoutes)) {
+      const result = scoreTest(compiled, [...route]);
+      assert.equal(result.type.id, typeId);
+      assert.ok(Number.isInteger(result.matchPercent) && result.matchPercent >= 0 && result.matchPercent <= 100);
+      assert.ok(result.runnerUp && result.runnerUp.type.id !== typeId);
+      assert.ok(result.runnerUp.matchPercent <= result.matchPercent);
+      assert.deepEqual(scoreTest(compiled, [...route]), result);
+      for (const dimension of result.dimensions) {
+        assert.ok(dimension.normalized >= 0 && dimension.normalized <= 10000);
+        assert.ok(dimension.level >= 1 && dimension.level <= 5);
+      }
     }
   }
 });
