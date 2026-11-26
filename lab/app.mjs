@@ -172,6 +172,36 @@ function renderTest(test) {
     const saveMessage = el('p', 'quiz-save', storageAvailable
       ? '进度保存在此设备。' : '浏览器无法保存进度，关闭页面会丢失记录。');
     saveMessage.setAttribute('role', 'status');
+
+    let advanceTimer;
+    let arrowNav = false;
+    let handledInChange = false;
+    function advance() {
+      clearTimeout(advanceTimer);
+      if (!state.answers[state.index]) return;
+      if (position === total) {
+        state.complete = true;
+        persist();
+        report();
+        return;
+      }
+      state.index += 1;
+      persist();
+      question();
+    }
+    function scheduleAdvance() {
+      clearTimeout(advanceTimer);
+      advanceTimer = setTimeout(advance, 180);
+    }
+
+    choices.addEventListener('pointerdown', () => {
+      arrowNav = false;
+      handledInChange = false;
+    });
+    choices.addEventListener('keydown', (event) => {
+      arrowNav = event.key.startsWith('Arrow');
+    });
+
     item.options.forEach((option, index) => {
       const input = el('input', 'quiz-radio');
       input.type = 'radio';
@@ -179,6 +209,7 @@ function renderTest(test) {
       input.value = option.id;
       input.checked = state.answers[state.index] === option.id;
       input.addEventListener('change', () => {
+        handledInChange = !arrowNav;
         state.answers[state.index] = option.id;
         state.complete = false;
         persist();
@@ -186,6 +217,11 @@ function renderTest(test) {
         progress.value = state.answers.length;
         answered.textContent = `已答 ${state.answers.length} 题`;
         if (!storageAvailable) saveMessage.textContent = '浏览器无法保存进度，关闭页面会丢失记录。';
+        if (!arrowNav && position < total) scheduleAdvance();
+      });
+      input.addEventListener('click', (event) => {
+        if (!handledInChange && event.detail > 0 && input.checked && position < total) scheduleAdvance();
+        handledInChange = false;
       });
       const key = el('span', 'quiz-key', String.fromCharCode(65 + index));
       key.setAttribute('aria-hidden', 'true');
@@ -194,6 +230,7 @@ function renderTest(test) {
     });
 
     const previous = button(state.index === 0 ? '返回介绍' : '上一题', () => {
+      clearTimeout(advanceTimer);
       state.complete = false;
       if (state.index === 0) {
         persist();
@@ -207,16 +244,7 @@ function renderTest(test) {
     const form = el('form', 'quiz-form', choices, el('div', 'quiz-nav', previous, next), saveMessage);
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      if (!state.answers[state.index]) return;
-      if (position === total) {
-        state.complete = true;
-        persist();
-        report();
-        return;
-      }
-      state.index += 1;
-      persist();
-      question();
+      advance();
     });
 
     show(el('section', 'card quiz-card',
@@ -224,7 +252,7 @@ function renderTest(test) {
   }
 
   function report() {
-    const { type, dimensions } = scoreTest(test, state.answers);
+    const { type, matchPercent, runnerUp, dimensions } = scoreTest(test, state.answers);
     const labels = config.report?.labels ?? {};
     const traits = el('ul', 'report-traits', ...type.traits.map((trait) => el('li', '', trait)));
     traits.setAttribute('aria-label', labels.traits ?? '主要特征');
@@ -233,11 +261,20 @@ function renderTest(test) {
         el('span', '', labels.certificate ?? '人格鉴定报告'), el('span', '', `V${config.version}`)),
       el('div', 'certificate-main',
         el('header', 'certificate-copy',
-          el('p', 'lab-kicker', type.code),
+          el('div', 'certificate-meta',
+            el('p', 'lab-kicker', type.code),
+            el('span', 'match-badge', `匹配度 ${matchPercent}%`)),
           el('h1', '', type.name),
           el('p', 'report-summary', type.summary), traits),
         illustration(type.image, 'lab-art certificate-art')));
     if (type.quote) certificate.append(el('blockquote', 'report-quote', `「${type.quote}」`));
+    if (runnerUp) {
+      certificate.append(el('div', 'report-secondary',
+        el('span', 'lab-kicker', `隐藏副结构 · 第二顺位（匹配度 ${runnerUp.matchPercent}%）`),
+        el('p', 'report-secondary-body',
+          el('strong', '', runnerUp.type.name),
+          ` — ${runnerUp.type.summary}`)));
+    }
 
     const profile = el('section', 'card report-profile',
       el('h2', '', labels.profile ?? '人格解析'), el('p', 'lab-muted', type.description));

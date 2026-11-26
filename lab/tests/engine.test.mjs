@@ -15,14 +15,14 @@ const readingTest = prepareTest(reading);
 
 // Each route follows the behavior described in that type's report.
 const routes = {
-  simple: 'cbdbbacacdcbbbbb',
-  cantilever: 'dbabbacdaabbdbdb',
-  continuous: 'badadaacbbddbaaa',
-  frame: 'cccdccdcccbacbcc',
-  truss: 'bacdcbacdbddcaaa',
-  cable: 'bdbaadbbdbccacaa',
-  arch: 'adbcaabdbbccdddd',
-  column: 'ccabccdbccabbccc'
+  simple: 'dbdbbdbbacaaddda',
+  cantilever: 'cbadbabbaaadcaaa',
+  continuous: 'bccabbdbddccdcdd',
+  frame: 'abbabbcababbaabb',
+  truss: 'bcbaabbddabcdcbd',
+  cable: 'cdddcdcaadcaabdc',
+  arch: 'cdccccaccbcabbab',
+  column: 'dadadddabddaddbc'
 };
 
 test('the catalog loads the mechanics test and all its illustrations', async () => {
@@ -59,6 +59,9 @@ test('all eight structures have representative routes with reproducible results'
   for (const [typeId, route] of Object.entries(routes)) {
     const result = scoreTest(structureTest, [...route]);
     assert.equal(result.type.id, typeId);
+    assert.ok(Number.isInteger(result.matchPercent) && result.matchPercent >= 0 && result.matchPercent <= 100);
+    assert.ok(result.runnerUp && result.runnerUp.type.id !== typeId);
+    assert.ok(result.runnerUp.matchPercent <= result.matchPercent);
     assert.deepEqual(scoreTest(structureTest, [...route]), result);
     for (const dimension of result.dimensions) {
       assert.ok(dimension.normalized >= 0 && dimension.normalized <= 10000);

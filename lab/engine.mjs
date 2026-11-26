@@ -147,20 +147,26 @@ export function scoreTest(test, answers) {
     return { ...dimension, normalized, level: Math.min(5, Math.floor(normalized / (SCALE / 5)) + 1) };
   });
 
-  let type = null;
-  let nearestDistance = Infinity;
-  for (const candidate of config.types) {
+  const weightSum = dimensions.reduce((sum, dimension) => sum + (dimension.weight ?? 1), 0);
+  const ranked = config.types.map((candidate, index) => {
     const distance = dimensions.reduce((sum, dimension) => {
       const difference = dimension.normalized - candidate.target[dimension.id] * (SCALE / 100);
       return sum + (dimension.weight ?? 1) * difference ** 2;
     }, 0);
-    // Strict comparison keeps the earlier configured type when distances tie.
-    if (distance < nearestDistance) {
-      nearestDistance = distance;
-      type = candidate;
-    }
-  }
-  return { type, dimensions };
+    const rmsDiff = Math.sqrt(distance / weightSum) / (SCALE / 100);
+    const matchPercent = Math.round(Math.max(0, Math.min(100, 100 - rmsDiff)));
+    return { type: candidate, distance, matchPercent, index };
+  });
+  // Preserve configuration order when distances tie.
+  ranked.sort((a, b) => a.distance - b.distance || a.index - b.index);
+
+  const [primary, secondary] = ranked;
+  return {
+    type: primary.type,
+    matchPercent: primary.matchPercent,
+    runnerUp: secondary ? { type: secondary.type, matchPercent: secondary.matchPercent } : null,
+    dimensions
+  };
 }
 
 export function restoreProgress(config, saved) {
